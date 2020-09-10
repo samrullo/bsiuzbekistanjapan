@@ -1,0 +1,249 @@
+# Uzbek translations for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-09-08 10:45+0900\n"
+"PO-Revision-Date: 2020-09-08 21:39+0900\n"
+"Language: uz\n"
+"Language-Team: uz <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: application/auth/forms.py:10 application/auth/forms.py:17
+#: application/auth/templates/profile.html:5
+msgid "Email"
+msgstr "Email"
+
+#: application/auth/forms.py:11 application/auth/forms.py:20
+msgid "Password"
+msgstr "Parol"
+
+#: application/auth/forms.py:12
+msgid "Keep me logged in"
+msgstr "Akkauntga kirgan holatni saqlamoq"
+
+#: application/auth/forms.py:13
+msgid "Log In"
+msgstr "Kirish"
+
+#: application/auth/forms.py:18 application/auth/templates/profile.html:6
+msgid "Username"
+msgstr "Foydalanuvchi qisqa nomi"
+
+#: application/auth/forms.py:22
+msgid "Confirm Password"
+msgstr "Parolni tasdiqlamoq"
+
+#: application/auth/forms.py:23 application/auth/templates/login.html:10
+#: application/auth/views.py:57
+msgid "Register"
+msgstr "Ro'yxatdan o'tmoq"
+
+#: application/auth/forms.py:27
+msgid "Email already exists"
+msgstr "Email boshqa foydalanuchi tomondan egallangan"
+
+#: application/auth/forms.py:31
+msgid "username already exists"
+msgstr "Ushbu nom boshqa foydalanuvchi tomondan egallangan"
+
+#: application/auth/forms.py:35
+msgid "Please enter your email"
+msgstr "Iltimos emailizni kiriting"
+
+#: application/auth/forms.py:36 application/auth/views.py:107
+msgid "Send password reset link"
+msgstr "Parolni qayta o'rnatish linkini yubormoq"
+
+#: application/auth/forms.py:40
+msgid ""
+"This email doesn't exist in our system. Please enter the email you "
+"registered with."
+msgstr ""
+"Ushbu email databaseda mavjud emas. Iltimos, siz ro'yxatdan o'tgan "
+"to'gri emailni kiriting"
+
+#: application/auth/forms.py:44
+msgid "Enter the new password"
+msgstr "Yangi parolni kiriting"
+
+#: application/auth/forms.py:45
+msgid "Passwords don't match"
+msgstr "Parollar mos emas"
+
+#: application/auth/forms.py:46
+msgid "Confirm the password"
+msgstr "Parolni tasdiqlang"
+
+#: application/auth/forms.py:47
+msgid "Save new password"
+msgstr "Yangi parolni saqlamoq"
+
+#: application/auth/views.py:28
+msgid "Invalid email or password"
+msgstr "Email yoki parolingiz noto’g’ri"
+
+#: application/auth/views.py:29
+msgid "Login"
+msgstr "Kirish"
+
+#: application/auth/views.py:36
+msgid "Logged you out"
+msgstr "Akkauntdan chiqdingiz"
+
+#: application/auth/views.py:55
+msgid ""
+"We successfully registered you. But you need to verify your email "
+"through the link we sent you"
+msgstr ""
+"Muvaffaqiyat bilan ro'yxatdan o'tdiz. Lekin platformamizdan foydalanish "
+"uchun email adresingizni biz yuborgan link orqali tasdiqlashingiz lozim."
+
+#: application/auth/views.py:80
+msgid "Resent confirmation url to your email"
+msgstr "Tasdiqlash linkini emailizga qayta yubordik"
+
+#: application/auth/templates/profile.html:7 application/auth/views.py:86
+msgid "Unconfirmed"
+msgstr "Tasdiqlanmagan"
+
+#: application/auth/views.py:92
+msgid "Account"
+msgstr "Akkaunt"
+
+#: application/auth/views.py:105
+#, python-format
+msgid "Sent reset password link to %(email)s"
+msgstr "Parolni qayta tiklash linkini %(email)s ga yubordik"
+
+#: application/auth/views.py:119
+msgid "Updated your password successfully"
+msgstr "Parolingizni muvaffaqiyat bilan yangiladik"
+
+#: application/auth/views.py:124
+msgid "The reset link has expired or you are not authorized"
+msgstr ""
+"Parolni tiklash linki muddatidan o'tdi yoki boshqa muammo sodir bo'ldi. "
+"Login sahifasidan parolni esdan chiqarish linkini bosing."
+
+#: application/auth/templates/login.html:10
+msgid "New user?"
+msgstr "Hali ro'yxatdan o'tmadizmi?"
+
+#: application/auth/templates/login.html:11
+msgid "Forgot password?"
+msgstr "Parolingiz esdan chiqdimi?"
+
+#: application/auth/templates/login.html:11
+msgid "Send Reset Password link"
+msgstr "Parolni qayta tiklash linkini yubormoq"
+
+#: application/auth/templates/profile.html:7
+msgid "Is confirmed?"
+msgstr "Tasdiqlanganmi?"
+
+#: application/auth/templates/profile.html:7
+msgid "Confirmed"
+msgstr "Tasdiqlangan"
+
+#: application/auth/templates/unconfirmed.html:4
+#, python-format
+msgid "Dear %(username)s, you haven't confirmed your email yet"
+msgstr "Hurmatli %(username)s, siz hali emailizni tasdiqlaganiz yo'q."
+
+#: application/auth/templates/unconfirmed.html:5
+msgid "Please check the email sent by us and confirm your email."
+msgstr "Iltimos biz yuborgan emailni tekshiring va emailizni tasdiqlang"
+
+#: application/auth/templates/unconfirmed.html:7
+msgid "Haven't received email?"
+msgstr "Emailni olmadizmi?"
+
+#: application/auth/templates/unconfirmed.html:7
+msgid "Resend"
+msgstr "Qayta yuborish"
+
+#: application/auth/templates/confirmation_mails/confirmation.html:5
+msgid "Confirmation"
+msgstr "Tasdiqlash"
+
+#: application/auth/templates/confirmation_mails/confirmation.html:8
+msgid "Hello"
+msgstr "Salom"
+
+#: application/auth/templates/confirmation_mails/confirmation.html:9
+msgid ""
+"Thank you for registering to our platform. Please confirm your email by "
+"clicking below link"
+msgstr ""
+"Bizning platformamizga ro'yxatdan o'tganiz uchun tashakkur. Iltimos "
+"quyidagilink orqali emailizni tasdiqlang"
+
+#: application/auth/templates/reset_password/reset_password.html:5
+msgid "Reset password"
+msgstr "Parolni qayta qo'yish"
+
+#: application/auth/templates/reset_password/reset_password.html:8
+msgid "Please reset your password by following the link below"
+msgstr "Iltimos quyidagi link orqali parolizni qayta tiklang"
+
+#: application/main/views.py:25
+msgid "Main page"
+msgstr "Bosh sahifa"
+
+#: application/main/views.py:32
+msgid "Secret page"
+msgstr "Sirli sahifa"
+
+#: application/main/views.py:38
+msgid "Page not found"
+msgstr "Sahifa topilmadi"
+
+#: application/main/views.py:44
+msgid "Internal server error"
+msgstr "Serverda ichki muammo sodir bo'ldi"
+
+#: application/templates/index.html:4
+msgid "Flasky 2 main page "
+msgstr "Flasky 2 bosh sahifasi "
+
+#: application/templates/secret.html:4
+#, python-format
+msgid ""
+"Dear %(username)s, you have successfully confirmed your email and "
+"reached the secret page."
+msgstr ""
+"Hurmatli %(username)s, siz muvaffaqiyat bilan emailizni tasdiqladiz va "
+"bizning sirli sahifamizga tashrif buyurdingiz"
+
+#: application/templates/secret.html:5
+msgid ""
+"The most important question that we can involve ourselves with is the "
+"question 'Who am I'"
+msgstr "Biz o'zimizni butun umr mashg'ul etadigan savol'Men kimman' savoli"
+
+#: application/templates/includes/footer.html:2
+msgid "About us"
+msgstr "Biz haqimizda"
+
+#: application/templates/includes/footer.html:3
+msgid "Contact us"
+msgstr "Biz bilan ulaning"
+
+#: application/templates/includes/nav.html:20
+msgid "Log out"
+msgstr "Chiqish"
+
+#: application/templates/includes/nav.html:22
+msgid "Log in"
+msgstr "Kirish"

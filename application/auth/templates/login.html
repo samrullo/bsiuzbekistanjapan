@@ -1,0 +1,22 @@
+{% extends  "layout.html" %}
+{% from "bootstrap/form.html" import render_form %}
+
+{% block title %} Flasky Login {% endblock %}
+
+{% block page_content %}
+<div class="container p-1 mx-auto my-1">
+  <a class="btn btn-dark btn-lg" href="{{url_for('auth_bp.google_login')}}">{{_("Login with Google Account")}}</a>
+</div>
+<div class="container p-1 mx-auto my-1">
+  <p class="mx-auto">{{_('Or log in with your registered account')}}</p>
+</div>
+
+<div class="container p-1 mx-auto my-1">
+  {{render_form(form)}}
+</div>
+<div class="login-page-footer">
+  <div class="login-page-footer-link">{{_("New user?")}} <a href="{{url_for('auth_bp.register')}}">{{_("Register")}}</a></div>
+  <div class="login-page-footer-link">{{_("Forgot password?")}} <a href="{{url_for('auth_bp.send_reset_link')}}">{{_("Send Reset Password link")}}</a></div>
+</div>
+
+{% endblock %}

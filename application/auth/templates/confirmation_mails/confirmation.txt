@@ -1,0 +1,5 @@
+
+{{_("Hello")}}, {{name}}
+
+{{_("Thanks for registering to our platform. Please confirm your email by clicking the below URL")}}
+{{url_for('auth_bp.confirm',token=token,_external=True)}}

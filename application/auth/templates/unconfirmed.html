@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+<p>{{_("Dear %(username)s, you haven't confirmed your email yet",username=current_user.username)}}</p>
+<p>{{_("Please check the email sent by us and confirm your email.")}}</p>
+<p>
+  {{_("Haven't received email?")}} <a href="{{url_for('auth_bp.resend_confirmation')}}">{{_("Resend")}}</a>
+</p>
+{% endblock %}

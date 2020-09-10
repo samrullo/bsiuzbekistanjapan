@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+<head>
+  {% block head %}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {% block styles %}
+  {{bootstrap.load_css()}}
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+  <!-- Material Design Bootstrap -->
+  <!-- <link rel="stylesheet" href="{{ url_for('static',filename='css/mdb.min.css') }}"> -->
+
+  <!-- MDBootstrap Datatables  -->
+  <link href="{{ url_for('static',filename='css/addons/datatables.min.css') }}" rel="stylesheet">
+
+  <!-- Custom css -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}">
+  {% endblock %}
+
+  <!-- Optional JavaScript -->
+  <title>Flasky2</title>
+  {% endblock %}
+</head>
+
+<body>
+  <div class="container pt-1">
+    {% with messages=get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+      <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </div>
+  {% include "includes/nav.html"%}
+
+
+  {% block content %}
+  <div class="container">
+    {% block page_header %}
+    <div class="pb-2 mt-4 mb-2 border-bottom">
+      <h1>{{page_header_title}}</h1>
+    </div>
+    {% endblock %}
+    {% block page_content %}{% endblock %}
+  </div>
+  {% endblock %}
+
+  <div class="container">
+    {% include "includes/footer.html"%}
+  </div>
+
+  {% block scripts %}
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{{ url_for('static',filename='js/mdb.min.js') }}"></script>
+
+  <!-- MDBootstrap Datatables  -->
+  <script type="text/javascript" src="{{ url_for('static',filename='js/addons/datatables.min.js') }}"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+  <!-- Fontawesome icon CDN -->
+  <script src="https://kit.fontawesome.com/5f545fcbc8.js"></script>
+
+  <!-- Custom javascript -->
+  <script src="{{url_for('static',filename='js/myscripts.js')}}"></script>
+
+  {{moment.include_moment()}}
+
+  {% endblock %}
+
+</body>
+
+</html>

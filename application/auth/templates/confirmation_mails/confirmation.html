@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{_("Confirmation")}}</title>
+</head>
+<body>
+<h1>{{_("Hello")}}, {{name}}</h1>
+<p>{{_("Thank you for registering to our platform. Please confirm your email by clicking below link")}}</p>
+{{url_for('auth_bp.confirm',token=token,_external=True)}}
+</body>
+</html>

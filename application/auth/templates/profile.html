@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+<ul class="list-group">
+  <li class="list-group-item">{{_("Email")}} : {{current_user.email}}</li>
+  <li class="list-group-item">{{_("Username")}} : {{current_user.username}}</li>
+  <li class="list-group-item">{{_("Registered date")}} : {{moment(current_user.registered_on).format('LLL')}}</li>
+  <li class="list-group-item">{{_("Is confirmed?")}} : {% if not current_user.is_confirmed %} {{_("Unconfirmed")}} {% else %} {{_("Confirmed")}} {% endif %}</li>
+</ul>
+{% endblock %}
