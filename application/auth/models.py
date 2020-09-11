@@ -1,22 +1,31 @@
 from application import db
-from flask_login import UserMixin, AnonymousUserMixin
+from flask_login import UserMixin, AnonymousUserMixin, current_user
+from flask import abort
 from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from application import login_manager
 import datetime
+from .permissions import Permissions
+from functools import wraps
+from application.post_weight.models import PostWeight
 
 
 class User(UserMixin, db.Model):
-    __tablename = "users"
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
+    name = db.Column(db.String(250), unique=True, index=True)
+    phone = db.Column(db.String(64), unique=True, index=True)
+    address = db.Column(db.String(250), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     registered_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     is_confirmed = db.Column(db.Boolean)
     confirmed_on = db.Column(db.DateTime, nullable=True)
+    last_seen = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     is_google_account = db.Column(db.Boolean, default=False)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
+    post_weights = db.relationship("PostWeight", backref="user", lazy="dynamic")
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -41,6 +50,11 @@ class User(UserMixin, db.Model):
 
     def is_administrator(self):
         return self.can(Permissions.ADMIN)
+
+    def update_last_seen(self):
+        self.last_seen = datetime.datetime.utcnow()
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
         return f"<User {self.id}-{self.email} Role id : {self.role_id}>"
@@ -109,11 +123,3 @@ class Role(db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-
-class Permissions:
-    FOLLOW = 1
-    COMMENT = 2
-    WRITE = 4
-    MODERATE = 8
-    ADMIN = 16

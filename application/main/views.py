@@ -3,7 +3,7 @@ from flask import render_template, redirect
 from flask_babel import lazy_gettext as _
 from application.utils.custom_url_for import url_for
 from flask_login import login_required
-from application.utils.confirm_required import confirm_required
+from application.utils.permission_required import confirm_required
 from flask import current_app
 from flask import request, g
 

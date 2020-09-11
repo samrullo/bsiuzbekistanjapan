@@ -11,7 +11,7 @@ class Config:
     BOOTSTRAP_BTN_STYLE = 'dark'
     DEFAULT_LANG="en"
     ALLOWED_LANGUAGES = {'en': 'English', 'uz': 'Uzbek'}
-    LOG_FILE = "flasky2.log"
+    LOG_FILE = "bsiuzbekistanjapan.log"
 
     # Google OAuth2 related configurations
     GOOGLE_CLIENT_ID=os.environ.get('GOOGLE_CLIENT_ID')

@@ -20,6 +20,9 @@ class RegisterForm(FlaskForm):
     username = StringField(_("Username"),
                            validators=[DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*', 0,
                                                                              'Usernames must have only letters,numbers,dots or underscores')])
+    name = StringField(_("Name"), validators=[DataRequired()], render_kw={"placeholder": _("<Last name> <First name>")})
+    phone = StringField(_("Phone"), render_kw={"placeholder": _("080-1234-1234")})
+    address = StringField(_("Address"))
     password = PasswordField(_("Password"),
                              validators=[DataRequired(), EqualTo("confirm_password", message="Passwords must match")])
     confirm_password = PasswordField(_("Confirm Password"), validators=[DataRequired()])
@@ -28,6 +31,20 @@ class RegisterForm(FlaskForm):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError(_("Email already exists"))
+
+    def validate_username(self, field):
+        if User.query.filter_by(username=field.data).first():
+            raise ValidationError(_('username already exists'))
+
+
+class EditProfileForm(FlaskForm):
+    username = StringField(_("Username"),
+                           validators=[DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*', 0,
+                                                                             'Usernames must have only letters,numbers,dots or underscores')])
+    name = StringField(_("Name"), validators=[DataRequired()], render_kw={"placeholder": _("<Last name> <First name>")})
+    phone = StringField(_("Phone"), render_kw={"placeholder": _("080-1234-1234")})
+    address = StringField(_("Address"))
+    submit = SubmitField(_("Register"))
 
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():

@@ -3,14 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_babel import Babel
-from flask import g, current_app
+from flask import g, session
 from flask import request
 from flask_mail import Mail
 from flask_login import LoginManager
-import requests
 from config import config
-from .main import main_bp
 import logging
+
 
 bootstrap = Bootstrap()
 babel = Babel()
@@ -23,7 +22,6 @@ login_manager = LoginManager()
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
-
 
     # set up logging
     if not app.debug:
@@ -53,7 +51,10 @@ def create_app(config_name):
                 g.current_lang = request.accept_languages.best_match(app.config.get('ALLOWED_LANGUAGES').keys())
                 return g.current_lang
 
+        from .main import main_bp
         from .auth import auth_bp
+        from .post_weight import post_weight_bp
         app.register_blueprint(main_bp)
         app.register_blueprint(auth_bp)
+        app.register_blueprint(post_weight_bp)
         return app

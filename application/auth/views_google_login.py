@@ -2,8 +2,10 @@ from ..auth import auth_bp
 from oauthlib.oauth2 import WebApplicationClient
 from ..utils.google_login_utils import get_google_provider_cfg
 from application import db
+from flask_login import login_required,current_user
 from .models import User
-from flask import request, redirect, current_app, flash
+from ..auth.forms import RegisterForm
+from flask import request, redirect, current_app, flash,g
 from flask_babel import lazy_gettext as _
 from flask_login import login_user
 from ..utils.custom_url_for import url_for
@@ -86,6 +88,7 @@ def callback():
             db.session.add(user)
             db.session.commit()
             flash(_("Successfully registered %(username)s", username=user.username), "success")
+            return redirect(url_for('auth_bp.edit_profile',next=f'/{g.current_lang}'))
         login_user(user)
         next = request.args.get('next')
         if next is None or not next.startswith('/'):

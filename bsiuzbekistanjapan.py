@@ -1,5 +1,6 @@
 from application import create_app, db
-from application.auth.models import User, Role
+from application.auth.models import User, Role,Permissions
+from application.main.models import BusinessGlobalVariable
 from flask_migrate import Migrate
 from flask import g, request, current_app
 from flask import url_for as flask_url_for
@@ -11,7 +12,7 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, User=User, Role=Role, app=app)
+    return dict(db=db, User=User, Role=Role, app=app,Permissions=Permissions,BusinessGlobalVariable=BusinessGlobalVariable)
 
 
 @app.cli.command()
@@ -47,3 +48,7 @@ def before():
 @app.context_processor
 def inject_url_for():
     return {'url_for': lambda endpoint, **kwargs: flask_url_for(endpoint, lang=g.current_lang, **kwargs)}
+
+
+if __name__=="__main__":
+    app.run()

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+<table class="table table-hover orderByDateTable" order_col_no="0">
+  <thead>
+    <th scope="col">{{_("Sent date")}}</th>
+    <th scope="col">{{_("Weight")}}</th>
+    <th scope="col">{{_("Payment amount")}}</th>
+    <th scope="col">{{_("Entered on")}}</th>
+    <th scope="col">{{_("Modified on")}}</th>
+  </thead>
+  <tbody>
+    {% for post_weight in all_post_weights %}
+    <tr>
+      <td>{{moment(post_weight.sent_date).format('LL')}}</td>
+      <td>{{post_weight.weight}}</td>
+      <td>{{post_weight.payment_amount}}</td>
+      <td>{{post_weight.entered_on}}</td>
+      <td>{{post_weight.modified_on}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
