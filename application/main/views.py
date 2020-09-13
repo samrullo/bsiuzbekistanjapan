@@ -3,9 +3,10 @@ from flask import render_template, redirect
 from flask_babel import lazy_gettext as _
 from application.utils.custom_url_for import url_for
 from flask_login import login_required
-from application.utils.permission_required import confirm_required
+from application.auth.permission_required import confirm_required
 from flask import current_app
 from flask import request, g
+
 
 
 @main_bp.route('/')
@@ -31,14 +32,17 @@ def home():
 def secret():
     return render_template("secret.html", page_header_title=_("Secret page"))
 
+@main_bp.route('/<lang>/aboutus')
+def aboutus():
+    return render_template("about_us.html",page_header_title=_("About us"))
 
 @main_bp.app_errorhandler(404)
 def page_not_found(e):
-    g.current_lang='en'
+    g.current_lang = 'en'
     return render_template("errors/error.html", page_header_title=_("Page not found")), 404
 
 
 @main_bp.app_errorhandler(500)
 def internal_server_error(e):
-    g.current_lang='en'
+    g.current_lang = 'en'
     return render_template("errors/error.html", page_header_title=_("Internal server error")), 500

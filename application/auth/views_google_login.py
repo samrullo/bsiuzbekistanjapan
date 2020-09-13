@@ -2,10 +2,10 @@ from ..auth import auth_bp
 from oauthlib.oauth2 import WebApplicationClient
 from ..utils.google_login_utils import get_google_provider_cfg
 from application import db
-from flask_login import login_required,current_user
+from flask_login import login_required, current_user
 from .models import User
 from ..auth.forms import RegisterForm
-from flask import request, redirect, current_app, flash,g
+from flask import request, redirect, current_app, flash, g
 from flask_babel import lazy_gettext as _
 from flask_login import login_user
 from ..utils.custom_url_for import url_for
@@ -78,21 +78,25 @@ def callback():
 
         user_usual_account = User.query.filter_by(email=users_email, is_google_account=False).first()
         if user_usual_account:
-            flash(_("Seems like %(email)s is registered via usual route. Please login using your password",email=users_email), "danger")
+            flash(_("Seems like %(email)s is registered via usual route. Please login using your password",
+                    email=users_email), "danger")
             return redirect(url_for('auth_bp.login'))
 
         user = User.query.filter_by(email=users_email, is_google_account=True).first()
         if not user or not user.is_confirmed:
-            user = User(email=users_email, username=users_name, is_confirmed=True, is_google_account=True,
+            user = User(email=users_email, username=users_name, name=users_name, is_confirmed=True,
+                        is_google_account=True,
                         confirmed_on=datetime.datetime.utcnow())
             db.session.add(user)
             db.session.commit()
-            flash(_("Successfully registered %(username)s", username=user.username), "success")
-            return redirect(url_for('auth_bp.edit_profile',next=f'/{g.current_lang}'))
+            flash(_("Successfully registered %(username)s. Please consider to edit your profile later",
+                    username=user.username), "success")
+            login_user(user)
+            return redirect(url_for('auth_bp.edit_profile'))
         login_user(user)
         next = request.args.get('next')
         if next is None or not next.startswith('/'):
-            next = url_for('main_bp.secret')
+            next = url_for('main_bp.home')
         return redirect(next)
     else:
         return "User email not available or not verified by Google.", 400

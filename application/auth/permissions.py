@@ -1,6 +1,5 @@
 class Permissions:
-    FOLLOW = 1
-    COMMENT = 2
-    WRITE = 4
-    MODERATE = 8
-    ADMIN = 16
+    VIEW_USER_INFO = 1
+    ADD_WEIGHT = 2
+    ADD_BSI_WEIGHT = 4
+    ADMIN = 8

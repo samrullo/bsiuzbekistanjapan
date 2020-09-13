@@ -4,7 +4,12 @@
 <ul class="list-group">
   <li class="list-group-item">{{_("Email")}} : {{current_user.email}}</li>
   <li class="list-group-item">{{_("Username")}} : {{current_user.username}}</li>
+  <li class="list-group-item">{{_("Name")}} : {{current_user.name}}</li>
+  <li class="list-group-item">{{_("Phone")}} : {{current_user.phone}}</li>
+  <li class="list-group-item">{{_("Address")}} : {{current_user.address}}</li>
   <li class="list-group-item">{{_("Registered date")}} : {{moment(current_user.registered_on).format('LLL')}}</li>
   <li class="list-group-item">{{_("Is confirmed?")}} : {% if not current_user.is_confirmed %} {{_("Unconfirmed")}} {% else %} {{_("Confirmed")}} {% endif %}</li>
+  <li class="list-group-item">{{_("Last seen")}} : {{moment(current_user.last_seen).format('LLL')}}</li>
+  <li class="list-group-item">{{_("Role")}} : {{current_user.role.name}}</li>
 </ul>
 {% endblock %}

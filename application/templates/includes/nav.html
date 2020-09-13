@@ -14,15 +14,15 @@
   </button>
   <div class="collapse navbar-collapse" id="mynavigation" aria-expanded="false">
     <ul class="navbar-nav mr-auto">
-
-      {% if current_user.is_authenticated %}
+      {% if current_user.is_authenticated and current_user.is_confirmed%}
+      <li class="nav-item"><a class="nav-link" href="{{url_for('post_weight_bp.post_weights')}}">{{_("View post weights")}}</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{url_for('post_weight_bp.new_weight')}}">{{_("Enter new weight")}}</a></li>
       <li class="nav-item"><a class="nav-link" href="{{url_for('auth_bp.profile')}}">{{current_user.username}}</a></li>
       <li class="nav-item"><a class="nav-link" href="{{url_for('auth_bp.logout')}}">{{_("Log out")}}</a></li>
       {% else %}
       <li class="nav-item"><a class="nav-link" href="{{url_for('auth_bp.login')}}">{{_("Log in")}}</a></li>
       {% endif %}
-      <li class="nav-item d-md-none d-sm-block"><a class="nav-link" href="#">{{_('About us')}}</a></li>
-      <li class="nav-item d-md-none d-sm-block"><a class="nav-link" href="#">{{_('Contact us')}}</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{url_for('main_bp.aboutus')}}">{{_('About us')}}</a></li>
     </ul>
   </div>
 </nav>

@@ -1,5 +1,6 @@
 import logging
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from flask_babel import lazy_gettext as _
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
@@ -47,7 +48,7 @@ class EditProfileForm(FlaskForm):
     submit = SubmitField(_("Register"))
 
     def validate_username(self, field):
-        if User.query.filter_by(username=field.data).first():
+        if User.query.filter(User.username == field.data).filter(User.id != current_user.id).first():
             raise ValidationError(_('username already exists'))
 
 

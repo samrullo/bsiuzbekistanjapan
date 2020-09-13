@@ -49,6 +49,13 @@ def before():
 def inject_url_for():
     return {'url_for': lambda endpoint, **kwargs: flask_url_for(endpoint, lang=g.current_lang, **kwargs)}
 
+@app.context_processor
+def inject_number_formatter():
+    def format_number(amount):
+        return "{:,.2f}".format(amount)
+    return dict(format_number=format_number)
+
+
 
 if __name__=="__main__":
     app.run()

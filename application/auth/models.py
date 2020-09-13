@@ -103,10 +103,10 @@ class Role(db.Model):
 
     @staticmethod
     def insert_roles():
-        roles = {"User": [Permissions.FOLLOW, Permissions.COMMENT, Permissions.WRITE],
-                 "Moderator": [Permissions.FOLLOW, Permissions.COMMENT, Permissions.WRITE, Permissions.MODERATE],
-                 "Administrator": [Permissions.FOLLOW, Permissions.COMMENT, Permissions.WRITE, Permissions.MODERATE,
-                                   Permissions.ADMIN], }
+        roles = {"User": [Permissions.VIEW_USER_INFO, Permissions.ADD_WEIGHT],
+                 "Moderator": [Permissions.VIEW_USER_INFO, Permissions.ADD_WEIGHT,Permissions.ADD_BSI_WEIGHT],
+                 "Administrator": [Permissions.VIEW_USER_INFO,
+                                   Permissions.ADD_WEIGHT,Permissions.ADD_BSI_WEIGHT,Permissions.ADMIN], }
         for role_name, permissions in roles.items():
             role = Role.query.filter_by(name=role_name).first()
             if role is None:

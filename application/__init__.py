@@ -11,6 +11,7 @@ from config import config
 import logging
 
 
+
 bootstrap = Bootstrap()
 babel = Babel()
 mail = Mail()
@@ -57,4 +58,6 @@ def create_app(config_name):
         app.register_blueprint(main_bp)
         app.register_blueprint(auth_bp)
         app.register_blueprint(post_weight_bp)
+        from application.auth.models import Role
+        Role.insert_roles()
         return app

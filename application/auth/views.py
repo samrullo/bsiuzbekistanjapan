@@ -5,7 +5,7 @@ from application.utils.custom_url_for import url_for
 from flask_babel import lazy_gettext as _
 from flask import current_app
 from flask_login import login_required, logout_user, login_user
-from application.utils.permission_required import confirm_required
+from application.auth.permission_required import confirm_required
 from .forms import LoginForm, RegisterForm, EditProfileForm, ResetPasswordSendLinkForm, ResetPasswordForm
 from .models import User
 from application import db
@@ -132,15 +132,11 @@ def profile():
     return render_template("profile.html", page_header_title=_("Account"))
 
 
-@auth_bp.route('/<lang>/edit_profile')
+@auth_bp.route('/<lang>/edit_profile',methods=['GET','POST'])
 @login_required
 @confirm_required
 def edit_profile():
     form = EditProfileForm()
-    form.username.data = current_user.username
-    form.name.data = current_user.name
-    form.phone.data = current_user.phone
-    form.address.data = current_user.address
     if form.validate_on_submit():
         current_user.name = form.name.data
         current_user.username = form.username.data
@@ -153,5 +149,9 @@ def edit_profile():
         if next is None or not next.startswith('/'):
             next = url_for('auth_bp.profile')
         return redirect(next)
+    form.username.data = current_user.username
+    form.name.data = current_user.name
+    form.phone.data = current_user.phone
+    form.address.data = current_user.address
     return render_template("edit_profile.html", form=form,
                            page_header_title=_("Edit profile for %(email)s", email=current_user.email))

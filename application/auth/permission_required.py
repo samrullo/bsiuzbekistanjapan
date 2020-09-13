@@ -28,3 +28,6 @@ def permission_required(perm):
 
 def admin_required(func):
     return permission_required(Permissions.ADMIN)(func)
+
+def moderator_required(func):
+    return permission_required(Permissions.ADD_BSI_WEIGHT)(func)
