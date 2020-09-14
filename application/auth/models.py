@@ -9,16 +9,6 @@ from .permissions import Permissions
 from functools import wraps
 from application.post_weight.models import PostWeight
 
-entered_by_to_bsi_post_weights = db.Table("entered_by_to_bsi_post_weights",
-                                          db.Column("entered_by_id", db.Integer, db.ForeignKey("users.id")),
-                                          db.Column("bsi_post_weight_id", db.Integer,
-                                                    db.ForeignKey("bsi_post_weights.id")))
-
-modified_by_to_bsi_post_weights = db.Table("modified_by_to_bsi_post_weights",
-                                           db.Column("modified_by_id", db.Integer, db.ForeignKey("users.id")),
-                                           db.Column("bsi_post_weight_id", db.Integer,
-                                                     db.ForeignKey("bsi_post_weights.id")))
-
 
 class User(UserMixin, db.Model):
     __tablename__ = "users"
@@ -36,16 +26,6 @@ class User(UserMixin, db.Model):
     is_google_account = db.Column(db.Boolean, default=False)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
     post_weights = db.relationship("PostWeight", backref="user", lazy="dynamic")
-    entered_by_bsi_post_weights = db.relationship("BSIPostWeight",
-                                                  secondary=entered_by_to_bsi_post_weights,
-                                                  backref=db.backref("entered_by_user", lazy="dynamic"),
-                                                  lazy="dynamic",
-                                                  )
-    modified_by_bsi_post_weights = db.relationship("BSIPostWeight",
-                                                   secondary=modified_by_to_bsi_post_weights,
-                                                   backref=db.backref("modified_by_user", lazy="dynamic"),
-                                                   lazy="dynamic",
-                                                   )
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)

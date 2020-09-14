@@ -22,6 +22,9 @@
       {% else %}
       <li class="nav-item"><a class="nav-link" href="{{url_for('auth_bp.login')}}">{{_("Log in")}}</a></li>
       {% endif %}
+      {% if current_user.is_authenticated and current_user.is_confirmed and current_user.is_moderator() %}
+      <li class="nav-item"><a class="nav-link" href="{{url_for('bsi_bp.moderator')}}">{{_("Moderator")}}</a></li>
+      {% endif %}
       <li class="nav-item"><a class="nav-link" href="{{url_for('main_bp.aboutus')}}">{{_('About us')}}</a></li>
     </ul>
   </div>

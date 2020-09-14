@@ -1,5 +1,6 @@
 Flask
 Bootstrap-Flask
+Flask-Admin
 Flask-Babel
 Flask-Bcrypt
 Flask-DebugToolbar
@@ -25,3 +26,7 @@ email_validator
 requests
 oauthlib
 pyOpenSSL
+pandas
+openpyxl
+xlrd
+xlwt

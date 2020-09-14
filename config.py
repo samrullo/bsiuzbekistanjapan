@@ -20,6 +20,12 @@ class Config:
         "https://accounts.google.com/.well-known/openid-configuration"
     )
 
+    # admins and moderators
+    ADMINISTRATOR_EMAILS=os.environ.get("ADMINISTRATOR_EMAILS")
+    MODERATOR_EMAILS = os.environ.get("MODERATOR_EMAILS")
+
+
+
     @staticmethod
     def init_app():
         pass

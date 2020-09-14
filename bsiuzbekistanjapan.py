@@ -1,5 +1,6 @@
 from application import create_app, db
-from application.auth.models import User, Role,Permissions
+from application.auth.models import User, Role, Permissions
+from application.bsi.models import BSIPostWeight
 from application.main.models import BusinessGlobalVariable
 from flask_migrate import Migrate
 from flask import g, request, current_app
@@ -12,7 +13,8 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, User=User, Role=Role, app=app,Permissions=Permissions,BusinessGlobalVariable=BusinessGlobalVariable)
+    return dict(db=db, User=User, BSIPostWeight=BSIPostWeight, Role=Role, app=app, Permissions=Permissions,
+                BusinessGlobalVariable=BusinessGlobalVariable)
 
 
 @app.cli.command()
@@ -49,13 +51,14 @@ def before():
 def inject_url_for():
     return {'url_for': lambda endpoint, **kwargs: flask_url_for(endpoint, lang=g.current_lang, **kwargs)}
 
+
 @app.context_processor
 def inject_number_formatter():
     def format_number(amount):
         return "{:,.2f}".format(amount)
+
     return dict(format_number=format_number)
 
 
-
-if __name__=="__main__":
+if __name__ == "__main__":
     app.run()

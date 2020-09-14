@@ -16,18 +16,18 @@ def confirm_required(func):
 
 
 def permission_required(perm):
-    def decorator(func):
-        @wraps(func)
+    def decorator(func2):
+        @wraps(func2)
         def decorated_function(*args, **kwargs):
             if not current_user.can(perm):
                 abort(403)
-            return func(*args, **kwargs)
-
+            return func2(*args, **kwargs)
+        return decorated_function
     return decorator
 
 
 def admin_required(func):
     return permission_required(Permissions.ADMIN)(func)
 
-def moderator_required(func):
-    return permission_required(Permissions.ADD_BSI_WEIGHT)(func)
+def moderator_required(f):
+    return permission_required(Permissions.ADD_BSI_WEIGHT)(f)

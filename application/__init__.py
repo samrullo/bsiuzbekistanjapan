@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_babel import Babel
+from flask_admin import Admin
 from flask import g, session
 from flask import request
 from flask_mail import Mail
@@ -10,13 +11,12 @@ from flask_login import LoginManager
 from config import config
 import logging
 
-
-
 bootstrap = Bootstrap()
 babel = Babel()
 mail = Mail()
 moment = Moment()
 db = SQLAlchemy()
+admin_flsk = Admin(name="bsiuzbekistanjapan")
 login_manager = LoginManager()
 
 
@@ -33,6 +33,7 @@ def create_app(config_name):
         app.logger.addHandler(file_handler)
 
     db.init_app(app)
+    admin_flsk.init_app(app)
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
@@ -54,10 +55,22 @@ def create_app(config_name):
 
         from .main import main_bp
         from .auth import auth_bp
-        from .post_weight import post_weight_bp
+
         app.register_blueprint(main_bp)
         app.register_blueprint(auth_bp)
+
+        # add post_weight blueprint
+        from .post_weight import post_weight_bp
         app.register_blueprint(post_weight_bp)
+
+        # add bsi blueprint
+        from .bsi import bsi_bp
+        app.register_blueprint(bsi_bp)
+
+        # add admin blueprint
+        from application.admin import admin_bp
+        app.register_blueprint(admin_bp)
+
         from application.auth.models import Role
         Role.insert_roles()
         return app

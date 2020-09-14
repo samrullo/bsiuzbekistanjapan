@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "layout.html" %}
+{% from "bootstrap/form.html" import render_form %}
+{% block page_content%}
+<ul class="list-group">
+  <li class="list-group-item">{{_("User")}} : {{post_weight.user.name}}</li>
+  <li class="list-group-item">{{_("User sent on date")}} : {{moment(post_weight.sent_date).format('LL')}}</li>
+  <li class="list-group-item">{{_("User entered weight")}} : {{format_number(post_weight.weight)}}</li>
+  <li class="list-group-item">{{_("Payment amount")}} : {{format_number(post_weight.payment_amount)}}</li>
+</ul>
+{{render_form(form)}}
+{% endblock %}

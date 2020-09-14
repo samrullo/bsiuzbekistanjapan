@@ -7,10 +7,11 @@ from flask_login import login_required, current_user
 from .models import PostWeight
 from .forms import PostWeightForm
 from application.post_weight.post_weight_utils import get_price_per_kg
-
+from application.auth.permission_required import confirm_required
 
 @post_weight_bp.route("/<lang>/post_weights")
 @login_required
+@confirm_required
 def post_weights():
     all_post_weights=PostWeight.query.filter_by(user_id=current_user.id).all()
     return render_template("all_post_weights.html",
@@ -20,6 +21,7 @@ def post_weights():
 
 @post_weight_bp.route("/<lang>/new_weight",methods=['GET','POST'])
 @login_required
+@confirm_required
 def new_weight():
     form = PostWeightForm()
     if form.validate_on_submit():

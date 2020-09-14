@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
 
-</body>
-</html>
+{% block page_content %}
+
+<table class="table table-hover orderByDateTable">
+  <thead order_col_no="0">
+    <th>{{_("Sent date")}}</th>
+    <th>{{_("Total weight (in kg)")}}</th>
+    <th>{{_("Total payment amount")}}</th>
+    <th></th>
+  </thead>
+  <tbody>
+    {% for i,row in post_weights_grp_df.iterrows() %}
+    <tr>
+      <td>{{moment(i).format('LL')}}</td>
+      <td>{{format_number(row['weight'])}}</td>
+      <td>{{format_number(row['payment_amount'])}}</td>
+      <td><a href="{{url_for('bsi_bp.weights_by_user_as_of_date',user_id=user.id,adate=i)}}">{{_('View')}}</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
