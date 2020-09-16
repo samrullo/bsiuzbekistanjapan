@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 from flask import g, request, current_app
 from flask import url_for as flask_url_for
 
-app = create_app('development')
+app = create_app('production')
 
 migrate = Migrate(app, db)
 

@@ -23,6 +23,7 @@ class Config:
     # admins and moderators
     ADMINISTRATOR_EMAILS=os.environ.get("ADMINISTRATOR_EMAILS")
     MODERATOR_EMAILS = os.environ.get("MODERATOR_EMAILS")
+    ADMIN_EMAIL=os.environ.get('ADMIN_EMAIL')
 
 
 
@@ -42,7 +43,7 @@ class DevelopmentConfig(Config):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('PROD_DATABASE_URI') or 'sqlite:///' + os.path.join(basedir, "prod.sqlite")
+    SQLALCHEMY_DATABASE_URI = os.environ.get('PROD_DATABASE_URI')
 
 
 class TestConfig(Config):

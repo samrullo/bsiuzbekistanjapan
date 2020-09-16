@@ -1,3 +1,4 @@
+import os
 from ..auth import auth_bp
 from oauthlib.oauth2 import WebApplicationClient
 from ..utils.google_login_utils import get_google_provider_cfg
@@ -84,7 +85,7 @@ def callback():
 
         user = User.query.filter_by(email=users_email, is_google_account=True).first()
         if not user or not user.is_confirmed:
-            user = User(email=users_email, username=users_name, name=users_name, is_confirmed=True,
+            user = User(email=users_email, username=users_name, name=users_name, password=os.urandom(23),is_confirmed=True,
                         is_google_account=True,
                         confirmed_on=datetime.datetime.utcnow())
             db.session.add(user)
