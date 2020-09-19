@@ -47,14 +47,14 @@ def logout():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data, username=form.username.data, password=form.password.data, is_confirmed=False)
+        user = User(email=form.email.data, password=form.password.data, is_confirmed=False)
         db.session.add(user)
         db.session.commit()
         login_user(user)
         token = generate_token(current_user.email)
-        plain_text_body = render_template("confirmation_mails/confirmation.txt", name=current_user.username,
+        plain_text_body = render_template("confirmation_mails/confirmation.txt", name=current_user.name,
                                           token=token)
-        html_body = render_template("confirmation_mails/confirmation.html", name=current_user.username, token=token)
+        html_body = render_template("confirmation_mails/confirmation.html", name=current_user.name, token=token)
         send_mail("Please confirm your email", sender=current_app.config.get('MAIL_USERNAME'),
                   recipient=current_user.email,
                   plain_text_body=plain_text_body, html_body=html_body)
@@ -78,9 +78,9 @@ def confirm(token):
 @auth_bp.route("/<lang>/resend_confirmation")
 def resend_confirmation():
     token = generate_token(current_user.email)
-    plain_text_body = render_template("confirmation_mails/confirmation.txt", name=current_user.username,
+    plain_text_body = render_template("confirmation_mails/confirmation.txt", name=current_user.name,
                                       token=token)
-    html_body = render_template("confirmation_mails/confirmation.html", name=current_user.username, token=token)
+    html_body = render_template("confirmation_mails/confirmation.html", name=current_user.name, token=token)
     send_mail("Please confirm your email", sender=current_app.config.get('MAIL_USERNAME'),
               recipient=current_user.email,
               plain_text_body=plain_text_body, html_body=html_body)
@@ -139,7 +139,6 @@ def edit_profile():
     form = EditProfileForm()
     if form.validate_on_submit():
         current_user.name = form.name.data
-        current_user.username = form.username.data
         current_user.phone = form.phone.data
         current_user.address = form.address.data
         db.session.add(current_user)
@@ -149,7 +148,6 @@ def edit_profile():
         if next is None or not next.startswith('/'):
             next = url_for('auth_bp.profile')
         return redirect(next)
-    form.username.data = current_user.username
     form.name.data = current_user.name
     form.phone.data = current_user.phone
     form.address.data = current_user.address

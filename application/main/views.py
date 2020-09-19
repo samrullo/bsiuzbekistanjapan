@@ -1,13 +1,48 @@
 from . import main_bp
 from flask import render_template, redirect
+from flask import url_for as flask_url_for
 from flask_babel import lazy_gettext as _
 from application.utils.custom_url_for import url_for
 from flask_login import login_required
 from application.auth.permission_required import confirm_required
 from flask import current_app
 from flask import request, g
+from flask_sqlalchemy import get_debug_queries
 
 
+@main_bp.app_context_processor
+def inject_url_for():
+    return {'url_for': lambda endpoint, **kwargs: flask_url_for(endpoint, lang=g.current_lang, **kwargs)}
+
+
+@main_bp.app_context_processor
+def inject_number_formatter():
+    def format_number(amount):
+        return "{:,.2f}".format(amount)
+
+    return dict(format_number=format_number)
+
+
+
+@main_bp.before_app_request
+def before():
+    if request.view_args and 'lang' in request.view_args:
+        selected_lang_value = request.view_args['lang']
+        if selected_lang_value in current_app.config.get('ALLOWED_LANGUAGES'):
+            g.current_lang = request.view_args['lang']
+        else:
+            g.current_lang = 'en'
+        request.view_args.pop('lang')
+    if 'lc' in request.args:
+        g.current_lang = request.args.get('lc')
+
+@main_bp.after_app_request
+def after_request(response):
+    for query in get_debug_queries():
+        if query.duration>=current_app.config['SLOW_DB_QUERY_THRESHOLD']:
+            current_app.logger.warning('Slow query : %s\nParameters: %s\nDuration: %f\nContext:%s\n'%
+            (query.statement,query.parameters,query.duration,query.context))
+    return response
 
 @main_bp.route('/')
 def index():

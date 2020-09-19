@@ -85,13 +85,13 @@ def callback():
 
         user = User.query.filter_by(email=users_email, is_google_account=True).first()
         if not user or not user.is_confirmed:
-            user = User(email=users_email, username=users_name, name=users_name, password=os.urandom(23),is_confirmed=True,
+            user = User(email=users_email, name=users_name, password=os.urandom(23),is_confirmed=True,
                         is_google_account=True,
                         confirmed_on=datetime.datetime.utcnow())
             db.session.add(user)
             db.session.commit()
-            flash(_("Successfully registered %(username)s. Please consider to edit your profile later",
-                    username=user.username), "success")
+            flash(_("Successfully registered %(name)s. Please consider to edit your profile later",
+                    name=user.name), "success")
             login_user(user)
             return redirect(url_for('auth_bp.edit_profile'))
         login_user(user)

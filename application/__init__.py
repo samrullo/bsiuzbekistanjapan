@@ -27,7 +27,7 @@ def create_app(config_name):
     # set up logging
     if not app.debug:
         from logging import FileHandler, Formatter
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.INFO,format='%(asctime)s %(levelname)s: %(message)s [in %(pathname)s %(lineno)s]')
         file_handler = FileHandler(app.config.get('LOG_FILE'))
         file_handler.setFormatter(Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s %(lineno)s]'))
         app.logger.addHandler(file_handler)
@@ -41,6 +41,7 @@ def create_app(config_name):
     login_manager.init_app(app)
 
     app.logger.info(f"Finished initializations for db,bootstrap, moment, babel and mail and login_manager")
+    app.logger.info(f"SQLALCHEMY_DATABASE_URI is {app.config['SQLALCHEMY_DATABASE_URI']}")
 
     with app.app_context():
         db.create_all()

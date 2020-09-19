@@ -4,28 +4,28 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    BRAND_NAME="BSI UZB-JP POST"
+    BRAND_NAME = "BSI UZB-JP POST"
     SECRET_KEY = os.environ.get('SECRET_KEY')
     TOKEN_SALT = os.environ.get('TOKEN_SALT')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     BOOTSTRAP_BTN_STYLE = 'dark'
-    DEFAULT_LANG="en"
+    DEFAULT_LANG = "en"
     ALLOWED_LANGUAGES = {'en': 'English', 'uz': 'Uzbek'}
     LOG_FILE = "bsiuzbekistanjapan.log"
 
+    SLOW_DB_QUERY_THRESHOLD = float(os.environ.get('SLOW_DB_QUERY_THRESHOLD'))
+
     # Google OAuth2 related configurations
-    GOOGLE_CLIENT_ID=os.environ.get('GOOGLE_CLIENT_ID')
-    GOOGLE_CLIENT_SECRET=os.environ.get('GOOGLE_CLIENT_SECRET')
+    GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+    GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
     GOOGLE_DISCOVERY_URL = (
         "https://accounts.google.com/.well-known/openid-configuration"
     )
 
     # admins and moderators
-    ADMINISTRATOR_EMAILS=os.environ.get("ADMINISTRATOR_EMAILS")
+    ADMINISTRATOR_EMAILS = os.environ.get("ADMINISTRATOR_EMAILS")
     MODERATOR_EMAILS = os.environ.get("MODERATOR_EMAILS")
-    ADMIN_EMAIL=os.environ.get('ADMIN_EMAIL')
-
-
+    ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
 
     @staticmethod
     def init_app():

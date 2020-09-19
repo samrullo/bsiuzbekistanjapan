@@ -14,7 +14,6 @@ class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.String(64), unique=True, index=True)
     name = db.Column(db.String(250), unique=True, index=True)
     phone = db.Column(db.String(64), unique=True, index=True,nullable=True)
     address = db.Column(db.String(250), unique=True, index=True,nullable=True)
