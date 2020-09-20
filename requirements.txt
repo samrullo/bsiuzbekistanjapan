@@ -34,3 +34,4 @@ pandas
 openpyxl
 xlrd
 xlwt
+virtualenv
