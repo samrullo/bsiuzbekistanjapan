@@ -8,6 +8,7 @@ from application.auth.permission_required import confirm_required
 from flask import current_app
 from flask import request, g
 from flask_sqlalchemy import get_debug_queries
+from flask_login import current_user
 
 
 @main_bp.app_context_processor
@@ -23,7 +24,6 @@ def inject_number_formatter():
     return dict(format_number=format_number)
 
 
-
 @main_bp.before_app_request
 def before():
     if request.view_args and 'lang' in request.view_args:
@@ -36,13 +36,15 @@ def before():
     if 'lc' in request.args:
         g.current_lang = request.args.get('lc')
 
+
 @main_bp.after_app_request
 def after_request(response):
     for query in get_debug_queries():
-        if query.duration>=current_app.config['SLOW_DB_QUERY_THRESHOLD']:
-            current_app.logger.warning('Slow query : %s\nParameters: %s\nDuration: %f\nContext:%s\n'%
-            (query.statement,query.parameters,query.duration,query.context))
+        if query.duration >= current_app.config['SLOW_DB_QUERY_THRESHOLD']:
+            current_app.logger.warning('Slow query : %s\nParameters: %s\nDuration: %f\nContext:%s\n' %
+                                       (query.statement, query.parameters, query.duration, query.context))
     return response
+
 
 @main_bp.route('/')
 def index():
@@ -58,6 +60,8 @@ def switch_language(switch_to_lang):
 
 @main_bp.route('/<lang>')
 def home():
+    if current_user.is_authenticated and not current_user.is_confirmed:
+        return redirect(url_for('auth_bp.unconfirmed'))
     return render_template('index.html', name="boss", page_header_title=_("Main page"))
 
 
@@ -67,9 +71,11 @@ def home():
 def secret():
     return render_template("secret.html", page_header_title=_("Secret page"))
 
+
 @main_bp.route('/<lang>/aboutus')
 def aboutus():
-    return render_template("about_us.html",page_header_title=_("About us"))
+    return render_template("about_us.html", page_header_title=_("About us"))
+
 
 @main_bp.app_errorhandler(404)
 def page_not_found(e):
