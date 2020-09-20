@@ -31,6 +31,7 @@ def create_app(config_name):
         file_handler = FileHandler(app.config.get('LOG_FILE'))
         file_handler.setFormatter(Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s %(lineno)s]'))
         app.logger.addHandler(file_handler)
+    app.logger.info(f"Sender MAIL_USERNAME is {app.config.get('MAIL_USERNAME')}")
 
     db.init_app(app)
     admin_flsk.init_app(app)
