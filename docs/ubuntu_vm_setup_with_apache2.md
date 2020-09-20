@@ -40,6 +40,18 @@ Then
 sudo apt-get install libmysqlclient-dev
 ```
 
+Had to add below
+```python
+[mysqld]
+skip-grant-tables
+```
+
+After installing mysql-server, couldn't login as usual user
+To prevent that had to make changes to config file
+```python
+sudo vi /etc/mysql/my.cnf
+```
+
 # Some challenges faced when installing flask project on ubuntu 18.04
 To check ubuntu version
 

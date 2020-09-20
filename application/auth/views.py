@@ -74,6 +74,7 @@ def confirm(token):
         current_user.confirmed_on = datetime.datetime.now()
         db.session.add(current_user)
         db.session.commit()
+        flash(_("Successfully confrmed your email %(email)s",email=current_user.email),"success")
     return redirect(url_for('main_bp.home'))
 
 
