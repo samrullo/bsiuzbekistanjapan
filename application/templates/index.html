@@ -4,18 +4,14 @@
 <p>{{_("This is a platform to enter and keep track of post weights that you send to BSI.")}}</p>
 
 {% if current_user.is_authenticated and current_user.is_confirmed %}
-<ul class="list-group">
-<li class="list-group-item"><a href="{{url_for('post_weight_bp.post_weights')}}">{{_("View post weights")}}</a></li>
-  <li class="list-group-item"><a href="{{url_for('post_weight_bp.new_weight')}}">{{_("Enter new weight")}}</a></li>
-</ul>
-
+<div class="list-group">
+  <a class="list-group-item list-group-item-action" href="{{url_for('post_weight_bp.post_weight_home')}}">{{_("View post weights")}}</a>
+  <a class="list-group-item list-group-item-action" href="{{url_for('post_weight_bp.new_post_weight')}}">{{_("Enter new weight")}}</a>
+</div>
 {% else %}
-
-<ul class="list-group">
-  <li class="list-group-item"><a href="{{url_for('auth_bp.google_login')}}">{{_("Log in with Google account")}}</a></li>
-  <li class="list-group-item"><a href="{{url_for('auth_bp.login')}}">{{_("Log in with usual account")}}</a></li>
-</ul>
-
+<div class="list-group">
+  <a class="list-group-item list-group-item-action" href="{{url_for('auth_bp.google_login')}}">{{_("Log in with Google account")}}</a>
+  <a class="list-group-item list-group-item-action" href="{{url_for('auth_bp.login')}}">{{_("Log in with usual account")}}</a>
+</div>
 {% endif %}
-
 {% endblock %}

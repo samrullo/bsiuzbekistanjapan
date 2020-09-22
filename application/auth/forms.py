@@ -35,7 +35,7 @@ class EditProfileForm(FlaskForm):
     name = StringField(_("Name"), validators=[DataRequired()], render_kw={"placeholder": _("<Last name> <First name>")})
     phone = StringField(_("Phone"), render_kw={"placeholder": _("080-1234-1234")})
     address = StringField(_("Address"))
-    submit = SubmitField(_("Register"))
+    submit = SubmitField(_("Save"))
 
 class ResetPasswordSendLinkForm(FlaskForm):
     email = StringField(_("Please enter your email"), validators=[DataRequired(), Length(1, 64), Email()])

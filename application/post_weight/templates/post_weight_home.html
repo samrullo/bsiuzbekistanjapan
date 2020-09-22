@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+
+<div class="container">
+  <h3>{{_("Different views")}}</h3>
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action" href="{{url_for('post_weight_bp.unpaid_post_weights')}}">{{_("View unpaid post weights")}}</a>
+    <a class="list-group-item list-group-item-action" href="{{url_for('post_weight_bp.post_weights_by_date')}}">{{_("View post weights by date")}}</a>
+    <a class="list-group-item list-group-item-action" href="{{url_for('post_weight_bp.post_weights')}}">{{_("View all post weights")}}</a>
+  </div>
+</div>
+
+
+{% endblock %}

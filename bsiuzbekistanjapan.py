@@ -2,6 +2,7 @@ import os
 from application import create_app, db
 from application.auth.models import User, Role, Permissions
 from application.bsi.models import BSIPostWeight
+from application.post_weight.models import PostWeight
 from application.main.models import BusinessGlobalVariable
 from flask_migrate import Migrate
 from flask import g, request, current_app
@@ -13,7 +14,7 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, User=User, BSIPostWeight=BSIPostWeight, Role=Role, app=app, Permissions=Permissions,
+    return dict(db=db, User=User, PostWeight=PostWeight,BSIPostWeight=BSIPostWeight, Role=Role, app=app, Permissions=Permissions,
                 BusinessGlobalVariable=BusinessGlobalVariable)
 
 

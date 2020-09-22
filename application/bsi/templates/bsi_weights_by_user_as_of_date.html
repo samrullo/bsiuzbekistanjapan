@@ -14,10 +14,11 @@
     <th>{{_("BSI modified on")}}</th>
     <th>{{_("BSI modified by")}}</th>
     <th></th>
+    <th></th>
   </thead>
   <tbody>
     {% for post_weight in post_weights %}
-    <tr>
+    <tr class="{% if post_weight.is_paid %} table-success {% endif %}">
       <td>{{moment(post_weight.entered_on).format('LLL')}}</td>
       <td>{{post_weight.is_paid}}</td>
       <td>{{format_number(post_weight.weight)}}</td>
@@ -38,10 +39,17 @@
       <td>-</td>
       {% endif %}
       {% if not post_weight.bsi_post_weight %}
-      <td><a href="{{url_for('bsi_bp.add_bsi_weight',post_weight_id=post_weight.id)}}">{{_('Add BSI weight')}}</a></td>
+      <td><a class="btn btn-dark" href="{{url_for('bsi_bp.add_bsi_weight',post_weight_id=post_weight.id)}}">{{_('Add BSI weight')}}</a></td>
       {% else %}
-      <td><a href="{{url_for('bsi_bp.edit_bsi_weight',bsi_post_weight_id=post_weight.bsi_post_weight.id)}}">{{_('Edit BSI weight')}}</a></td>
+      <td><a class="btn btn-dark" href="{{url_for('bsi_bp.edit_bsi_weight',bsi_post_weight_id=post_weight.bsi_post_weight.id)}}">{{_('Edit BSI weight')}}</a></td>
       {% endif %}
+      <td>
+        {% if not post_weight.is_paid %}
+        <a class="btn btn-dark" href="{{url_for('bsi_bp.mark_post_weight_as_paid_or_unpaid',post_weight_id=post_weight.id)}}">{{_("Mark as paid")}}</a>
+        {% else %}
+        <a class="btn btn-dark" href="{{url_for('bsi_bp.mark_post_weight_as_paid_or_unpaid',post_weight_id=post_weight.id)}}">{{_("Mark as unpaid")}}</a>
+        {% endif %}
+      </td>
     </tr>
     {% endfor %}
   </tbody>

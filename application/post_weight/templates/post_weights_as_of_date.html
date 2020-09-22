@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+<table class="table table-hover orderByDateTable">
+  <thead order_col_no="0">
+    <th>{{_("Entered on")}}</th>
+    <th>{{_("Is paid?")}}</th>
+    <th>{{_("Weight")}}</th>
+    <th>{{_("Payment amount")}}</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    {% for post_weight in post_weights %}
+    <tr class="{% if post_weight.is_paid %} table-success {% endif %}">
+      <td>{{moment(post_weight.entered_on).format('LLL')}}</td>
+      <td>{{post_weight.is_paid}}</td>
+      <td>{{format_number(post_weight.weight)}}</td>
+      <td>{{format_number(post_weight.payment_amount)}}</td>
+      <td>
+        <a class="btn btn-dark {% if not post_weight.is_removable %} disabled {% endif %}" href="{{url_for('post_weight_bp.remove_post_weight',post_weight_id=post_weight.id)}}">{{_("Remove")}}</a>
+      </td>
+      <td>
+        <a class="btn btn-dark" href="{{url_for('post_weight_bp.edit_post_weight',post_weight_id=post_weight.id)}}">{{_("Edit")}}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

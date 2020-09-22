@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+
+<table class="table table-hover orderByDateTable">
+  <thead order_col_no="6">
+    <th>{{_("Name")}}</th>
+    <th>{{_("Email")}}</th>
+    <th>{{_("Total post weight")}}</th>
+    <th></th>
+  </thead>
+  <tbody>
+    {% for user,total_post_weight in users_with_total_weight %}
+    <tr>
+      <td><a href="{{url_for('bsi_bp.view_user_profile',user_id=user.id)}}">{{user.name}}</a></td>
+      <td>{{user.email}}</td>
+      <td>{{format_number(total_post_weight)}}</td>
+      {% if page_for_viewing_unpaid%}
+      <td><a class="btn btn-dark" href="{{url_for('bsi_bp.unpaid_weights_by_user',user_id=user.id)}}">{{_('View')}}</a></td>
+      {% else %}
+      <td><a class="btn btn-dark" href="{{url_for('bsi_bp.weights_by_user',user_id=user.id)}}">{{_('View')}}</a></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

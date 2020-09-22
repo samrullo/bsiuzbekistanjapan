@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
-
 <table class="table table-hover orderByDateTable">
   <thead order_col_no="0">
     <th>{{_("Sent date")}}</th>
@@ -15,11 +14,7 @@
       <td>{{moment(i).format('LL')}}</td>
       <td>{{format_number(row['weight'])}}</td>
       <td>{{format_number(row['payment_amount'])}}</td>
-      {% if page_for_viewing_unpaid %}
-      <td><a class="btn btn-dark" href="{{url_for('bsi_bp.unpaid_weights_by_user_as_of_date',user_id=user.id,adate=i)}}">{{_('View')}}</a></td>
-      {% else %}
-      <td><a class="btn btn-dark" href="{{url_for('bsi_bp.weights_by_user_as_of_date',user_id=user.id,adate=i)}}">{{_('View')}}</a></td>
-      {% endif %}
+      <td><a class="btn btn-dark" href="{{url_for('post_weight_bp.post_weights_as_of_date',adate=i)}}">{{_('View')}}</a></td>
     </tr>
     {% endfor %}
   </tbody>

@@ -21,12 +21,38 @@ import pandas as pd
 @confirm_required
 @moderator_required
 def moderator():
+    return render_template("bsi_moderator_home.html", page_header_title=_("Moderator menu"))
+
+
+@bsi_bp.route("/<lang>/user_total_weights")
+@login_required
+@confirm_required
+@moderator_required
+def user_total_weights():
     users = User.query.all()
     users_with_total_weight = []
     for user in users:
         total_post_weight = sum([post_weight.weight for post_weight in user.post_weights])
         users_with_total_weight.append((user, total_post_weight))
-    return render_template("bsi_moderator.html", page_header_title=_("User list for BSI moderator"),
+    return render_template("bsi_user_total_weights.html",
+                           page_header_title=_("User total weights"),
+                           page_for_viewing_unpaid=False,
+                           users_with_total_weight=users_with_total_weight)
+
+
+@bsi_bp.route("/<lang>/unpaid_user_total_weights")
+@login_required
+@confirm_required
+@moderator_required
+def unpaid_user_total_weights():
+    users = User.query.all()
+    users_with_total_weight = []
+    for user in users:
+        total_post_weight = sum([post_weight.weight for post_weight in user.post_weights if not post_weight.is_paid])
+        users_with_total_weight.append((user, total_post_weight))
+    return render_template("bsi_user_total_weights.html",
+                           page_header_title=_("Unpaid user total weights"),
+                           page_for_viewing_unpaid=True,
                            users_with_total_weight=users_with_total_weight)
 
 
@@ -41,7 +67,27 @@ def weights_by_user(user_id):
                         post_weights]
     post_weights_df = pd.DataFrame(columns=['sent_date', 'weight', 'payment_amount'], data=post_weight_list)
     post_weights_grp_df = post_weights_df.groupby('sent_date').sum()
-    return render_template("bsi_weights_by_user.html", page_header_title=_("Weights by user %(name)s", name=user.name),
+    return render_template("bsi_weights_by_user.html",
+                           page_header_title=_("Weights by user %(name)s", name=user.name),
+                           page_for_viewing_unpaid=False,
+                           user=user,
+                           post_weights_grp_df=post_weights_grp_df)
+
+
+@bsi_bp.route("/<lang>/unpaid_weights_by_user/<user_id>")
+@login_required
+@confirm_required
+@moderator_required
+def unpaid_weights_by_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    post_weights = PostWeight.query.filter(PostWeight.user_id == user.id).filter(PostWeight.is_paid == False).all()
+    post_weight_list = [(post_weight.sent_date, post_weight.weight, post_weight.payment_amount) for post_weight in
+                        post_weights]
+    post_weights_df = pd.DataFrame(columns=['sent_date', 'weight', 'payment_amount'], data=post_weight_list)
+    post_weights_grp_df = post_weights_df.groupby('sent_date').sum()
+    return render_template("bsi_weights_by_user.html",
+                           page_header_title=_("Unpaid weights by user %(name)s", name=user.name),
+                           page_for_viewing_unpaid=True,
                            user=user,
                            post_weights_grp_df=post_weights_grp_df)
 
@@ -55,6 +101,23 @@ def weights_by_user_as_of_date(user_id, adate):
     post_weights = PostWeight.query.filter(PostWeight.user_id == user_id).filter(PostWeight.sent_date == adate).all()
     return render_template("bsi_weights_by_user_as_of_date.html",
                            page_header_title=_("Post weights sent by %(name)s on %(date)s", name=user.name, date=adate),
+                           page_for_viewing_unpaid=False,
+                           user=user,
+                           post_weights=post_weights)
+
+
+@bsi_bp.route("/<lang>/unpaid_weights_by_user_as_of_date/<user_id>/<adate>")
+@login_required
+@confirm_required
+@moderator_required
+def unpaid_weights_by_user_as_of_date(user_id, adate):
+    user = User.query.filter_by(id=user_id).first()
+    post_weights = PostWeight.query.filter(PostWeight.user_id == user_id).filter(PostWeight.sent_date == adate).filter(
+        PostWeight.is_paid == False).all()
+    return render_template("bsi_weights_by_user_as_of_date.html",
+                           page_header_title=_("Unpaid post weights sent by %(name)s on %(date)s", name=user.name,
+                                               date=adate),
+                           page_for_viewing_unpaid=True,
                            user=user,
                            post_weights=post_weights)
 
@@ -65,6 +128,7 @@ def weights_by_user_as_of_date(user_id, adate):
 @moderator_required
 def add_bsi_weight(post_weight_id):
     form = BSIPostWeightForm()
+    post_weight = PostWeight.query.get(post_weight_id)
     if form.validate_on_submit():
         bsi_post_weight = BSIPostWeight(post_weight_id=post_weight_id, weight=form.weight.data, entered_by=current_user,
                                         modified_by=current_user)
@@ -72,11 +136,14 @@ def add_bsi_weight(post_weight_id):
         bsi_post_weight.payment_amount = price_per_kg * bsi_post_weight.weight
         db.session.add(bsi_post_weight)
         db.session.commit()
+        post_weight.is_removable = False
+        db.session.add(post_weight)
+        db.session.commit()
         flash(_("Successfully saved bsi post weight of %(weight)d", weight=bsi_post_weight.weight), "success")
         return redirect(url_for('bsi_bp.weights_by_user_as_of_date', user_id=bsi_post_weight.post_weight.user.id,
                                 adate=bsi_post_weight.post_weight.sent_date))
-    post_weight = PostWeight.query.filter_by(id=post_weight_id).first()
-    return render_template("bsi_add_weight.html", page_header_title=_("Add BSI weight"),
+    return render_template("bsi_add_weight.html",
+                           page_header_title=_("Add BSI weight"),
                            form=form,
                            post_weight=post_weight)
 
@@ -87,11 +154,11 @@ def add_bsi_weight(post_weight_id):
 @moderator_required
 def edit_bsi_weight(bsi_post_weight_id):
     form = BSIPostWeightForm()
-    bsi_post_weight = BSIPostWeight.query.filter_by(id=bsi_post_weight_id).first()
+    bsi_post_weight = BSIPostWeight.query.get(bsi_post_weight_id)
     if form.validate_on_submit():
-        bsi_post_weight.weight=form.weight.data
-        bsi_post_weight.modified_on=datetime.datetime.utcnow()
-        bsi_post_weight.modified_by=current_user
+        bsi_post_weight.weight = form.weight.data
+        bsi_post_weight.modified_on = datetime.datetime.utcnow()
+        bsi_post_weight.modified_by = current_user
         db.session.add(bsi_post_weight)
         db.session.commit()
         flash(_("Successfully saved bsi post weight of %(weight)s", weight=bsi_post_weight.weight), "success")
@@ -102,3 +169,41 @@ def edit_bsi_weight(bsi_post_weight_id):
                            page_header_title=_("Edit BSI post weight"),
                            form=form,
                            post_weight=bsi_post_weight.post_weight)
+
+
+@bsi_bp.route("/<lang>/remove_bsi_weight/<bsi_post_weight_id>", methods=['GET', 'POST'])
+@login_required
+@confirm_required
+@moderator_required
+def remove_bsi_weight(bsi_post_weight_id):
+    bsi_post_weight = BSIPostWeight.query.get(bsi_post_weight_id)
+    db.session.delete(bsi_post_weight)
+    db.session.commit()
+    flash(_("Successfully removed bsi post weight %(bsi_post_weight)s", bsi_post_weight=bsi_post_weight), "success")
+    return redirect(url_for('bsi_bp.weights_by_user_as_of_date', user_id=bsi_post_weight.post_weight.user.id,
+                            adate=bsi_post_weight.post_weight.sent_date))
+
+
+@bsi_bp.route("/<lang>/mark_post_weight_as_paid_or_unpaid/<post_weight_id>")
+@login_required
+@confirm_required
+@moderator_required
+def mark_post_weight_as_paid_or_unpaid(post_weight_id):
+    post_weight = PostWeight.query.get(post_weight_id)
+    post_weight.is_paid = not post_weight.is_paid
+    db.session.add(post_weight)
+    db.session.commit()
+    flash(_("Marked post weight as paid"), "success")
+    return redirect(url_for('bsi_bp.weights_by_user_as_of_date', user_id=post_weight.user.id,
+                            adate=post_weight.sent_date))
+
+
+@bsi_bp.route("/<lang>/view_user_profile/<user_id>")
+@login_required
+@confirm_required
+@moderator_required
+def view_user_profile(user_id):
+    user = User.query.get(user_id)
+    return render_template("bsi_user_profile.html",
+                           page_header_title=_("%(name)s profile", name=user.name),
+                           user=user)

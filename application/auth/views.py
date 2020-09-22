@@ -132,7 +132,7 @@ def reset_password(token):
 @auth_bp.route('/<lang>/profile')
 @login_required
 def profile():
-    return render_template("profile.html", page_header_title=_("Account"))
+    return render_template("profile.html", page_header_title=_("Profile"))
 
 
 @auth_bp.route('/<lang>/edit_profile', methods=['GET', 'POST'])

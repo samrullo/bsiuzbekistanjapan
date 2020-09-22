@@ -9,25 +9,24 @@
   <tbody>
     <tr>
       <td>{{_("Email")}}</td>
-      <td>{{current_user.email}}</td>
+      <td>{{user.email}}</td>
     </tr>
     <tr>
       <td>{{_("Name")}}</td>
-      <td>{{current_user.name}}</td>
+      <td>{{user.name}}</td>
     </tr>
     <tr>
       <td>{{_("Phone")}}</td>
-      <td>{{current_user.phone}}</td>
+      <td>{{user.phone}}</td>
     </tr>
     <tr>
       <td>{{_("Address")}}</td>
-      <td>{{current_user.address}}</td>
+      <td>{{user.address}}</td>
     </tr>
     <tr>
       <td>{{_("Registered date")}}</td>
-      <td>{{moment(current_user.registered_on).format('LLL')}}</td>
+      <td>{{moment(user.registered_on).format('LLL')}}</td>
     </tr>
   </tbody>
 </table>
-<a class="btn btn-lg btn-dark" href="{{url_for('auth_bp.edit_profile')}}">Edit</a>
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+<div class="container">
+  <h3>{{_("User weights")}}</h3>
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action" href="{{url_for('bsi_bp.unpaid_user_total_weights')}}">{{_("View user unpaid weights")}}</a>
+    <a class="list-group-item list-group-item-action" href="{{url_for('bsi_bp.user_total_weights')}}">{{_("View user total weights")}}</a>    
+  </div>
+</div>
+{% endblock %}
