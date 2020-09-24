@@ -7,163 +7,241 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-09-08 10:45+0900\n"
-"PO-Revision-Date: 2020-09-08 21:39+0900\n"
+"POT-Creation-Date: 2020-09-24 20:50+0900\n"
+"PO-Revision-Date: 2020-09-24 20:43+0900\n"
+"Last-Translator: \n"
 "Language: uz\n"
 "Language-Team: uz <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"Last-Translator: \n"
-"X-Generator: Poedit 2.4.1\n"
 
-#: application/auth/forms.py:10 application/auth/forms.py:17
-#: application/auth/templates/profile.html:5
+#: application/auth/forms.py:13 application/auth/forms.py:20
+#: application/auth/templates/profile.html:11
+#: application/bsi/templates/bsi_user_profile.html:11
+#: application/bsi/templates/bsi_user_total_weights.html:8
 msgid "Email"
 msgstr "Email"
 
-#: application/auth/forms.py:11 application/auth/forms.py:20
+#: application/auth/forms.py:14 application/auth/forms.py:24
 msgid "Password"
 msgstr "Parol"
 
-#: application/auth/forms.py:12
+#: application/auth/forms.py:15
 msgid "Keep me logged in"
 msgstr "Akkauntga kirgan holatni saqlamoq"
 
-#: application/auth/forms.py:13
+#: application/auth/forms.py:16
 msgid "Log In"
 msgstr "Kirish"
 
-#: application/auth/forms.py:18 application/auth/templates/profile.html:6
-msgid "Username"
-msgstr "Foydalanuvchi qisqa nomi"
+#: application/auth/forms.py:21 application/auth/forms.py:35
+#: application/auth/templates/profile.html:15
+#: application/bsi/templates/bsi_user_profile.html:15
+#: application/bsi/templates/bsi_user_total_weights.html:7
+msgid "Name"
+msgstr "Ismi sharifi"
 
-#: application/auth/forms.py:22
+#: application/auth/forms.py:21 application/auth/forms.py:35
+msgid "<Last name> <First name>"
+msgstr "<Familiya> <Ismi>"
+
+#: application/auth/forms.py:22 application/auth/forms.py:36
+#: application/auth/templates/profile.html:19
+#: application/bsi/templates/bsi_user_profile.html:19
+msgid "Phone"
+msgstr "Telefon raqami"
+
+#: application/auth/forms.py:22 application/auth/forms.py:36
+msgid "080-1234-1234"
+msgstr "080-1234-1234"
+
+#: application/auth/forms.py:23 application/auth/forms.py:37
+#: application/auth/templates/profile.html:23
+#: application/bsi/templates/bsi_user_profile.html:23
+msgid "Address"
+msgstr "Adres"
+
+#: application/auth/forms.py:26
 msgid "Confirm Password"
 msgstr "Parolni tasdiqlamoq"
 
-#: application/auth/forms.py:23 application/auth/templates/login.html:10
-#: application/auth/views.py:57
+#: application/auth/forms.py:27 application/auth/templates/login.html:18
+#: application/auth/views.py:66
 msgid "Register"
 msgstr "Ro'yxatdan o'tmoq"
 
-#: application/auth/forms.py:27
-msgid "Email already exists"
-msgstr "Email boshqa foydalanuchi tomondan egallangan"
-
 #: application/auth/forms.py:31
-msgid "username already exists"
-msgstr "Ushbu nom boshqa foydalanuvchi tomondan egallangan"
+msgid "Email already exists"
+msgstr "Email boshqa foydalanuchi tomonidan egallangan"
 
-#: application/auth/forms.py:35
+#: application/auth/forms.py:38
+msgid "Save"
+msgstr "Saqlamoq"
+
+#: application/auth/forms.py:41
 msgid "Please enter your email"
 msgstr "Iltimos emailizni kiriting"
 
-#: application/auth/forms.py:36 application/auth/views.py:107
+#: application/auth/forms.py:42 application/auth/views.py:111
 msgid "Send password reset link"
-msgstr "Parolni qayta o'rnatish linkini yubormoq"
+msgstr "Parolni qayta tiklash linkini yubormoq"
 
-#: application/auth/forms.py:40
+#: application/auth/forms.py:47
 msgid ""
 "This email doesn't exist in our system. Please enter the email you "
 "registered with."
 msgstr ""
-"Ushbu email databaseda mavjud emas. Iltimos, siz ro'yxatdan o'tgan "
-"to'gri emailni kiriting"
+"Ushbu email mavjud emas. Iltimos, siz ro'yxatdan o'tgan to'gri emailni "
+"kiriting."
 
-#: application/auth/forms.py:44
+#: application/auth/forms.py:51
 msgid "Enter the new password"
 msgstr "Yangi parolni kiriting"
 
-#: application/auth/forms.py:45
+#: application/auth/forms.py:52
 msgid "Passwords don't match"
 msgstr "Parollar mos emas"
 
-#: application/auth/forms.py:46
+#: application/auth/forms.py:54
 msgid "Confirm the password"
 msgstr "Parolni tasdiqlang"
 
-#: application/auth/forms.py:47
+#: application/auth/forms.py:55
 msgid "Save new password"
 msgstr "Yangi parolni saqlamoq"
 
-#: application/auth/views.py:28
+#: application/auth/views.py:34
 msgid "Invalid email or password"
 msgstr "Email yoki parolingiz noto’g’ri"
 
-#: application/auth/views.py:29
+#: application/auth/views.py:35
 msgid "Login"
 msgstr "Kirish"
 
-#: application/auth/views.py:36
+#: application/auth/views.py:42
 msgid "Logged you out"
 msgstr "Akkauntdan chiqdingiz"
 
-#: application/auth/views.py:55
+#: application/auth/views.py:63
 msgid ""
-"We successfully registered you. But you need to verify your email "
-"through the link we sent you"
+"We successfully registered you. But you need to verify your email through"
+" the link we sent you"
 msgstr ""
 "Muvaffaqiyat bilan ro'yxatdan o'tdiz. Lekin platformamizdan foydalanish "
-"uchun email adresingizni biz yuborgan link orqali tasdiqlashingiz lozim."
+"uchun email adresingizni biz yuborgan link orqali tasdiqlashingiz lozim"
 
-#: application/auth/views.py:80
+#: application/auth/views.py:77
+#, python-format
+msgid "Successfully confrmed your email %(email)s"
+msgstr "%(email)s emailni muvaffaqiyat bilan tasdiqladik"
+
+#: application/auth/views.py:90
 msgid "Resent confirmation url to your email"
 msgstr "Tasdiqlash linkini emailizga qayta yubordik"
 
-#: application/auth/templates/profile.html:7 application/auth/views.py:86
+#: application/auth/views.py:96
 msgid "Unconfirmed"
 msgstr "Tasdiqlanmagan"
 
-#: application/auth/views.py:92
-msgid "Account"
-msgstr "Akkaunt"
-
-#: application/auth/views.py:105
+#: application/auth/views.py:109
 #, python-format
 msgid "Sent reset password link to %(email)s"
 msgstr "Parolni qayta tiklash linkini %(email)s ga yubordik"
 
-#: application/auth/views.py:119
+#: application/auth/views.py:123
 msgid "Updated your password successfully"
 msgstr "Parolingizni muvaffaqiyat bilan yangiladik"
 
-#: application/auth/views.py:124
+#: application/auth/views.py:128
 msgid "The reset link has expired or you are not authorized"
 msgstr ""
 "Parolni tiklash linki muddatidan o'tdi yoki boshqa muammo sodir bo'ldi. "
-"Login sahifasidan parolni esdan chiqarish linkini bosing."
+"Login sahifasidan parolni tiklash linkini bosing"
 
-#: application/auth/templates/login.html:10
+#: application/auth/views.py:135
+msgid "Profile"
+msgstr "Profil"
+
+#: application/auth/views.py:149
+#, python-format
+msgid "Updated profile for %(email)s successfully"
+msgstr "%(email)s profilini muvaffaqiyat bilan saqladik"
+
+#: application/auth/views.py:158
+#, python-format
+msgid "Edit profile for %(email)s"
+msgstr "%(email)s profilini o’zgartirmoq"
+
+#: application/auth/views_google_login.py:82
+#, python-format
+msgid ""
+"Seems like %(email)s is registered via usual route. Please login using "
+"your password"
+msgstr ""
+"%(email)s odatiy yo’l bilan ro’yxatdan o’tgani sababli, google logindan "
+"foydalana olmaysiz. Odatiy yo’l bilan akkauntga kiring"
+
+#: application/auth/views_google_login.py:93
+#, python-format
+msgid ""
+"Successfully registered %(name)s. Please consider to edit your profile "
+"later"
+msgstr ""
+"%(name)s ni muvaffaqiyat bilan ro’yxatdan o’tkazdik. Iltimos, "
+"profilingizga yetishmayotgan ma’lumotlarni qo’shing"
+
+#: application/auth/templates/login.html:8
+msgid "Login with Google Account"
+msgstr "Google akkaunt bilan kirish"
+
+#: application/auth/templates/login.html:11
+msgid "Or log in with your registered account"
+msgstr "Yoki odatiy akkauntingiz bilan kiring"
+
+#: application/auth/templates/login.html:18
 msgid "New user?"
 msgstr "Hali ro'yxatdan o'tmadizmi?"
 
-#: application/auth/templates/login.html:11
+#: application/auth/templates/login.html:19
 msgid "Forgot password?"
 msgstr "Parolingiz esdan chiqdimi?"
 
-#: application/auth/templates/login.html:11
+#: application/auth/templates/login.html:19
 msgid "Send Reset Password link"
 msgstr "Parolni qayta tiklash linkini yubormoq"
 
-#: application/auth/templates/profile.html:7
-msgid "Is confirmed?"
-msgstr "Tasdiqlanganmi?"
+#: application/auth/templates/profile.html:6
+#: application/bsi/templates/bsi_user_profile.html:6
+msgid "Field"
+msgstr "Ma’lumot"
 
 #: application/auth/templates/profile.html:7
-msgid "Confirmed"
-msgstr "Tasdiqlangan"
+#: application/bsi/templates/bsi_user_profile.html:7
+msgid "Value"
+msgstr "Ma’lumot qiymati"
+
+#: application/auth/templates/profile.html:27
+#: application/bsi/templates/bsi_user_profile.html:27
+msgid "Registered date"
+msgstr "Ro’yxatdan o’tgan kun"
+
+#: application/auth/templates/profile.html:32
+#: application/post_weight/templates/post_weights_as_of_date.html:24
+#: application/post_weight/templates/unpaid_post_weights.html:30
+msgid "Edit"
+msgstr "O’zgartirmoq"
 
 #: application/auth/templates/unconfirmed.html:4
 #, python-format
-msgid "Dear %(username)s, you haven't confirmed your email yet"
-msgstr "Hurmatli %(username)s, siz hali emailizni tasdiqlaganiz yo'q."
+msgid "Dear %(name)s, you haven't confirmed your email yet"
+msgstr "Hurmatli %(name)s, siz hali emailingizni tasdiqlaganiz yo’q"
 
 #: application/auth/templates/unconfirmed.html:5
 msgid "Please check the email sent by us and confirm your email."
-msgstr "Iltimos biz yuborgan emailni tekshiring va emailizni tasdiqlang"
+msgstr "Iltimos biz yuborgan emailni tekshiring va emailizni tasdiqlang."
 
 #: application/auth/templates/unconfirmed.html:7
 msgid "Haven't received email?"
@@ -178,6 +256,7 @@ msgid "Confirmation"
 msgstr "Tasdiqlash"
 
 #: application/auth/templates/confirmation_mails/confirmation.html:8
+#: application/auth/templates/confirmation_mails/confirmation.txt:2
 msgid "Hello"
 msgstr "Salom"
 
@@ -189,6 +268,14 @@ msgstr ""
 "Bizning platformamizga ro'yxatdan o'tganiz uchun tashakkur. Iltimos "
 "quyidagilink orqali emailizni tasdiqlang"
 
+#: application/auth/templates/confirmation_mails/confirmation.txt:4
+msgid ""
+"Thanks for registering to our platform. Please confirm your email by "
+"clicking the below URL"
+msgstr ""
+"Bizning platformamizga ro’yxatdan o’tganiz uchun tashakkur. Iltimos "
+"quyidagilink orqali emailizni tasdiqlang"
+
 #: application/auth/templates/reset_password/reset_password.html:5
 msgid "Reset password"
 msgstr "Parolni qayta qo'yish"
@@ -197,34 +284,340 @@ msgstr "Parolni qayta qo'yish"
 msgid "Please reset your password by following the link below"
 msgstr "Iltimos quyidagi link orqali parolizni qayta tiklang"
 
-#: application/main/views.py:25
-msgid "Main page"
-msgstr "Bosh sahifa"
+#: application/bsi/forms.py:7 application/post_weight/forms.py:11
+#: application/post_weight/templates/all_post_weights.html:7
+#: application/post_weight/templates/unpaid_post_weights.html:11
+msgid "Weight (in kg)"
+msgstr "Vazn (kg)"
 
-#: application/main/views.py:32
+#: application/bsi/forms.py:8 application/post_weight/forms.py:12
+msgid "Submit"
+msgstr "Yubormoq"
+
+#: application/bsi/views.py:24
+msgid "Moderator menu"
+msgstr "Moderator menusi"
+
+#: application/bsi/views.py:38
+msgid "User total weights"
+msgstr "Foydalanuvhi yuborgan umumiy vazn"
+
+#: application/bsi/views.py:54
+msgid "Unpaid user total weights"
+msgstr "Hali to’lanmgan yuklarning umumiy vazni"
+
+#: application/bsi/views.py:71
+#, python-format
+msgid "Weights by user %(name)s"
+msgstr "%(name)s yuborgan yuklar"
+
+#: application/bsi/views.py:89
+#, python-format
+msgid "Unpaid weights by user %(name)s"
+msgstr "%(name)s hali to’lamagan yuklar"
+
+#: application/bsi/views.py:103 application/post_weight/views.py:43
+#, python-format
+msgid "Post weights sent by %(name)s on %(date)s"
+msgstr "%(name)s %(date)s da yuborgan yuklar"
+
+#: application/bsi/views.py:118
+#, python-format
+msgid "Unpaid post weights sent by %(name)s on %(date)s"
+msgstr "%(name)s %(date)s da yuborgan hali to’lanmagan yuklar"
+
+#: application/bsi/views.py:142
+#, python-format
+msgid "Successfully saved bsi post weight of %(weight)d"
+msgstr "BSI xodimi o’lchagan vazn %(weight)d ni muvaffaqiyat bilan saqladik"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:42
+#: application/bsi/views.py:146
+msgid "Add BSI weight"
+msgstr "BSI xodimi o’lchagan vaznni kiritmoq"
+
+#: application/bsi/views.py:164
+#, python-format
+msgid "Successfully saved bsi post weight of %(weight)s"
+msgstr "BSI xodimi o’lchagan vazn %(weight)s ni muvaffaqiyat bilan saqladik"
+
+#: application/bsi/views.py:169
+msgid "Edit BSI post weight"
+msgstr "BSI xodimi o’lchagan yuk vaznini o’zgartirmoq"
+
+#: application/bsi/views.py:182
+#, python-format
+msgid "Successfully removed bsi post weight %(bsi_post_weight)s"
+msgstr ""
+"BSI xodimi o’lchagan vazn %(bsi_post_weight)s ni muvaffaqiyat bilan "
+"o’chirdik"
+
+#: application/bsi/views.py:196
+msgid "Marked post weight as paid"
+msgstr "Yukni to’langan deb belgiladik"
+
+#: application/bsi/views.py:208
+#, python-format
+msgid "%(name)s profile"
+msgstr "%(name)s profili"
+
+#: application/bsi/templates/bsi_add_weight.html:5
+#: application/bsi/templates/bsi_edit_weight.html:5
+msgid "User"
+msgstr "Foydalanuvchi"
+
+#: application/bsi/templates/bsi_add_weight.html:6
+#: application/bsi/templates/bsi_edit_weight.html:6
+msgid "User sent on date"
+msgstr "Foydalanuvchi yuborgan kun"
+
+#: application/bsi/templates/bsi_add_weight.html:7
+#: application/bsi/templates/bsi_edit_weight.html:7
+msgid "User entered weight"
+msgstr "Foydalanuvhi yukni kiritgan kun"
+
+#: application/bsi/templates/bsi_add_weight.html:8
+#: application/bsi/templates/bsi_edit_weight.html:8
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:9
+#: application/post_weight/templates/all_post_weights.html:8
+#: application/post_weight/templates/post_weights_as_of_date.html:9
+#: application/post_weight/templates/unpaid_post_weights.html:12
+msgid "Payment amount"
+msgstr "Yuborish narxi"
+
+#: application/bsi/templates/bsi_moderator_home.html:5
+msgid "User weights"
+msgstr "Yuk vazni"
+
+#: application/bsi/templates/bsi_moderator_home.html:7
+msgid "View user unpaid weights"
+msgstr "Foydalanuvchilarning hali to’lanmagan yuklar ro’yxati"
+
+#: application/bsi/templates/bsi_moderator_home.html:8
+msgid "View user total weights"
+msgstr "Foydalanuvchilarning yuklar ro’yxati"
+
+#: application/bsi/templates/bsi_user_total_weights.html:9
+msgid "Total post weight"
+msgstr "Yuklarning umumiy vazni"
+
+#: application/bsi/templates/bsi_user_total_weights.html:19
+#: application/bsi/templates/bsi_user_total_weights.html:21
+#: application/bsi/templates/bsi_weights_by_user.html:19
+#: application/bsi/templates/bsi_weights_by_user.html:21
+#: application/post_weight/templates/post_weights_by_date.html:17
+msgid "View"
+msgstr "Ko’rmoq"
+
+#: application/bsi/templates/bsi_weights_by_user.html:7
+#: application/post_weight/forms.py:10
+#: application/post_weight/templates/all_post_weights.html:6
+#: application/post_weight/templates/post_weights_by_date.html:6
+#: application/post_weight/templates/unpaid_post_weights.html:10
+msgid "Sent date"
+msgstr "Yuborilgan kun"
+
+#: application/bsi/templates/bsi_weights_by_user.html:8
+#: application/post_weight/templates/post_weights_by_date.html:7
+msgid "Total weight (in kg)"
+msgstr "Yuklarning umumiy vazni (kg)"
+
+#: application/bsi/templates/bsi_weights_by_user.html:9
+#: application/post_weight/templates/post_weights_by_date.html:8
+msgid "Total payment amount"
+msgstr "Yuklarning umumiy narxi"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:6
+#: application/post_weight/templates/all_post_weights.html:9
+#: application/post_weight/templates/post_weights_as_of_date.html:6
+#: application/post_weight/templates/unpaid_post_weights.html:13
+msgid "Entered on"
+msgstr "Kiritilgan kun"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:7
+#: application/post_weight/templates/post_weights_as_of_date.html:7
+msgid "Is paid?"
+msgstr "To’langanmi?"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:8
+#: application/post_weight/templates/post_weights_as_of_date.html:8
+msgid "Weight"
+msgstr "Vazn"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:10
+msgid "BSI weight"
+msgstr "BSI xodimi kiritgan vazn"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:11
+msgid "BSI payment amount"
+msgstr "BSI xodimi kiritgan yuk narxi"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:12
+msgid "BSI entered on"
+msgstr "BSI xodimi kiritgan vaqt"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:13
+msgid "BSI entered by"
+msgstr "BSI xodimi"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:14
+msgid "BSI modified on"
+msgstr "BSI xodimi o’zgartirgan vaqt"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:15
+msgid "BSI modified by"
+msgstr "Oxirgi marta o’zgarish kiritgan BSI xodimi"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:44
+msgid "Edit BSI weight"
+msgstr "BSI xodimi kiritgan vaznni o’zgartirmoq"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:48
+msgid "Mark as paid"
+msgstr "To’langan deb belgilash"
+
+#: application/bsi/templates/bsi_weights_by_user_as_of_date.html:50
+msgid "Mark as unpaid"
+msgstr "To’lanmagan deb belgilash"
+
+#: application/main/views.py:65
+msgid "BSI Delivery services"
+msgstr "BSI Pochta xizmatlari"
+
+#: application/main/views.py:72
 msgid "Secret page"
 msgstr "Sirli sahifa"
 
-#: application/main/views.py:38
+#: application/main/views.py:77 application/templates/includes/nav.html:33
+msgid "About us"
+msgstr "Biz haqimizda"
+
+#: application/main/views.py:83
 msgid "Page not found"
 msgstr "Sahifa topilmadi"
 
-#: application/main/views.py:44
+#: application/main/views.py:89
 msgid "Internal server error"
 msgstr "Serverda ichki muammo sodir bo'ldi"
 
+#: application/post_weight/views.py:19
+#, python-format
+msgid "Post weights by %(name)s"
+msgstr "%(name)s yuborgan yuklar"
+
+#: application/post_weight/views.py:32
+#, python-format
+msgid "Post weights by %(name)s grouped by sent dates"
+msgstr "%(name)s yuborgan kunlar bo’yicha umumiy vaznlar hisoboti"
+
+#: application/post_weight/views.py:53
+#, python-format
+msgid "All post weights sent by %(name)s"
+msgstr "%(name)s yuborgan barcha yuklar"
+
+#: application/post_weight/views.py:66
+#, python-format
+msgid "Unpaid post weights by %(name)s"
+msgstr "%(name)s hali to’lamagan barcha yuklar"
+
+#: application/post_weight/views.py:84
+#, python-format
+msgid ""
+"Successfully inserted new weight %(weight)s with paid amount "
+"%(paid_amount)s"
+msgstr ""
+"Vazni %(weight)s kg, to’lovi %(paid_amount)s bo’lgan yangi yukni "
+"muvaffaqiyat bilan saqladik"
+
+#: application/post_weight/views.py:87
+#: application/templates/includes/nav.html:19
+#: application/templates/index.html:9
+msgid "Enter new weight"
+msgstr "Yangi yukni kiriting"
+
+#: application/post_weight/views.py:102
+msgid "Successfully updated post weight"
+msgstr "Yukni muvaffaqiyat bilan saqladik"
+
+#: application/post_weight/views.py:106
+msgid "Edit post weight"
+msgstr "Yuk vaznini o’zgartirmoq"
+
+#: application/post_weight/views.py:115
+msgid "Successfully removed post weight"
+msgstr "Yukni muvaffaqiyat bilan o’chirdik"
+
+#: application/post_weight/templates/all_post_weights.html:10
+#: application/post_weight/templates/unpaid_post_weights.html:14
+msgid "Modified on"
+msgstr "O’zgartirilgan vaqt"
+
+#: application/post_weight/templates/post_weight_home.html:6
+msgid "Different views"
+msgstr "Yuklarning turli ro’yxati"
+
+#: application/post_weight/templates/post_weight_home.html:8
+msgid "View unpaid post weights"
+msgstr "Hali to’lanmagan yuklar ro’yxati"
+
+#: application/post_weight/templates/post_weight_home.html:9
+msgid "View post weights by date"
+msgstr "Yuklarni yuborilgan kunlar bo’yicha ko’rish"
+
+#: application/post_weight/templates/post_weight_home.html:10
+msgid "View all post weights"
+msgstr "Barcha yuklar ro’yxati"
+
+#: application/post_weight/templates/post_weights_as_of_date.html:21
+#: application/post_weight/templates/unpaid_post_weights.html:27
+msgid "Remove"
+msgstr "O’chirmoq"
+
+#: application/post_weight/templates/unpaid_post_weights.html:5
+msgid "Unpaid amount"
+msgstr "To’lanmagan yuklarning umumiy miqdori"
+
+#: application/post_weight/templates/unpaid_post_weights.html:6
+msgid "Unpaid weight"
+msgstr "To’lanmagan yuklarning umumiy vazni"
+
+#: application/templates/about_us.html:4
+msgid "We deliver your posts to the following cities of Uzbekistan"
+msgstr "Yuklarizni O’zbekistonning quyidagi shaharlariga yetkazib bera olamiz"
+
+#: application/templates/about_us.html:7
+msgid "Contact us via our admins"
+msgstr "Adminlarimiz orqali biz bilan ulaning"
+
 #: application/templates/index.html:4
-msgid "Flasky 2 main page "
-msgstr "Flasky 2 bosh sahifasi "
+msgid ""
+"This is a platform to enter and keep track of post weights that you send "
+"to BSI."
+msgstr ""
+"Ushbu sayt BSI orqali yuboruvchi yuklarizni ro’yxatdan o’tkazish, va "
+"doimiy ravishda kuzatib borish platformasidir."
+
+#: application/templates/includes/nav.html:18
+#: application/templates/index.html:8
+msgid "View post weights"
+msgstr "Yuborilgan yuklarni ko’rmoq"
+
+#: application/templates/index.html:13
+msgid "Login with Google"
+msgstr "Google akkaunti bilan kirmoq"
+
+#: application/templates/index.html:14
+msgid "Login with usual account"
+msgstr "Odatiy akkaunt bilan kirmoq"
 
 #: application/templates/secret.html:4
 #, python-format
 msgid ""
-"Dear %(username)s, you have successfully confirmed your email and "
-"reached the secret page."
+"Dear %(username)s, you have successfully confirmed your email and reached"
+" the secret page."
 msgstr ""
 "Hurmatli %(username)s, siz muvaffaqiyat bilan emailizni tasdiqladiz va "
-"bizning sirli sahifamizga tashrif buyurdingiz"
+"bizning sirli sahifamizga tashrif buyurdingiz."
 
 #: application/templates/secret.html:5
 msgid ""
@@ -232,18 +625,47 @@ msgid ""
 "question 'Who am I'"
 msgstr "Biz o'zimizni butun umr mashg'ul etadigan savol'Men kimman' savoli"
 
-#: application/templates/includes/footer.html:2
-msgid "About us"
-msgstr "Biz haqimizda"
-
-#: application/templates/includes/footer.html:3
-msgid "Contact us"
-msgstr "Biz bilan ulaning"
-
-#: application/templates/includes/nav.html:20
+#: application/templates/includes/nav.html:21
+#: application/templates/includes/nav.html:23
 msgid "Log out"
 msgstr "Chiqish"
 
-#: application/templates/includes/nav.html:22
+#: application/templates/includes/nav.html:25
 msgid "Log in"
 msgstr "Kirish"
+
+#: application/templates/includes/nav.html:28
+msgid "Moderator"
+msgstr "Moderator"
+
+#: application/templates/includes/nav.html:31
+msgid "Admin"
+msgstr "Admin"
+
+#~ msgid "Username"
+#~ msgstr "Foydalanuvchi qisqa nomi"
+
+#~ msgid "username already exists"
+#~ msgstr "Ushbu nom boshqa foydalanuvchi tomondan egallangan"
+
+#~ msgid "Account"
+#~ msgstr "Akkaunt"
+
+#~ msgid "Is confirmed?"
+#~ msgstr "Tasdiqlanganmi?"
+
+#~ msgid "Confirmed"
+#~ msgstr "Tasdiqlangan"
+
+#~ msgid "Dear %(username)s, you haven't confirmed your email yet"
+#~ msgstr "Hurmatli %(username)s, siz hali emailizni tasdiqlaganiz yo'q."
+
+#~ msgid "Main page"
+#~ msgstr "Bosh sahifa"
+
+#~ msgid "Flasky 2 main page "
+#~ msgstr "Flasky 2 bosh sahifasi "
+
+#~ msgid "Contact us"
+#~ msgstr "Biz bilan ulaning"
+

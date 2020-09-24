@@ -94,3 +94,14 @@ Based on https://stackoverflow.com/questions/53070868/how-to-install-python3-7-a
 % . py37-venv/bin/activate
 (py37-venv) % 
 ```
+
+# system administration
+## adding a sudo user
+
+```python
+adduser samrullo
+```
+
+```python
+sudo usermod -aG sudo samrullo
+```

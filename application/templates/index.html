@@ -9,9 +9,9 @@
   <a class="list-group-item list-group-item-action" href="{{url_for('post_weight_bp.new_post_weight')}}">{{_("Enter new weight")}}</a>
 </div>
 {% else %}
-<div class="list-group">
-  <a class="list-group-item list-group-item-action" href="{{url_for('auth_bp.google_login')}}">{{_("Log in with Google account")}}</a>
-  <a class="list-group-item list-group-item-action" href="{{url_for('auth_bp.login')}}">{{_("Log in with usual account")}}</a>
-</div>
+<ul class="list-group">
+  <li class="list-group-item"><a class="btn btn-social btn-google" href="{{url_for('auth_bp.google_login')}}"><i class="fab fa-google"></i>{{_("Login with Google")}}</a></li>
+  <li class="list-group-item"><a class="btn btn-dark" href="{{url_for('auth_bp.login')}}">{{_("Login with usual account")}}</a></li>
+</ul>
 {% endif %}
 {% endblock %}

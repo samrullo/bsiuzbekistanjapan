@@ -62,7 +62,7 @@ def switch_language(switch_to_lang):
 def home():
     if current_user.is_authenticated and not current_user.is_confirmed:
         return redirect(url_for('auth_bp.unconfirmed'))
-    return render_template('index.html', name="boss", page_header_title=_("Main page"))
+    return render_template('index.html', page_header_title=_("BSI Delivery services"))
 
 
 @main_bp.route('/<lang>/secret')
@@ -87,3 +87,8 @@ def page_not_found(e):
 def internal_server_error(e):
     g.current_lang = 'en'
     return render_template("errors/error.html", page_header_title=_("Internal server error")), 500
+
+@main_bp.route("/<lang>/test/<name>")
+def test(name):
+    current_app.logger.info(f"request endpoint is {request.endpoint}")
+    return render_template("test.html",name=name)

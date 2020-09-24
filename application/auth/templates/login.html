@@ -5,7 +5,7 @@
 
 {% block page_content %}
 <div class="container p-1 mx-auto my-1">
-  <a class="btn btn-dark btn-lg" href="{{url_for('auth_bp.google_login')}}">{{_("Login with Google Account")}}</a>
+  <a class="btn btn-social btn-google" href="{{url_for('auth_bp.google_login')}}"><i class="fab fa-google"></i>{{_("Login with Google Account")}}</a>
 </div>
 <div class="container p-1 mx-auto my-1">
   <p class="mx-auto">{{_('Or log in with your registered account')}}</p>

@@ -15,22 +15,22 @@
   <div class="collapse navbar-collapse" id="mynavigation" aria-expanded="false">
     <ul class="navbar-nav mr-auto">
       {% if current_user.is_authenticated and current_user.is_confirmed%}
-      <li class="nav-item"><a class="nav-link" href="{{url_for('post_weight_bp.post_weight_home')}}">{{_("View post weights")}}</a></li>
-      <li class="nav-item"><a class="nav-link" href="{{url_for('post_weight_bp.new_post_weight')}}">{{_("Enter new weight")}}</a></li>
-      <li class="nav-item"><a class="nav-link" href="{{url_for('auth_bp.profile')}}">{{current_user.name}}</a></li>
-      <li class="nav-item"><a class="nav-link" href="{{url_for('auth_bp.logout')}}">{{_("Log out")}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='post_weight_bp.post_weight_home' %} active {% endif %}" href="{{url_for('post_weight_bp.post_weight_home')}}">{{_("View post weights")}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='post_weight_bp.new_post_weight' %} active {% endif %}" href="{{url_for('post_weight_bp.new_post_weight')}}">{{_("Enter new weight")}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='auth_bp.profile' %} active {% endif %}" href="{{url_for('auth_bp.profile')}}">{{current_user.name}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='auth_bp.logout' %} active {% endif %}" href="{{url_for('auth_bp.logout')}}">{{_("Log out")}}</a></li>
       {% elif current_user.is_authenticated and not current_user.is_confirmed %}
-      <li class="nav-item"><a class="nav-link" href="{{url_for('auth_bp.logout')}}">{{_("Log out")}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='auth_bp.logout' %} active {% endif %}" href="{{url_for('auth_bp.logout')}}">{{_("Log out")}}</a></li>
       {% else %}
-      <li class="nav-item"><a class="nav-link" href="{{url_for('auth_bp.login')}}">{{_("Log in")}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='auth_bp.login' %} active {% endif %}" href="{{url_for('auth_bp.login')}}">{{_("Log in")}}</a></li>
       {% endif %}
       {% if current_user.is_authenticated and current_user.is_confirmed and current_user.is_moderator() %}
-      <li class="nav-item"><a class="nav-link" href="{{url_for('bsi_bp.moderator')}}">{{_("Moderator")}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='bsi_bp.moderator' %} active {% endif %}" href="{{url_for('bsi_bp.moderator')}}">{{_("Moderator")}}</a></li>
       {% endif %}
       {% if current_user.is_authenticated and current_user.is_confirmed and current_user.is_moderator() and current_user.is_administrator() %}
       <li class="nav-item"><a class="nav-link" href="/admin">{{_("Admin")}}</a></li>
       {% endif %}
-      <li class="nav-item"><a class="nav-link" href="{{url_for('main_bp.aboutus')}}">{{_('About us')}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='main_bp.aboutus' %} active {% endif %}" href="{{url_for('main_bp.aboutus')}}">{{_('About us')}}</a></li>
     </ul>
   </div>
 </nav>
