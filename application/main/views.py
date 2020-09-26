@@ -1,5 +1,5 @@
 from . import main_bp
-from flask import render_template, redirect
+from flask import render_template, redirect, session
 from flask import url_for as flask_url_for
 from flask_babel import lazy_gettext as _
 from application.utils.custom_url_for import url_for
@@ -9,6 +9,7 @@ from flask import current_app
 from flask import request, g
 from flask_sqlalchemy import get_debug_queries
 from flask_login import current_user
+import datetime
 
 
 @main_bp.app_context_processor
@@ -62,7 +63,21 @@ def switch_language(switch_to_lang):
 def home():
     if current_user.is_authenticated and not current_user.is_confirmed:
         return redirect(url_for('auth_bp.unconfirmed'))
-    return render_template('index.html', page_header_title=_("BSI Delivery services"))
+    # store price_per_kg in session
+    from application.post_weight.post_weight_utils import get_price_per_kg
+    session['price_per_kg'] = get_price_per_kg()
+
+    # get next most recent sending date
+    from application.bsi.models import SendingDate
+    sending_dates = SendingDate.query.filter(SendingDate.sending_date >= datetime.date.today()).all()
+    next_sending_dates = [sending_date_record.sending_date for sending_date_record in sending_dates]
+    if len(next_sending_dates) > 0:
+        min_sending_date = min(next_sending_dates)
+    else:
+        min_sending_date = datetime.date(2222, 12, 22)
+    return render_template('index.html', page_header_title=_("BSI Delivery services"),
+                           price_per_kg=session.get('price_per_kg'),
+                           sending_date=min_sending_date)
 
 
 @main_bp.route('/<lang>/secret')
@@ -88,7 +103,8 @@ def internal_server_error(e):
     g.current_lang = 'en'
     return render_template("errors/error.html", page_header_title=_("Internal server error")), 500
 
+
 @main_bp.route("/<lang>/test/<name>")
 def test(name):
     current_app.logger.info(f"request endpoint is {request.endpoint}")
-    return render_template("test.html",name=name)
+    return render_template("test.html", name=name)

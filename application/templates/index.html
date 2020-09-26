@@ -1,13 +1,21 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
-<p>{{_("This is a platform to enter and keep track of post weights that you send to BSI.")}}</p>
+<div class="container">
+  <p>{{_("This is a platform to enter and keep track of post weights that you send to BSI.")}}</p>
+  <ul class="list-group">
+    <li class="list-group-item">{{_("Post weight price per kg")}} : {{format_number(price_per_kg)}}</li>
+    <li class="list-group-item">{{_("Next sending date")}} : {{moment(sending_date).format('LLL')}}</li>
+  </ul>
+</div>
+
+
 
 {% if current_user.is_authenticated and current_user.is_confirmed %}
-<div class="list-group">
-  <a class="list-group-item list-group-item-action" href="{{url_for('post_weight_bp.post_weight_home')}}">{{_("View post weights")}}</a>
-  <a class="list-group-item list-group-item-action" href="{{url_for('post_weight_bp.new_post_weight')}}">{{_("Enter new weight")}}</a>
-</div>
+<ul class="list-group">
+  <li class="list-group-item"><a class="btn btn-dark" href="{{url_for('post_weight_bp.post_weight_home')}}">{{_("View post weights")}}</a></li>
+  <li class="list-group-item"><a class="btn btn-dark" href="{{url_for('post_weight_bp.new_post_weight')}}">{{_("Enter new weight")}}</a></li>
+</ul>
 {% else %}
 <ul class="list-group">
   <li class="list-group-item"><a class="btn btn-social btn-google" href="{{url_for('auth_bp.google_login')}}"><i class="fab fa-google"></i>{{_("Login with Google")}}</a></li>

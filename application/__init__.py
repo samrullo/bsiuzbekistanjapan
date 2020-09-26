@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
@@ -55,10 +56,8 @@ def create_app(config_name):
                 g.current_lang = request.accept_languages.best_match(app.config.get('ALLOWED_LANGUAGES').keys())
                 return g.current_lang
 
-        from .main import main_bp
+        # add auth_bp blueprint
         from .auth import auth_bp
-
-        app.register_blueprint(main_bp)
         app.register_blueprint(auth_bp)
 
         # add post_weight blueprint
@@ -69,10 +68,16 @@ def create_app(config_name):
         from .bsi import bsi_bp
         app.register_blueprint(bsi_bp)
 
+        # add main_bp blueprint
+        from .main import main_bp
+        app.register_blueprint(main_bp)
+
+
         # add admin blueprint
         from application.admin import admin_bp
         app.register_blueprint(admin_bp)
 
         from application.auth.models import Role
         Role.insert_roles()
+
         return app

@@ -13,6 +13,7 @@ class PostWeight(db.Model):
     modified_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     is_paid = db.Column(db.Boolean, default=False)
     is_removable = db.Column(db.Boolean, default=True)
+    is_editable = db.Column(db.Boolean, default=True)
     bsi_post_weight = db.relationship("BSIPostWeight", backref="post_weight", uselist=False)
 
     def update_modified_on(self):

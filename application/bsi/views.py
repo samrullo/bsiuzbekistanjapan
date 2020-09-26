@@ -7,11 +7,11 @@ from application import moment
 from application.bsi import bsi_bp
 from application.post_weight.post_weight_utils import get_price_per_kg
 from application.post_weight.models import PostWeight
-from .models import BSIPostWeight
+from .models import BSIPostWeight, SendingDate
 from application.auth.models import User
 from flask_login import login_required
 from application.auth.permission_required import confirm_required, moderator_required
-from .forms import BSIPostWeightForm
+from .forms import BSIPostWeightForm, SendingDateForm
 from flask_babel import lazy_gettext as _
 import pandas as pd
 
@@ -139,7 +139,7 @@ def add_bsi_weight(post_weight_id):
         post_weight.is_removable = False
         db.session.add(post_weight)
         db.session.commit()
-        flash(_("Successfully saved bsi post weight of %(weight)d", weight=bsi_post_weight.weight), "success")
+        flash(_("Successfully saved bsi post weight of %(weight)d kg sent on %(sent_date)s", weight=bsi_post_weight.weight,sent_date=bsi_post_weight.post_weight.sent_date), "success")
         return redirect(url_for('bsi_bp.weights_by_user_as_of_date', user_id=bsi_post_weight.post_weight.user.id,
                                 adate=bsi_post_weight.post_weight.sent_date))
     return render_template("bsi_add_weight.html",
@@ -161,7 +161,7 @@ def edit_bsi_weight(bsi_post_weight_id):
         bsi_post_weight.modified_by = current_user
         db.session.add(bsi_post_weight)
         db.session.commit()
-        flash(_("Successfully saved bsi post weight of %(weight)s", weight=bsi_post_weight.weight), "success")
+        flash(_("Successfully saved bsi post weight of %(weight)d kg sent on %(sent_date)s", weight=bsi_post_weight.weight,sent_date=bsi_post_weight.post_weight.sent_date), "success")
         return redirect(url_for('bsi_bp.weights_by_user_as_of_date', user_id=bsi_post_weight.post_weight.user.id,
                                 adate=bsi_post_weight.post_weight.sent_date))
     form.weight.data = bsi_post_weight.weight
@@ -179,7 +179,7 @@ def remove_bsi_weight(bsi_post_weight_id):
     bsi_post_weight = BSIPostWeight.query.get(bsi_post_weight_id)
     db.session.delete(bsi_post_weight)
     db.session.commit()
-    flash(_("Successfully removed bsi post weight %(bsi_post_weight)s", bsi_post_weight=bsi_post_weight), "success")
+    flash(_("Successfully removed bsi post weight %(bsi_post_weight)d kg sent on %(sent_date)s", bsi_post_weight=bsi_post_weight,sent_date=bsi_post_weight.post_weight.sent_date), "success")
     return redirect(url_for('bsi_bp.weights_by_user_as_of_date', user_id=bsi_post_weight.post_weight.user.id,
                             adate=bsi_post_weight.post_weight.sent_date))
 
@@ -191,9 +191,15 @@ def remove_bsi_weight(bsi_post_weight_id):
 def mark_post_weight_as_paid_or_unpaid(post_weight_id):
     post_weight = PostWeight.query.get(post_weight_id)
     post_weight.is_paid = not post_weight.is_paid
+    if post_weight.is_paid:
+        post_weight.is_removable = False
+        post_weight.is_editable = False
+    else:
+        post_weight.is_removable = True
+        post_weight.is_editable = True
     db.session.add(post_weight)
     db.session.commit()
-    flash(_("Marked post weight as paid"), "success")
+    flash(_("Marked post weight %(weight)d kg sent on %(sent_date)s as paid",weight=post_weight.weight,sent_date=post_weight.sent_date), "success")
     return redirect(url_for('bsi_bp.weights_by_user_as_of_date', user_id=post_weight.user.id,
                             adate=post_weight.sent_date))
 
@@ -207,3 +213,42 @@ def view_user_profile(user_id):
     return render_template("bsi_user_profile.html",
                            page_header_title=_("%(name)s profile", name=user.name),
                            user=user)
+
+
+@bsi_bp.route("/<lang>/sending_dates")
+@login_required
+@confirm_required
+@moderator_required
+def sending_dates():
+    sending_dates = SendingDate.query.all()
+    return render_template("sending_dates.html",
+                           page_header_title=_("Sending dates"),
+                           sending_dates=sending_dates)
+
+
+@bsi_bp.route("/<lang>/add_sending_date",methods=['GET','POST'])
+@login_required
+@confirm_required
+@moderator_required
+def add_sending_date():
+    form = SendingDateForm()
+    if form.validate_on_submit():
+        sending_date_record = SendingDate(sending_date=form.sending_date.data, note=form.note.data)
+        db.session.add(sending_date_record)
+        db.session.commit()
+        flash(_("Successfully added sending date %(sending_date)s", sending_date=sending_date_record.sending_date),
+              "success")
+        return redirect(url_for('bsi_bp.moderator'))
+    return render_template("add_sending_date.html",
+                           page_header_title=_("Add sending date"),
+                           form=form)
+
+
+@bsi_bp.route("/<lang>/remove_sending_date/<sending_date_id>")
+def remove_sending_date(sending_date_id):
+    sending_date_record = SendingDate.query.get(sending_date_id)
+    db.session.delete(sending_date_record)
+    db.session.commit()
+    flash(_("Successfully removed sending date %(sending_date)s", sending_date=sending_date_record.sending_date),
+          "success")
+    return redirect(url_for('bsi_bp.sending_dates'))

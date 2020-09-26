@@ -14,3 +14,9 @@ class BSIPostWeight(db.Model):
     modified_by_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     entered_by = db.relationship("User", foreign_keys=[entered_by_id])
     modified_by = db.relationship("User", foreign_keys=[modified_by_id])
+
+
+class SendingDate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sending_date = db.Column(db.Date, unique=True)
+    note = db.Column(db.String(100))

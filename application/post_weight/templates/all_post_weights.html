@@ -1,22 +1,39 @@
 {% extends "layout.html" %}
 
 {% block page_content %}
-<table class="table table-hover orderByDateTable">
+<ul class="list-group">
+  <li class="list-group-item list-group-item-warning">{{_("Unpaid amount")}} : {{format_number(summary['total_unpaid_amount'])}}</li>
+  <li class="list-group-item">{{_("Unpaid weight")}} : {{format_number(summary['total_unpaid_weight'])}}</li>
+  <li class="list-group-item ">{{_("Total amount")}} : {{format_number(summary['total_amount'])}}</li>
+  <li class="list-group-item">{{_("Total weight")}} : {{format_number(summary['total_weight'])}}</li>
+</ul>
+<div class="container">
+  <a class="btn btn-dark" href="{{url_for('post_weight_bp.new_post_weight')}}">{{_("Add new weight")}}</a>
+</div>
+<table class="table table-hover table-responsive orderByDateTable">
   <thead order_col_no="0">
     <th scope="col">{{_("Sent date")}}</th>
     <th scope="col">{{_("Weight (in kg)")}}</th>
     <th scope="col">{{_("Payment amount")}}</th>
     <th scope="col">{{_("Entered on")}}</th>
     <th scope="col">{{_("Modified on")}}</th>
+    <th></th>
+    <th></th>
   </thead>
   <tbody>
     {% for post_weight in all_post_weights %}
-    <tr>
+    <tr class="{% if post_weight.is_paid %} table-success {% endif %}">
       <td>{{moment(post_weight.sent_date).format('LL')}}</td>
       <td>{{format_number(post_weight.weight)}}</td>
       <td>{{format_number(post_weight.payment_amount)}}</td>
       <td>{{moment(post_weight.entered_on).format('LLL')}}</td>
       <td>{{moment(post_weight.modified_on).format('LLL')}}</td>
+      <td>
+        <a class="btn btn-dark {% if not post_weight.is_removable %} disabled {% endif %}" href="{{url_for('post_weight_bp.remove_post_weight',post_weight_id=post_weight.id)}}">{{_("Remove")}}</a>
+      </td>
+      <td>
+        <a class="btn btn-dark {% if not post_weight.is_editable %} disabled {% endif %}" href="{{url_for('post_weight_bp.edit_post_weight',post_weight_id=post_weight.id)}}">{{_("Edit")}}</a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>

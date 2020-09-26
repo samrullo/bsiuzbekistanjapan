@@ -39,19 +39,40 @@ def post_weights_by_date():
 def post_weights_as_of_date(adate):
     post_weights = PostWeight.query.filter(PostWeight.user_id == current_user.id).filter(
         PostWeight.sent_date == adate).all()
+    unpaid_post_weights=[post_weight for post_weight in post_weights if not post_weight.is_paid]
+    total_amount=sum([post_weight.payment_amount for post_weight in post_weights])
+    total_weight=sum([post_weight.weight for post_weight in post_weights])
+    total_unpaid_amount=sum([post_weight.payment_amount for post_weight in unpaid_post_weights])
+    total_unpaid_weight=sum([post_weight.weight for post_weight in unpaid_post_weights])
+    summary={'total_unpaid_amount':total_unpaid_amount,
+             'total_unpaid_weight':total_unpaid_weight,
+             'total_amount':total_amount,
+             'total_weight':total_weight}
     return render_template("post_weights_as_of_date.html",
                            page_header_title=_("Post weights sent by %(name)s on %(date)s", name=current_user.name,
                                                date=adate),
-                           post_weights=post_weights)
+                           post_weights=post_weights,
+                           summary=summary)
 
 
 @post_weight_bp.route("/<lang>/post_weights")
 @login_required
 @confirm_required
 def post_weights():
+    post_weights=current_user.post_weights
+    unpaid_post_weights=[post_weight for post_weight in post_weights if not post_weight.is_paid]
+    total_amount=sum([post_weight.payment_amount for post_weight in post_weights])
+    total_weight=sum([post_weight.weight for post_weight in post_weights])
+    total_unpaid_amount=sum([post_weight.payment_amount for post_weight in unpaid_post_weights])
+    total_unpaid_weight=sum([post_weight.weight for post_weight in unpaid_post_weights])
+    summary={'total_unpaid_amount':total_unpaid_amount,
+             'total_unpaid_weight':total_unpaid_weight,
+             'total_amount':total_amount,
+             'total_weight':total_weight}
     return render_template("all_post_weights.html",
                            page_header_title=_("All post weights sent by %(name)s", name=current_user.name),
-                           all_post_weights=current_user.post_weights)
+                           all_post_weights=current_user.post_weights,
+                           summary=summary)
 
 
 @post_weight_bp.route("/<lang>/unpaid_post_weights")
@@ -99,7 +120,7 @@ def edit_post_weight(post_weight_id):
         post_weight.payment_amount = post_weight.weight * get_price_per_kg()
         db.session.add(post_weight)
         db.session.commit()
-        flash(_("Successfully updated post weight"), "success")
+        flash(_("Successfully updated post weight %(weight)d kg sent on %(sent_date)s",weight=post_weight.weight,sent_date=post_weight.sent_date), "success")
         return redirect(url_for("post_weight_bp.post_weights_as_of_date", adate=post_weight.sent_date))
     form.sent_date.data = post_weight.sent_date
     form.weight.data = post_weight.weight
@@ -112,5 +133,5 @@ def remove_post_weight(post_weight_id):
     post_weight=PostWeight.query.get(post_weight_id)
     db.session.delete(post_weight)
     db.session.commit()
-    flash(_("Successfully removed post weight"), "success")
+    flash(_("Successfully removed post weight %(weight)d kg sent on %(sent_date)s", weight=post_weight.weight,sent_date=post_weight.sent_date), "success")
     return redirect(url_for("post_weight_bp.post_weights_as_of_date",adate=post_weight.sent_date))

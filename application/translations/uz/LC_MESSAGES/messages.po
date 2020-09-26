@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-09-24 20:50+0900\n"
-"PO-Revision-Date: 2020-09-24 20:43+0900\n"
+"POT-Creation-Date: 2020-09-26 14:27+0900\n"
+"PO-Revision-Date: 2020-09-26 14:33+0900\n"
 "Last-Translator: \n"
 "Language: uz\n"
 "Language-Team: uz <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: application/auth/forms.py:13 application/auth/forms.py:20
 #: application/auth/templates/profile.html:11
@@ -91,8 +92,8 @@ msgstr "Parolni qayta tiklash linkini yubormoq"
 
 #: application/auth/forms.py:47
 msgid ""
-"This email doesn't exist in our system. Please enter the email you "
-"registered with."
+"This email doesn't exist in our system. Please enter the email you registered "
+"with."
 msgstr ""
 "Ushbu email mavjud emas. Iltimos, siz ro'yxatdan o'tgan to'gri emailni "
 "kiriting."
@@ -127,11 +128,11 @@ msgstr "Akkauntdan chiqdingiz"
 
 #: application/auth/views.py:63
 msgid ""
-"We successfully registered you. But you need to verify your email through"
-" the link we sent you"
+"We successfully registered you. But you need to verify your email through the "
+"link we sent you"
 msgstr ""
-"Muvaffaqiyat bilan ro'yxatdan o'tdiz. Lekin platformamizdan foydalanish "
-"uchun email adresingizni biz yuborgan link orqali tasdiqlashingiz lozim"
+"Muvaffaqiyat bilan ro'yxatdan o'tdiz. Lekin platformamizdan foydalanish uchun "
+"email adresingizni biz yuborgan link orqali tasdiqlashingiz lozim"
 
 #: application/auth/views.py:77
 #, python-format
@@ -158,8 +159,8 @@ msgstr "Parolingizni muvaffaqiyat bilan yangiladik"
 #: application/auth/views.py:128
 msgid "The reset link has expired or you are not authorized"
 msgstr ""
-"Parolni tiklash linki muddatidan o'tdi yoki boshqa muammo sodir bo'ldi. "
-"Login sahifasidan parolni tiklash linkini bosing"
+"Parolni tiklash linki muddatidan o'tdi yoki boshqa muammo sodir bo'ldi. Login "
+"sahifasidan parolni tiklash linkini bosing"
 
 #: application/auth/views.py:135
 msgid "Profile"
@@ -178,8 +179,8 @@ msgstr "%(email)s profilini o’zgartirmoq"
 #: application/auth/views_google_login.py:82
 #, python-format
 msgid ""
-"Seems like %(email)s is registered via usual route. Please login using "
-"your password"
+"Seems like %(email)s is registered via usual route. Please login using your "
+"password"
 msgstr ""
 "%(email)s odatiy yo’l bilan ro’yxatdan o’tgani sababli, google logindan "
 "foydalana olmaysiz. Odatiy yo’l bilan akkauntga kiring"
@@ -187,11 +188,10 @@ msgstr ""
 #: application/auth/views_google_login.py:93
 #, python-format
 msgid ""
-"Successfully registered %(name)s. Please consider to edit your profile "
-"later"
+"Successfully registered %(name)s. Please consider to edit your profile later"
 msgstr ""
-"%(name)s ni muvaffaqiyat bilan ro’yxatdan o’tkazdik. Iltimos, "
-"profilingizga yetishmayotgan ma’lumotlarni qo’shing"
+"%(name)s ni muvaffaqiyat bilan ro’yxatdan o’tkazdik. Iltimos, profilingizga "
+"yetishmayotgan ma’lumotlarni qo’shing"
 
 #: application/auth/templates/login.html:8
 msgid "Login with Google Account"
@@ -229,8 +229,9 @@ msgid "Registered date"
 msgstr "Ro’yxatdan o’tgan kun"
 
 #: application/auth/templates/profile.html:32
-#: application/post_weight/templates/post_weights_as_of_date.html:24
-#: application/post_weight/templates/unpaid_post_weights.html:30
+#: application/post_weight/templates/all_post_weights.html:35
+#: application/post_weight/templates/post_weights_as_of_date.html:33
+#: application/post_weight/templates/unpaid_post_weights.html:33
 msgid "Edit"
 msgstr "O’zgartirmoq"
 
@@ -270,8 +271,8 @@ msgstr ""
 
 #: application/auth/templates/confirmation_mails/confirmation.txt:4
 msgid ""
-"Thanks for registering to our platform. Please confirm your email by "
-"clicking the below URL"
+"Thanks for registering to our platform. Please confirm your email by clicking "
+"the below URL"
 msgstr ""
 "Bizning platformamizga ro’yxatdan o’tganiz uchun tashakkur. Iltimos "
 "quyidagilink orqali emailizni tasdiqlang"
@@ -284,15 +285,28 @@ msgstr "Parolni qayta qo'yish"
 msgid "Please reset your password by following the link below"
 msgstr "Iltimos quyidagi link orqali parolizni qayta tiklang"
 
-#: application/bsi/forms.py:7 application/post_weight/forms.py:11
-#: application/post_weight/templates/all_post_weights.html:7
-#: application/post_weight/templates/unpaid_post_weights.html:11
+#: application/bsi/forms.py:9 application/post_weight/forms.py:11
+#: application/post_weight/templates/all_post_weights.html:16
+#: application/post_weight/templates/unpaid_post_weights.html:14
 msgid "Weight (in kg)"
 msgstr "Vazn (kg)"
 
-#: application/bsi/forms.py:8 application/post_weight/forms.py:12
+#: application/bsi/forms.py:10 application/bsi/forms.py:17
+#: application/post_weight/forms.py:12
 msgid "Submit"
 msgstr "Yubormoq"
+
+#: application/bsi/forms.py:14
+msgid "Enter sending date"
+msgstr "Reys kunini kiriting"
+
+#: application/bsi/forms.py:16
+msgid "Enter note"
+msgstr "Reys haqida qo’shimcha ma’lumotni kiriting"
+
+#: application/bsi/forms.py:21
+msgid "This sending date already exists"
+msgstr "Ushbu reys kiritilgan"
 
 #: application/bsi/views.py:24
 msgid "Moderator menu"
@@ -316,7 +330,7 @@ msgstr "%(name)s yuborgan yuklar"
 msgid "Unpaid weights by user %(name)s"
 msgstr "%(name)s hali to’lamagan yuklar"
 
-#: application/bsi/views.py:103 application/post_weight/views.py:43
+#: application/bsi/views.py:103 application/post_weight/views.py:52
 #, python-format
 msgid "Post weights sent by %(name)s on %(date)s"
 msgstr "%(name)s %(date)s da yuborgan yuklar"
@@ -326,20 +340,17 @@ msgstr "%(name)s %(date)s da yuborgan yuklar"
 msgid "Unpaid post weights sent by %(name)s on %(date)s"
 msgstr "%(name)s %(date)s da yuborgan hali to’lanmagan yuklar"
 
-#: application/bsi/views.py:142
+#: application/bsi/views.py:142 application/bsi/views.py:164
 #, python-format
-msgid "Successfully saved bsi post weight of %(weight)d"
-msgstr "BSI xodimi o’lchagan vazn %(weight)d ni muvaffaqiyat bilan saqladik"
+msgid "Successfully saved bsi post weight of %(weight)d kg sent on %(sent_date)s"
+msgstr ""
+"%(sent_date)s da yuborilgan %(weight)d kg BSI xodimi kiritgan yukni "
+"muvaffaqiyat bilan saqladik"
 
 #: application/bsi/templates/bsi_weights_by_user_as_of_date.html:42
 #: application/bsi/views.py:146
 msgid "Add BSI weight"
-msgstr "BSI xodimi o’lchagan vaznni kiritmoq"
-
-#: application/bsi/views.py:164
-#, python-format
-msgid "Successfully saved bsi post weight of %(weight)s"
-msgstr "BSI xodimi o’lchagan vazn %(weight)s ni muvaffaqiyat bilan saqladik"
+msgstr "BSI vaznni kiritmoq"
 
 #: application/bsi/views.py:169
 msgid "Edit BSI post weight"
@@ -347,19 +358,41 @@ msgstr "BSI xodimi o’lchagan yuk vaznini o’zgartirmoq"
 
 #: application/bsi/views.py:182
 #, python-format
-msgid "Successfully removed bsi post weight %(bsi_post_weight)s"
+msgid ""
+"Successfully removed bsi post weight %(bsi_post_weight)d kg sent on "
+"%(sent_date)s"
 msgstr ""
-"BSI xodimi o’lchagan vazn %(bsi_post_weight)s ni muvaffaqiyat bilan "
+"%(sent_date)s da yuborilgan %(bsi_post_weight)d kg BSI xodimi kiritgan yukni "
 "o’chirdik"
 
-#: application/bsi/views.py:196
-msgid "Marked post weight as paid"
-msgstr "Yukni to’langan deb belgiladik"
+#: application/bsi/views.py:202
+#, python-format
+msgid "Marked post weight %(weight)d kg sent on %(sent_date)s as paid"
+msgstr "%(sent_date)s da yuborilgan %(weight)d kg yukni to’langan deb belgiladik"
 
-#: application/bsi/views.py:208
+#: application/bsi/views.py:214
 #, python-format
 msgid "%(name)s profile"
 msgstr "%(name)s profili"
+
+#: application/bsi/views.py:225
+msgid "Sending dates"
+msgstr "Yuk yuborish reyslar kuni"
+
+#: application/bsi/views.py:239
+#, python-format
+msgid "Successfully added sending date %(sending_date)s"
+msgstr "%(sending_date)s ni muvaffaqiyat bilan saqladik"
+
+#: application/bsi/templates/bsi_moderator_home.html:14
+#: application/bsi/views.py:243
+msgid "Add sending date"
+msgstr "Yangi reysni kiritmoq"
+
+#: application/bsi/views.py:252
+#, python-format
+msgid "Successfully removed sending date %(sending_date)s"
+msgstr "%(sending_date)s reysini muvaffaqiyat bilan o’chirdik"
 
 #: application/bsi/templates/bsi_add_weight.html:5
 #: application/bsi/templates/bsi_edit_weight.html:5
@@ -374,16 +407,16 @@ msgstr "Foydalanuvchi yuborgan kun"
 #: application/bsi/templates/bsi_add_weight.html:7
 #: application/bsi/templates/bsi_edit_weight.html:7
 msgid "User entered weight"
-msgstr "Foydalanuvhi yukni kiritgan kun"
+msgstr "Foydalanuvhi kiritgan yuk vazni"
 
 #: application/bsi/templates/bsi_add_weight.html:8
 #: application/bsi/templates/bsi_edit_weight.html:8
 #: application/bsi/templates/bsi_weights_by_user_as_of_date.html:9
-#: application/post_weight/templates/all_post_weights.html:8
-#: application/post_weight/templates/post_weights_as_of_date.html:9
-#: application/post_weight/templates/unpaid_post_weights.html:12
+#: application/post_weight/templates/all_post_weights.html:17
+#: application/post_weight/templates/post_weights_as_of_date.html:18
+#: application/post_weight/templates/unpaid_post_weights.html:15
 msgid "Payment amount"
-msgstr "Yuborish narxi"
+msgstr "Yuk yuborish narxi"
 
 #: application/bsi/templates/bsi_moderator_home.html:5
 msgid "User weights"
@@ -396,6 +429,14 @@ msgstr "Foydalanuvchilarning hali to’lanmagan yuklar ro’yxati"
 #: application/bsi/templates/bsi_moderator_home.html:8
 msgid "View user total weights"
 msgstr "Foydalanuvchilarning yuklar ro’yxati"
+
+#: application/bsi/templates/bsi_moderator_home.html:11
+msgid "Manage settings"
+msgstr "Yuk narxi, reys kabilarni boshqarmoq"
+
+#: application/bsi/templates/bsi_moderator_home.html:13
+msgid "View sending dates"
+msgstr "Yuk reyslarini ko’rmoq"
 
 #: application/bsi/templates/bsi_user_total_weights.html:9
 msgid "Total post weight"
@@ -411,9 +452,9 @@ msgstr "Ko’rmoq"
 
 #: application/bsi/templates/bsi_weights_by_user.html:7
 #: application/post_weight/forms.py:10
-#: application/post_weight/templates/all_post_weights.html:6
+#: application/post_weight/templates/all_post_weights.html:15
 #: application/post_weight/templates/post_weights_by_date.html:6
-#: application/post_weight/templates/unpaid_post_weights.html:10
+#: application/post_weight/templates/unpaid_post_weights.html:13
 msgid "Sent date"
 msgstr "Yuborilgan kun"
 
@@ -428,19 +469,19 @@ msgid "Total payment amount"
 msgstr "Yuklarning umumiy narxi"
 
 #: application/bsi/templates/bsi_weights_by_user_as_of_date.html:6
-#: application/post_weight/templates/all_post_weights.html:9
-#: application/post_weight/templates/post_weights_as_of_date.html:6
-#: application/post_weight/templates/unpaid_post_weights.html:13
+#: application/post_weight/templates/all_post_weights.html:18
+#: application/post_weight/templates/post_weights_as_of_date.html:15
+#: application/post_weight/templates/unpaid_post_weights.html:16
 msgid "Entered on"
-msgstr "Kiritilgan kun"
+msgstr "Kiritilgan vaqt"
 
 #: application/bsi/templates/bsi_weights_by_user_as_of_date.html:7
-#: application/post_weight/templates/post_weights_as_of_date.html:7
+#: application/post_weight/templates/post_weights_as_of_date.html:16
 msgid "Is paid?"
 msgstr "To’langanmi?"
 
 #: application/bsi/templates/bsi_weights_by_user_as_of_date.html:8
-#: application/post_weight/templates/post_weights_as_of_date.html:8
+#: application/post_weight/templates/post_weights_as_of_date.html:17
 msgid "Weight"
 msgstr "Vazn"
 
@@ -470,7 +511,7 @@ msgstr "Oxirgi marta o’zgarish kiritgan BSI xodimi"
 
 #: application/bsi/templates/bsi_weights_by_user_as_of_date.html:44
 msgid "Edit BSI weight"
-msgstr "BSI xodimi kiritgan vaznni o’zgartirmoq"
+msgstr "BSI vaznini o’zgartirmoq"
 
 #: application/bsi/templates/bsi_weights_by_user_as_of_date.html:48
 msgid "Mark as paid"
@@ -480,23 +521,38 @@ msgstr "To’langan deb belgilash"
 msgid "Mark as unpaid"
 msgstr "To’lanmagan deb belgilash"
 
-#: application/main/views.py:65
+#: application/bsi/templates/sending_dates.html:7
+msgid "Sending date"
+msgstr "Reys kuni"
+
+#: application/bsi/templates/sending_dates.html:8
+msgid "Note"
+msgstr "Qo’shimcha ma’lumot"
+
+#: application/bsi/templates/sending_dates.html:17
+#: application/post_weight/templates/all_post_weights.html:32
+#: application/post_weight/templates/post_weights_as_of_date.html:30
+#: application/post_weight/templates/unpaid_post_weights.html:30
+msgid "Remove"
+msgstr "O’chirmoq"
+
+#: application/main/views.py:78
 msgid "BSI Delivery services"
 msgstr "BSI Pochta xizmatlari"
 
-#: application/main/views.py:72
+#: application/main/views.py:87
 msgid "Secret page"
 msgstr "Sirli sahifa"
 
-#: application/main/views.py:77 application/templates/includes/nav.html:33
+#: application/main/views.py:92 application/templates/includes/nav.html:33
 msgid "About us"
 msgstr "Biz haqimizda"
 
-#: application/main/views.py:83
+#: application/main/views.py:98
 msgid "Page not found"
 msgstr "Sahifa topilmadi"
 
-#: application/main/views.py:89
+#: application/main/views.py:104
 msgid "Internal server error"
 msgstr "Serverda ichki muammo sodir bo'ldi"
 
@@ -510,45 +566,76 @@ msgstr "%(name)s yuborgan yuklar"
 msgid "Post weights by %(name)s grouped by sent dates"
 msgstr "%(name)s yuborgan kunlar bo’yicha umumiy vaznlar hisoboti"
 
-#: application/post_weight/views.py:53
+#: application/post_weight/views.py:73
 #, python-format
 msgid "All post weights sent by %(name)s"
 msgstr "%(name)s yuborgan barcha yuklar"
 
-#: application/post_weight/views.py:66
+#: application/post_weight/views.py:87
 #, python-format
 msgid "Unpaid post weights by %(name)s"
 msgstr "%(name)s hali to’lamagan barcha yuklar"
 
-#: application/post_weight/views.py:84
+#: application/post_weight/views.py:105
 #, python-format
 msgid ""
-"Successfully inserted new weight %(weight)s with paid amount "
-"%(paid_amount)s"
+"Successfully inserted new weight %(weight)s with paid amount %(paid_amount)s"
 msgstr ""
-"Vazni %(weight)s kg, to’lovi %(paid_amount)s bo’lgan yangi yukni "
-"muvaffaqiyat bilan saqladik"
+"Vazni %(weight)s kg, to’lovi %(paid_amount)s bo’lgan yangi yukni muvaffaqiyat "
+"bilan saqladik"
 
-#: application/post_weight/views.py:87
-#: application/templates/includes/nav.html:19
-#: application/templates/index.html:9
+#: application/post_weight/views.py:108
+#: application/templates/includes/nav.html:19 application/templates/index.html:17
 msgid "Enter new weight"
 msgstr "Yangi yukni kiriting"
 
-#: application/post_weight/views.py:102
-msgid "Successfully updated post weight"
-msgstr "Yukni muvaffaqiyat bilan saqladik"
+#: application/post_weight/views.py:123
+#, python-format
+msgid "Successfully updated post weight %(weight)d kg sent on %(sent_date)s"
+msgstr ""
+"%(sent_date)s da yuborilgan %(weight)d kg yukni muvaffaqiyat bilan o’zgartirdik"
 
-#: application/post_weight/views.py:106
+#: application/post_weight/views.py:127
 msgid "Edit post weight"
 msgstr "Yuk vaznini o’zgartirmoq"
 
-#: application/post_weight/views.py:115
-msgid "Successfully removed post weight"
-msgstr "Yukni muvaffaqiyat bilan o’chirdik"
+#: application/post_weight/views.py:136
+#, python-format
+msgid "Successfully removed post weight %(weight)d kg sent on %(sent_date)s"
+msgstr ""
+"%(sent_date)s da yuborilgan %(weight)d kg yukni muvaffaqiyat bilan o’chirdik"
 
-#: application/post_weight/templates/all_post_weights.html:10
-#: application/post_weight/templates/unpaid_post_weights.html:14
+#: application/post_weight/templates/all_post_weights.html:5
+#: application/post_weight/templates/post_weights_as_of_date.html:5
+#: application/post_weight/templates/unpaid_post_weights.html:5
+msgid "Unpaid amount"
+msgstr "To’lanmagan yuklarning umumiy miqdori"
+
+#: application/post_weight/templates/all_post_weights.html:6
+#: application/post_weight/templates/post_weights_as_of_date.html:6
+#: application/post_weight/templates/unpaid_post_weights.html:6
+msgid "Unpaid weight"
+msgstr "To’lanmagan yuklarning umumiy vazni"
+
+#: application/post_weight/templates/all_post_weights.html:7
+#: application/post_weight/templates/post_weights_as_of_date.html:7
+msgid "Total amount"
+msgstr "Umumiy miqdor"
+
+#: application/post_weight/templates/all_post_weights.html:8
+#: application/post_weight/templates/post_weights_as_of_date.html:8
+msgid "Total weight"
+msgstr "Umumiy vazn"
+
+#: application/post_weight/templates/all_post_weights.html:11
+#: application/post_weight/templates/post_weight_home.html:13
+#: application/post_weight/templates/post_weights_as_of_date.html:11
+#: application/post_weight/templates/unpaid_post_weights.html:9
+msgid "Add new weight"
+msgstr "Yangi vaznni qo’shmoq"
+
+#: application/post_weight/templates/all_post_weights.html:19
+#: application/post_weight/templates/unpaid_post_weights.html:17
 msgid "Modified on"
 msgstr "O’zgartirilgan vaqt"
 
@@ -568,19 +655,6 @@ msgstr "Yuklarni yuborilgan kunlar bo’yicha ko’rish"
 msgid "View all post weights"
 msgstr "Barcha yuklar ro’yxati"
 
-#: application/post_weight/templates/post_weights_as_of_date.html:21
-#: application/post_weight/templates/unpaid_post_weights.html:27
-msgid "Remove"
-msgstr "O’chirmoq"
-
-#: application/post_weight/templates/unpaid_post_weights.html:5
-msgid "Unpaid amount"
-msgstr "To’lanmagan yuklarning umumiy miqdori"
-
-#: application/post_weight/templates/unpaid_post_weights.html:6
-msgid "Unpaid weight"
-msgstr "To’lanmagan yuklarning umumiy vazni"
-
 #: application/templates/about_us.html:4
 msgid "We deliver your posts to the following cities of Uzbekistan"
 msgstr "Yuklarizni O’zbekistonning quyidagi shaharlariga yetkazib bera olamiz"
@@ -589,40 +663,47 @@ msgstr "Yuklarizni O’zbekistonning quyidagi shaharlariga yetkazib bera olamiz"
 msgid "Contact us via our admins"
 msgstr "Adminlarimiz orqali biz bilan ulaning"
 
-#: application/templates/index.html:4
+#: application/templates/index.html:5
 msgid ""
-"This is a platform to enter and keep track of post weights that you send "
-"to BSI."
+"This is a platform to enter and keep track of post weights that you send to "
+"BSI."
 msgstr ""
-"Ushbu sayt BSI orqali yuboruvchi yuklarizni ro’yxatdan o’tkazish, va "
-"doimiy ravishda kuzatib borish platformasidir."
+"Ushbu sayt BSI orqali yuboruvchi yuklarizni ro’yxatdan o’tkazish, va doimiy "
+"ravishda kuzatib borish platformasidir."
 
-#: application/templates/includes/nav.html:18
+#: application/templates/index.html:7
+msgid "Post weight price per kg"
+msgstr "Yuk 1 kg narxi"
+
 #: application/templates/index.html:8
+msgid "Next sending date"
+msgstr "Keyingi reys"
+
+#: application/templates/includes/nav.html:18 application/templates/index.html:16
 msgid "View post weights"
 msgstr "Yuborilgan yuklarni ko’rmoq"
 
-#: application/templates/index.html:13
+#: application/templates/index.html:21
 msgid "Login with Google"
 msgstr "Google akkaunti bilan kirmoq"
 
-#: application/templates/index.html:14
+#: application/templates/index.html:22
 msgid "Login with usual account"
 msgstr "Odatiy akkaunt bilan kirmoq"
 
 #: application/templates/secret.html:4
 #, python-format
 msgid ""
-"Dear %(username)s, you have successfully confirmed your email and reached"
-" the secret page."
+"Dear %(username)s, you have successfully confirmed your email and reached the "
+"secret page."
 msgstr ""
-"Hurmatli %(username)s, siz muvaffaqiyat bilan emailizni tasdiqladiz va "
-"bizning sirli sahifamizga tashrif buyurdingiz."
+"Hurmatli %(username)s, siz muvaffaqiyat bilan emailizni tasdiqladiz va bizning "
+"sirli sahifamizga tashrif buyurdingiz."
 
 #: application/templates/secret.html:5
 msgid ""
-"The most important question that we can involve ourselves with is the "
-"question 'Who am I'"
+"The most important question that we can involve ourselves with is the question "
+"'Who am I'"
 msgstr "Biz o'zimizni butun umr mashg'ul etadigan savol'Men kimman' savoli"
 
 #: application/templates/includes/nav.html:21
@@ -669,3 +750,22 @@ msgstr "Admin"
 #~ msgid "Contact us"
 #~ msgstr "Biz bilan ulaning"
 
+#~ msgid "Successfully saved bsi post weight of %(weight)d"
+#~ msgstr "BSI xodimi o’lchagan vazn %(weight)d ni muvaffaqiyat bilan saqladik"
+
+#~ msgid "Successfully saved bsi post weight of %(weight)s"
+#~ msgstr "BSI xodimi o’lchagan vazn %(weight)s ni muvaffaqiyat bilan saqladik"
+
+#~ msgid "Successfully removed bsi post weight %(bsi_post_weight)s"
+#~ msgstr ""
+#~ "BSI xodimi o’lchagan vazn %(bsi_post_weight)s ni muvaffaqiyat bilan "
+#~ "o’chirdik"
+
+#~ msgid "Marked post weight as paid"
+#~ msgstr "Yukni to’langan deb belgiladik"
+
+#~ msgid "Successfully updated post weight"
+#~ msgstr "Yukni muvaffaqiyat bilan saqladik"
+
+#~ msgid "Successfully removed post weight"
+#~ msgstr "Yukni muvaffaqiyat bilan o’chirdik"
