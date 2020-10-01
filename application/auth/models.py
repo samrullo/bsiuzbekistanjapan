@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True)
     name = db.Column(db.String(250))
     phone = db.Column(db.String(64), nullable=True)
-    address = db.Column(db.String(250), unique=True, index=True,nullable=True)
+    address = db.Column(db.String(250),nullable=True)
     password_hash = db.Column(db.String(128))
     registered_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     is_confirmed = db.Column(db.Boolean)
