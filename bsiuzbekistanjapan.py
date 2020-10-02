@@ -1,5 +1,5 @@
 import os
-from application import create_app, db
+from application import create_app, db, mail
 from application.auth.models import User, Role, Permissions
 from application.bsi.models import BSIPostWeight
 from application.post_weight.models import PostWeight
@@ -12,9 +12,11 @@ app = create_app(os.environ['FLASK_ENV'])
 
 migrate = Migrate(app, db)
 
+
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, User=User, PostWeight=PostWeight,BSIPostWeight=BSIPostWeight, Role=Role, app=app, Permissions=Permissions,
+    return dict(db=db, mail=mail, User=User, PostWeight=PostWeight, BSIPostWeight=BSIPostWeight, Role=Role, app=app,
+                Permissions=Permissions,
                 BusinessGlobalVariable=BusinessGlobalVariable)
 
 
