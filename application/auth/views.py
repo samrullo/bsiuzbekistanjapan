@@ -52,12 +52,12 @@ def register():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        current_app.logger.info(f"will send confirmtion email by {current_app.config.get('MAIL_USERNAME')} to {current_user.email}")
+        current_app.logger.info(f"will send confirmtion email by {current_app.config.get('MAIL_SENDER')} to {current_user.email}")
         token = generate_token(current_user.email)
         plain_text_body = render_template("confirmation_mails/confirmation.txt", name=current_user.name,
                                           token=token)
         html_body = render_template("confirmation_mails/confirmation.html", name=current_user.name, token=token)
-        send_mail("Please confirm your email", sender=current_app.config.get('MAIL_USERNAME'),
+        send_mail("Please confirm your email", sender=current_app.config.get('MAIL_SENDER'),
                   recipient=current_user.email,
                   plain_text_body=plain_text_body, html_body=html_body)
         flash(_("We successfully registered you. But you need to verify your email through the link we sent you"),
@@ -84,7 +84,7 @@ def resend_confirmation():
     plain_text_body = render_template("confirmation_mails/confirmation.txt", name=current_user.name,
                                       token=token)
     html_body = render_template("confirmation_mails/confirmation.html", name=current_user.name, token=token)
-    send_mail("Please confirm your email", sender=current_app.config.get('MAIL_USERNAME'),
+    send_mail("Please confirm your email", sender=current_app.config.get('MAIL_SENDER'),
               recipient=current_user.email,
               plain_text_body=plain_text_body, html_body=html_body)
     flash(_("Resent confirmation url to your email"), "success")
@@ -103,7 +103,7 @@ def send_reset_link():
         token = generate_token(form.email.data)
         plain_text_body = render_template("reset_password/reset_password.txt", token=token)
         html_body = render_template("reset_password/reset_password.html", token=token)
-        send_mail("Reset password for Flasky", sender=current_app.config.get('MAIL_USERNAME'),
+        send_mail("Reset password for Flasky", sender=current_app.config.get('MAIL_SENDER'),
                   recipient=form.email.data,
                   plain_text_body=plain_text_body, html_body=html_body)
         flash(_("Sent reset password link to %(email)s", email=form.email.data), "success")
