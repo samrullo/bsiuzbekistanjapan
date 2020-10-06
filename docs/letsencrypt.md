@@ -1,9 +1,26 @@
 # Letsencrypt
 https://devanswers.co/lets-encrypt-ssl-apache-ubuntu-18-04/
 
+1. Install Let’s Encrypt client (Certbot)
+```python
+sudo apt-get update && sudo apt-get install software-properties-common
+```
+
+Add the repositories universe and certbot
+```python
+sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot
+```
+
+Update the package lists again and install certbot for Apache. This is the Let’s Encrypt client.
+```python
+sudo apt-get update && sudo apt-get install certbot python-certbot-apache
+```
+
+2. Get an SSL Certificate
+
 At the end of the instructions when running
 ```python
-sudo certbot --apache2
+sudo certbot --apache
 ```
 it throws error that trying to override existing WSGIProcess.
 

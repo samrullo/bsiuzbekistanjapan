@@ -21,6 +21,25 @@ sudo apt-get install libapache2-mod-wsgi-py3
 # mssql-tools on ubuntu
 follow instructions on https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver15#ubuntu
 
+below are instructions from above page
+
+Import public repository GPG keys
+```python
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+```
+
+Register Microsoft Ubuntu repository
+```python
+curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+```
+
+Update the sources list and run the installation command with the unixODBC developer package.
+```python
+sudo apt-get update 
+sudo apt-get install mssql-tools unixodbc-dev
+```
+
+
 You need to add the vm's IP to firewall rules of mssql
 
 Then you can test your connection with 
