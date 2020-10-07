@@ -47,7 +47,7 @@ class ProductionConfig(Config):
     MAIL_PORT = os.environ.get("PROD_MAIL_PORT")
     # MAIL_USE_SSL = True
     MAIL_USE_TLS=True
-    MAIL_SENDER=os.environ.get("PROD_MAIL_SENDER")
+    MAIL_SENDER=os.environ.get("PROD_MAIL_SENDER") or "bsigroup@bsigroup.com"
     MAIL_USERNAME = os.environ.get("PROD_MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("PROD_MAIL_PASSWORD")
     SQLALCHEMY_DATABASE_URI = os.environ.get('PROD_DATABASE_URI')
