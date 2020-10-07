@@ -10,7 +10,7 @@ from .forms import LoginForm, RegisterForm, EditProfileForm, ResetPasswordSendLi
 from .models import User
 from application import db
 from flask_login import current_user
-from application.utils.email_asynch import send_mail
+from application.utils.email import send_mail
 from application.utils.token import generate_token, confirm_token, confirm_reset_password_token
 
 
