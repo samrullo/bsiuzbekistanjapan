@@ -12,7 +12,11 @@ from application import db
 from flask_login import current_user
 from application.utils.email import send_mail
 from application.utils.token import generate_token, confirm_token, confirm_reset_password_token
+from application import login_manager
 
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    return redirect(url_for('auth_bp.login',next=request.path))
 
 @auth_bp.before_app_request
 def before_request():
