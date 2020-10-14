@@ -77,6 +77,10 @@ def create_app(config_name):
         from application.admin import admin_bp
         app.register_blueprint(admin_bp)
 
+        # add gmailapi_bp blueprint
+        from application.gmailapi import gmailapi_bp
+        app.register_blueprint(gmailapi_bp)
+
         from application.auth.models import Role
         Role.insert_roles()
 

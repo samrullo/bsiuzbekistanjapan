@@ -15,6 +15,19 @@ class Config:
 
     SLOW_DB_QUERY_THRESHOLD = float(os.environ.get('SLOW_DB_QUERY_THRESHOLD'))
 
+    # Gmail API related configurations
+    GMAILAPI_CREDENTIALS_FILE = os.path.join(basedir, "credentials/bsiuzbekistanjapan_gmailapi.json")
+    GMAILAPI_CREDENTIALS_FOLDER = os.path.join(basedir, "credentials")
+    GMAILAPI_REDIRECT_URI = 'https://127.0.0.1:5000/gmail_login/callback'
+
+    GMAILAPI_SCOPES = [
+        "https://www.googleapis.com/auth/gmail.compose",
+        "https://www.googleapis.com/auth/gmail.readonly",
+        "https://www.googleapis.com/auth/gmail.labels",
+        "https://www.googleapis.com/auth/gmail.modify",
+        "email"
+    ]
+
     # Google OAuth2 related configurations
     GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
     GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
@@ -46,8 +59,8 @@ class ProductionConfig(Config):
     MAIL_SERVER = os.environ.get("PROD_MAIL_SERVER")
     MAIL_PORT = os.environ.get("PROD_MAIL_PORT")
     # MAIL_USE_SSL = True
-    MAIL_USE_TLS=True
-    MAIL_SENDER=os.environ.get("PROD_MAIL_SENDER") or "bsiuzbekistanjapanpost@uzjapa.com"
+    MAIL_USE_TLS = True
+    MAIL_SENDER = os.environ.get("PROD_MAIL_SENDER")
     MAIL_USERNAME = os.environ.get("PROD_MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("PROD_MAIL_PASSWORD")
     SQLALCHEMY_DATABASE_URI = os.environ.get('PROD_DATABASE_URI')

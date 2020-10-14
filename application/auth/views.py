@@ -10,13 +10,16 @@ from .forms import LoginForm, RegisterForm, EditProfileForm, ResetPasswordSendLi
 from .models import User
 from application import db
 from flask_login import current_user
-from application.utils.email import send_mail
+# from application.utils.email import send_mail
+from application.gmailapi.gmailapi_send_mail import send_mail
 from application.utils.token import generate_token, confirm_token, confirm_reset_password_token
 from application import login_manager
 
+
 @login_manager.unauthorized_handler
 def unauthorized_callback():
-    return redirect(url_for('auth_bp.login',next=request.path))
+    return redirect(url_for('auth_bp.login', next=request.path))
+
 
 @auth_bp.before_app_request
 def before_request():
@@ -56,7 +59,8 @@ def register():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        current_app.logger.info(f"will send confirmtion email by {current_app.config.get('MAIL_SENDER')} to {current_user.email}")
+        current_app.logger.info(
+            f"will send confirmtion email by {current_app.config.get('MAIL_SENDER')} to {current_user.email}")
         token = generate_token(current_user.email)
         plain_text_body = render_template("confirmation_mails/confirmation.txt", name=current_user.name,
                                           token=token)
@@ -78,11 +82,12 @@ def confirm(token):
         current_user.confirmed_on = datetime.datetime.now()
         db.session.add(current_user)
         db.session.commit()
-        flash(_("Successfully confrmed your email %(email)s",email=current_user.email),"success")
+        flash(_("Successfully confrmed your email %(email)s", email=current_user.email), "success")
     return redirect(url_for('main_bp.home'))
 
 
 @auth_bp.route("/<lang>/resend_confirmation")
+@login_required
 def resend_confirmation():
     token = generate_token(current_user.email)
     plain_text_body = render_template("confirmation_mails/confirmation.txt", name=current_user.name,
@@ -96,6 +101,7 @@ def resend_confirmation():
 
 
 @auth_bp.route('/<lang>/unconfirmed')
+@login_required
 def unconfirmed():
     return render_template("unconfirmed.html", page_header_title=_("Unconfirmed"))
 

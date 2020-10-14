@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block page_content%}
+
+<div class="list-group">
+  <a class="list-group-item list-group-item-action" href="{{url_for('gmailapi_bp.gmail_login')}}">{{_("Authorize GMAIL API account")}}</a>
+  <a class="list-group-item list-group-item-action" href="{{url_for('gmailapi_bp.gmailapi_sendmail')}}">{{_("Send test email")}}</a>
+</div>
+{% endblock %}
