@@ -28,7 +28,8 @@ def create_app(config_name):
     # set up logging
     if not app.debug:
         from logging import FileHandler, Formatter
-        logging.basicConfig(level=logging.INFO,format='%(asctime)s %(levelname)s: %(message)s [in %(pathname)s %(lineno)s]')
+        logging.basicConfig(level=logging.INFO,
+                            format='%(asctime)s %(levelname)s: %(message)s [in %(pathname)s %(lineno)s]')
         file_handler = FileHandler(app.config.get('LOG_FILE'))
         file_handler.setFormatter(Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s %(lineno)s]'))
         app.logger.addHandler(file_handler)
@@ -72,7 +73,6 @@ def create_app(config_name):
         from .main import main_bp
         app.register_blueprint(main_bp)
 
-
         # add admin blueprint
         from application.admin import admin_bp
         app.register_blueprint(admin_bp)
@@ -81,7 +81,12 @@ def create_app(config_name):
         from application.gmailapi import gmailapi_bp
         app.register_blueprint(gmailapi_bp)
 
+        # insert roles if not exists in database
         from application.auth.models import Role
         Role.insert_roles()
+
+        # insert JP and UZ countries if not exists
+        from application.post_weight.models import Country
+        Country.insert_countries()
 
         return app

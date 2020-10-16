@@ -9,6 +9,17 @@ class Country(db.Model):
     country_code = db.Column(db.String(10))
     country_name = db.Column(db.String(100))
 
+    @staticmethod
+    def insert_countries(self):
+        """
+        Insert JP and UZ countries if not exists
+        """
+        countries = [('JP', 'Japan'), ('UZ', 'Uzbekistan')]
+        for country_code, country_name in countries:
+            country = Country(country_code=country_code, country_name=country_name)
+            db.session.add(country)
+            db.session.commit()
+
 
 class PostWeight(db.Model):
     __tablename__ = "post_weights"
