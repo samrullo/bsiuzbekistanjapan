@@ -8,6 +8,7 @@ from flask_login import login_required, logout_user, login_user
 from application.auth.permission_required import confirm_required
 from .forms import LoginForm, RegisterForm, EditProfileForm, ResetPasswordSendLinkForm, ResetPasswordForm
 from .models import User
+from application.post_weight.models import RepresentedIndividual
 from application import db
 from flask_login import current_user
 # from application.utils.email import send_mail
@@ -54,9 +55,17 @@ def logout():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data, name=form.name.data, phone=form.phone.data, address=form.address.data,
-                    password=form.password.data, is_confirmed=False)
+        user = User(email=form.email.data, name=form.name.data,
+                    phone=form.phone.data, telegram_username=form.telegram_username.data,
+                    address=form.address.data, password=form.password.data, is_confirmed=False)
         db.session.add(user)
+        db.session.commit()
+        user.set_username()
+
+        # add the user as a first represented individual
+        represented_individual = RepresentedIndividual(name=user.name, email=user.email, phone=user.phone,
+                                                       telegram_username=user.telegram_username, address=user.address)
+        db.session.add(represented_individual)
         db.session.commit()
         login_user(user)
         current_app.logger.info(
@@ -156,6 +165,7 @@ def edit_profile():
         current_user.address = form.address.data
         db.session.add(current_user)
         db.session.commit()
+        current_user.set_username()
         flash(_("Updated profile for %(email)s successfully", email=current_user.email), "success")
         next = request.args.get('next')
         if next is None or not next.startswith('/'):

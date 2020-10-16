@@ -6,6 +6,7 @@ class BSIPostWeight(db.Model):
     __tablename__ = "bsi_post_weights"
     id = db.Column(db.Integer, primary_key=True)
     post_weight_id = db.Column(db.Integer, db.ForeignKey("post_weights.id"))
+    post_weight = db.relationship("PostWeight", foreign_keys=[post_weight_id])
     weight = db.Column(db.Float)
     payment_amount = db.Column(db.Float)
     entered_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)

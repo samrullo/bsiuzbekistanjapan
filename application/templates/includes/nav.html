@@ -25,7 +25,7 @@
       <li class="nav-item"><a class="nav-link {% if request.endpoint=='auth_bp.login' %} active {% endif %}" href="{{url_for('auth_bp.login')}}">{{_("Log in")}}</a></li>
       {% endif %}
       {% if current_user.is_authenticated and current_user.is_confirmed and current_user.is_moderator() %}
-      <li class="nav-item"><a class="nav-link {% if request.endpoint=='bsi_bp.moderator' %} active {% endif %}" href="{{url_for('bsi_bp.moderator')}}">{{_("Moderator")}}</a></li>
+      <li class="nav-item"><a class="nav-link {% if request.endpoint=='bsi_bp.moderator' %} active {% endif %}" href="{{url_for('bsi_bp.moderator')}}">{{_("BSI Agent")}}</a></li>
       {% endif %}
       {% if current_user.is_authenticated and current_user.is_confirmed and current_user.is_moderator() and current_user.is_administrator() %}
       <li class="nav-item"><a class="nav-link" href="/admin">{{_("Admin")}}</a></li>

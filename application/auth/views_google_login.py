@@ -5,6 +5,7 @@ from ..utils.google_login_utils import get_google_provider_cfg
 from application import db
 from flask_login import login_required, current_user
 from .models import User
+from application.post_weight.models import RepresentedIndividual
 from ..auth.forms import RegisterForm
 from flask import request, redirect, current_app, flash, g
 from flask_babel import lazy_gettext as _
@@ -85,11 +86,18 @@ def callback():
 
         user = User.query.filter_by(email=users_email, is_google_account=True).first()
         if not user or not user.is_confirmed:
-            user = User(email=users_email, name=users_name, password=os.urandom(23),is_confirmed=True,
+            user = User(email=users_email, name=users_name, password=os.urandom(23), is_confirmed=True,
                         is_google_account=True,
                         confirmed_on=datetime.datetime.utcnow())
             db.session.add(user)
             db.session.commit()
+            # add the user as a first represented individual
+            represented_individual = RepresentedIndividual(name=user.name, email=user.email, phone=user.phone,
+                                                           telegram_username=user.telegram_username,
+                                                           address=user.address)
+            db.session.add(represented_individual)
+            db.session.commit()
+
             flash(_("Successfully registered %(name)s. Please consider to edit your profile later",
                     name=user.name), "success")
             login_user(user)

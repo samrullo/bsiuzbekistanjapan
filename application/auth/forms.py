@@ -20,6 +20,7 @@ class RegisterForm(FlaskForm):
     email = StringField(_("Email"), validators=[DataRequired(), Length(1, 64), Email()])
     name = StringField(_("Name"), validators=[DataRequired()], render_kw={"placeholder": _("<Last name> <First name>")})
     phone = StringField(_("Phone"), render_kw={"placeholder": _("080-1234-1234")})
+    telegram_username = StringField(_("Telegram Username"))
     address = StringField(_("Address"))
     password = PasswordField(_("Password"),
                              validators=[DataRequired(), EqualTo("confirm_password", message="Passwords must match")])
@@ -34,8 +35,10 @@ class RegisterForm(FlaskForm):
 class EditProfileForm(FlaskForm):
     name = StringField(_("Name"), validators=[DataRequired()], render_kw={"placeholder": _("<Last name> <First name>")})
     phone = StringField(_("Phone"), render_kw={"placeholder": _("080-1234-1234")})
+    telegram_username = StringField(_("Telegram Username"))
     address = StringField(_("Address"))
     submit = SubmitField(_("Save"))
+
 
 class ResetPasswordSendLinkForm(FlaskForm):
     email = StringField(_("Please enter your email"), validators=[DataRequired(), Length(1, 64), Email()])
