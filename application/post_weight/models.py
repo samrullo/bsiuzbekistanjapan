@@ -10,7 +10,7 @@ class Country(db.Model):
     country_name = db.Column(db.String(100))
 
     @staticmethod
-    def insert_countries(self):
+    def insert_countries():
         """
         Insert JP and UZ countries if not exists
         """
