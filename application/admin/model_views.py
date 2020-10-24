@@ -32,3 +32,13 @@ class RepresentedIndividualView(ModelView):
 class RecipientView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.is_confirmed and current_user.is_administrator()
+
+
+class PostWeightView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.is_confirmed and current_user.is_administrator()
+
+
+class PostWeightContentView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.is_confirmed and current_user.is_administrator()

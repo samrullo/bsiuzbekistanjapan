@@ -24,3 +24,15 @@ from .model_views import RecipientView
 from application.post_weight.models import Recipient
 
 admin_flsk.add_view(RecipientView(Recipient, db.session))
+
+# add ModelView to maintain PostWeight records
+from .model_views import PostWeightView
+from application.post_weight.models import PostWeight
+
+admin_flsk.add_view(PostWeightView(PostWeight, db.session))
+
+# add ModelView to maintain PostWeightContent records
+from .model_views import PostWeightContentView
+from application.post_weight.models import PostWeightContent
+
+admin_flsk.add_view(PostWeightContentView(PostWeightContent, db.session))
