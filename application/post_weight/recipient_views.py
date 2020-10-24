@@ -1,9 +1,11 @@
+import datetime
 from application import db
 from flask import render_template, redirect, flash, current_app
 from application.utils.custom_url_for import url_for
 from flask_babel import lazy_gettext as _
 from application.post_weight import post_weight_bp
 from flask_login import login_required, current_user
+from application.auth.permission_required import confirm_required
 
 # import models and forms related to recipients and recipients
 from .models import Recipient, Recipient
@@ -12,12 +14,16 @@ from application.post_weight.forms import RepresentedIndividualRecipientForm
 
 # views to add, edit, view recipients
 @post_weight_bp.route("/<lang>/view_recipients")
+@login_required
+@confirm_required
 def view_recipients():
     return render_template("recipients.html", page_header_title=_("Recipients"),
                            recipients=current_user.recipients)
 
 
 @post_weight_bp.route("/<lang>/add_recipient", methods=['GET', 'POST'])
+@login_required
+@confirm_required
 def add_recipient():
     form = RepresentedIndividualRecipientForm()
     if form.validate_on_submit():
@@ -35,6 +41,8 @@ def add_recipient():
 
 
 @post_weight_bp.route("/<lang>/edit_recipient/<recipient_id>", methods=['GET', 'POST'])
+@login_required
+@confirm_required
 def edit_recipient(recipient_id):
     recipient = Recipient.query.get(recipient_id)
     form = RepresentedIndividualRecipientForm()
@@ -44,6 +52,7 @@ def edit_recipient(recipient_id):
         recipient.phone = form.phone.data
         recipient.telegram_username = form.telegram_username.data
         recipient.address = form.address.data
+        recipient.modified_on = datetime.datetime.utcnow()
         db.session.add(recipient)
         db.session.commit()
         flash(_("Successfully updated recipient %(name)s", name=recipient.name), "success")
@@ -60,6 +69,8 @@ def edit_recipient(recipient_id):
 
 
 @post_weight_bp.route("/<lang>/remove_recipient/<recipient_id>")
+@login_required
+@confirm_required
 def remove_recipient(recipient_id):
     recipient = Recipient.query.get(recipient_id)
     db.session.delete(recipient)

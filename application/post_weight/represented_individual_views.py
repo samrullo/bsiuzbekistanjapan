@@ -1,3 +1,4 @@
+import datetime
 from application import db
 from flask import render_template, redirect, flash, current_app
 from application.utils.custom_url_for import url_for
@@ -45,6 +46,7 @@ def edit_represented_individual(represented_individual_id):
         represented_individual.phone = form.phone.data
         represented_individual.telegram_username = form.telegram_username.data
         represented_individual.address = form.address.data
+        represented_individual.modified_on = datetime.datetime.utcnow()
         db.session.add(represented_individual)
         db.session.commit()
         flash(_("Successfully updated represented individual %(name)s", name=represented_individual.name), "success")

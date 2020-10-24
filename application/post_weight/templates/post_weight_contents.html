@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+<ul class="list-group">
+  <li class="list-group-item list-group-item-warning">{{_("Post content sum")}} : {{format_number(post_weight_content_sum)}}</li>
+</ul>
+
+<div class="container">
+  <a class="btn btn-dark" href="{{url_for('post_weight_bp.new_post_weight_content',post_weight_id=post_weight.id)}}">{{_("Add new post content")}}</a>
+</div>
+<table class="table table-hover table-responsive orderByDateTable">
+  <thead order_col_no="0">
+    <th scope="col">{{_("Name")}}</th>
+    <th scope="col">{{_("Price")}}</th>
+    <th scope="col">{{_("Quantity")}}</th>
+    <th scope="col">{{_("Sum")}}</th>
+    <th scope="col">{{_("Image")}}</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    {% for post_weight_content in post_weight_contents %}
+    <tr>
+      <td>
+        <a href="{{url_for('post_weight_bp.view_post_weight_content',post_weight_content_id=post_weight_content.id)}}">{{post_weight_content.name}}</a>
+      </td>
+      <td>{{post_weight_content.price}}</td>
+      <td>{{post_weight_content.quantity}}</td>
+      <td>{{format_number(post_weight_content.price*post_weight_content.quantity)}}</td>
+      <td><img class="small-image" src="{{post_weight_content.content_image_url}}" alt="{{post_weight_content.name}}"></td>
+      <td>
+        <a class="btn btn-dark" href="{{url_for('post_weight_bp.remove_post_weight_content',post_weight_content_id=post_weight_content.id)}}">{{_("Remove")}}</a>
+      </td>
+      <td>
+        <a class="btn btn-dark" href="{{url_for('post_weight_bp.edit_post_weight_content',post_weight_content_id=post_weight_content.id)}}">{{_("Edit")}}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block page_content%}
+<div class="row">
+  <div class="col-sm-6">
+    <img src="{{post_weight_content.content_image_url}}" alt="{{post_weight_content.name}}">
+  </div>
+  <div class="col-sm-6">
+    <ul class="list-group">
+      <li class="list-group-item">{{_('Content name')}} : {{post_weight_content.name}}</li>
+      <li class="list-group-item">{{_('Content price')}} : {{format_number(post_weight_content.price)}}</li>
+      <li class="list-group-item">{{_('Quantity')}} : {{post_weight_content.quantity}}</li>
+      <li class="list-group-item">{{_('Content sum')}} : {{format_number(post_weight_content.price*post_weight_content.quantity)}}</li>
+    </ul>
+    <a class="btn btn-dark" href="{{url_for('post_weight_bp.view_post_weight_contents',post_weight_id=post_weight_content.post_weight_id)}}">{{_('Back')}}</a>
+  </div>
+
+</div>
+{% endblock %}

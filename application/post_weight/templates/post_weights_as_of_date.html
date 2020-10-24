@@ -8,10 +8,10 @@
   <li class="list-group-item">{{_("Total weight")}} : {{format_number(summary['total_weight'])}}</li>
 </ul>
 <div class="container">
-  <a class="btn btn-dark" href="{{url_for('post_weight_bp.new_post_weight')}}">{{_("Add new weight")}}</a>
+  <a class="btn btn-dark" href="{{url_for('post_weight_bp.new_post_weight',next=url_for(request.endpoint,adate=adate))}}">{{_("Add new weight")}}</a>
 </div>
 <table class="table table-hover table-responsive orderByDateTable">
-  <thead order_col_no="0">
+  <thead order_col_no="9">
     <th scope="col">{{_("Post ID")}}</th>
     <th scope="col">{{_("From Country")}}</th>
     <th scope="col">{{_("To Country")}}</th>
@@ -22,6 +22,7 @@
     <th scope="col">{{_("Payment amount")}}</th>
     <th scope="col">{{_("Entered on")}}</th>
     <th scope="col">{{_("Modified on")}}</th>
+    <th></th>
     <th></th>
     <th></th>
   </thead>
@@ -39,10 +40,13 @@
       <td>{{moment(post_weight.entered_on).format('LLL')}}</td>
       <td>{{moment(post_weight.modified_on).format('LLL')}}</td>
       <td>
-        <a class="btn btn-dark {% if not post_weight.is_removable %} disabled {% endif %}" href="{{url_for('post_weight_bp.remove_post_weight',post_weight_id=post_weight.id)}}">{{_("Remove")}}</a>
+        <a class="btn btn-dark" href="{{url_for('post_weight_bp.view_post_weight_contents',post_weight_id=post_weight.id)}}">{{_("Contents")}}</a>
       </td>
       <td>
-        <a class="btn btn-dark {% if not post_weight.is_editable %} disabled {% endif %}" href="{{url_for('post_weight_bp.edit_post_weight',post_weight_id=post_weight.id)}}">{{_("Edit")}}</a>
+        <a class="btn btn-dark {% if not post_weight.is_removable %} disabled {% endif %}" href="{{url_for('post_weight_bp.remove_post_weight',post_weight_id=post_weight.id, next=url_for(request.endpoint,adate=adate))}}">{{_("Remove")}}</a>
+      </td>
+      <td>
+        <a class="btn btn-dark {% if not post_weight.is_editable %} disabled {% endif %}" href="{{url_for('post_weight_bp.edit_post_weight',post_weight_id=post_weight.id, next=url_for(request.endpoint,adate=adate))}}">{{_("Edit")}}</a>
       </td>
     </tr>
     {% endfor %}

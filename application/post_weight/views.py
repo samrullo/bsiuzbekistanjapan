@@ -1,14 +1,16 @@
 from application import db
 import pandas as pd
-from flask import render_template, redirect, flash, current_app
+from flask import render_template, redirect, flash, current_app, request
+from flask_login import login_required, current_user
+from application.auth.permission_required import confirm_required
 from application.utils.custom_url_for import url_for
 from flask_babel import lazy_gettext as _
-from application.post_weight import post_weight_bp
-from flask_login import login_required, current_user
+from . import post_weight_bp
 from .models import PostWeight
+from .models import generate_human_readable_post_weight_id
 from .models import Country
+from .forms import PostWeightForm
 from application.post_weight.post_weight_utils import get_price_per_kg
-from application.auth.permission_required import confirm_required
 
 
 @post_weight_bp.route("/<lang>/post_weight_home")
@@ -52,7 +54,8 @@ def post_weights_as_of_date(adate):
                            page_header_title=_("Post weights sent by %(name)s on %(date)s", name=current_user.name,
                                                date=adate),
                            post_weights=post_weights,
-                           summary=summary)
+                           summary=summary,
+                           adate=adate)
 
 
 @post_weight_bp.route("/<lang>/post_weights")
@@ -94,7 +97,6 @@ def unpaid_post_weights():
 @login_required
 @confirm_required
 def new_post_weight():
-    from .forms import PostWeightForm
     form = PostWeightForm()
     if form.validate_on_submit():
         new_weight = PostWeight(from_country_id=form.from_country.data,
@@ -106,13 +108,18 @@ def new_post_weight():
         price_per_kg = get_price_per_kg()
         new_weight.payment_amount = new_weight.weight * price_per_kg
         new_weight.user = current_user
-        new_weight.set_human_readable_post_weight_id()
+        db.session.add(new_weight)
+        db.session.commit()
+        new_weight.human_readable_id = generate_human_readable_post_weight_id(new_weight)
         db.session.add(new_weight)
         db.session.commit()
         flash(
-            _("Successfully inserted new weight %(weight)s with paid amount %(paid_amount)s", weight=new_weight.weight,
-              paid_amount=new_weight.payment_amount), "success")
-        return redirect(url_for('post_weight_bp.post_weights'))
+            _(
+                "Successfully inserted new weight %(weight)s with paid amount %(paid_amount)s. \
+                Please proceed to entering post contents.",
+                weight=new_weight.weight,
+                paid_amount=new_weight.payment_amount), "success")
+        return redirect(url_for("post_weight_bp.view_post_weight_contents", post_weight_id=new_weight.id))
     form.from_country.choices = [(country.id, country.country_name) for country in Country.query.all()]
     form.to_country.choices = [(country.id, country.country_name) for country in Country.query.all()]
     form.represented_individual.choices = [(represented_individual.id, represented_individual.name) for
@@ -126,7 +133,6 @@ def new_post_weight():
 @confirm_required
 def edit_post_weight(post_weight_id):
     post_weight = PostWeight.query.get(post_weight_id)
-    from .forms import PostWeightForm
     form = PostWeightForm()
     if form.validate_on_submit():
         post_weight.from_country_id = form.from_country.data
@@ -136,12 +142,18 @@ def edit_post_weight(post_weight_id):
         post_weight.weight = form.weight.data
         post_weight.sent_date = form.sent_date.data
         post_weight.payment_amount = post_weight.weight * get_price_per_kg()
-        post_weight.set_human_readable_post_weight_id()
+        db.session.add(post_weight)
+        db.session.commit()
+        post_weight.human_readable_id = generate_human_readable_post_weight_id(post_weight)
         db.session.add(post_weight)
         db.session.commit()
         flash(_("Successfully updated post weight %(weight)d kg sent on %(sent_date)s", weight=post_weight.weight,
                 sent_date=post_weight.sent_date), "success")
-        return redirect(url_for("post_weight_bp.post_weights_as_of_date", adate=post_weight.sent_date))
+        next = request.args.get('next')
+        if next:
+            return redirect(next)
+        else:
+            return redirect(url_for("post_weight_bp.post_weights_as_of_date", adate=post_weight.sent_date))
     form.from_country.choices = [(country.id, country.country_name) for country in Country.query.all()]
     form.to_country.choices = [(country.id, country.country_name) for country in Country.query.all()]
     form.represented_individual.choices = [(represented_individual.id, represented_individual.name) for
@@ -165,4 +177,8 @@ def remove_post_weight(post_weight_id):
     db.session.commit()
     flash(_("Successfully removed post weight %(weight)d kg sent on %(sent_date)s", weight=post_weight.weight,
             sent_date=post_weight.sent_date), "success")
-    return redirect(url_for("post_weight_bp.post_weights_as_of_date", adate=post_weight.sent_date))
+    next = request.args.get('next')
+    if next:
+        return redirect(next)
+    else:
+        return redirect(url_for("post_weight_bp.post_weights_as_of_date", adate=post_weight.sent_date))

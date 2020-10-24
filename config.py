@@ -40,6 +40,23 @@ class Config:
     MODERATOR_EMAILS = os.environ.get("MODERATOR_EMAILS")
     ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
 
+    # configs for flask-upload
+    UPLOADED_IMAGES_DEST = os.path.join(basedir, "application", "static", "img")
+    UPLOADED_IMAGES_URL = "https://127.0.0.1/static/img/"
+
+    # configs for uploading images to S3
+    UPLOADED_PHOTOS_DEST = os.environ.get('UPLOADED_PHOTOS_DEST') or os.path.relpath("application/static/img")
+
+    AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    BUCKET_NAME = "elasticbeanstalk-ap-south-1-384482548730"
+    BUCKET_URL = "https://elasticbeanstalk-ap-south-1-384482548730.s3.ap-south-1.amazonaws.com"
+    BUCKET_FOLDER = "bsiuzbekistanjapanpost"
+
+    TINIFY_API_KEY = os.environ.get('TINIFY_API_KEY')
+    PHOTO_WIDTH = 500
+    PHOTO_HEIGHT = 500
+
     @staticmethod
     def init_app():
         pass

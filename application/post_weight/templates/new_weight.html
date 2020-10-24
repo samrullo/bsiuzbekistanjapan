@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 {% from "bootstrap/form.html" import render_form %}
 {% block page_content%}
+
+<div class="btn-group">
+  <a class="btn btn-dark" href="{{url_for('post_weight_bp.add_represented_individual')}}">{{_("Add represented individual")}}</a>
+  <a class="btn btn-dark" href="{{url_for('post_weight_bp.view_represented_individuals')}}">{{_("View represented individuals")}}</a>
+  <a class="btn btn-dark" href="{{url_for('post_weight_bp.add_recipient')}}">{{_("Add recipient")}}</a>
+  <a class="btn btn-dark" href="{{url_for('post_weight_bp.view_recipients')}}">{{_("View recipients")}}</a>
+</div>
+
 {{render_form(form)}}
 {% endblock %}

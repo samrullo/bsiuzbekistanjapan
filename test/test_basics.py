@@ -1,12 +1,13 @@
 import unittest
 from flask import current_app
-from application import create_app,db
+from application import create_app, db
 from base_test_class import BaseTestCase
+
 
 class BasicsTestCase(BaseTestCase):
     def setUp(self) -> None:
-        self.app=create_app('test')
-        self.app_context=self.app.app_context()
+        self.app = create_app('test')
+        self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
 

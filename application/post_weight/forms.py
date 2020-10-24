@@ -1,24 +1,33 @@
 import logging
 from flask_wtf import FlaskForm
 from flask_babel import lazy_gettext as _
-from wtforms import StringField, PasswordField, DateField, FloatField, BooleanField, SelectField, SubmitField
+from wtforms import StringField, PasswordField, DateField, FloatField, IntegerField, BooleanField, SelectField, \
+    SubmitField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
 from application import moment
 import datetime
+from flask_wtf.file import FileField, FileAllowed
+from application import images
 
 
 class PostWeightForm(FlaskForm):
-    # countries = [(country.id, country.country_name) for country in Country.query.all()]
-    # represented_individuals = [(represented_individual.id, represented_individual.name) for represented_individual in
-    #                            RepresentedIndividual.query.all()]
-    # recipients = [(recipient.id, recipient.name) for recipient in
-    #               Recipient.query.all()]
     from_country = SelectField(_("From country"), coerce=int, validate_choice=False)
     to_country = SelectField(_("To country"), coerce=int, validate_choice=False)
-    represented_individual = SelectField(_("Represented individual"), coerce=int, validate_choice=False)
-    recipient = SelectField(_("Recipient"), coerce=int, validate_choice=False)
+    represented_individual = SelectField(
+        _("Represented individual. (to add new represented individual use the menu above)"), coerce=int,
+        validate_choice=False)
+    recipient = SelectField(_("Recipient (to add a new recipient use the menu above)"), coerce=int,
+                            validate_choice=False)
     sent_date = DateField(_("Sent date"), validators=[DataRequired()], render_kw={"value": datetime.date.today()})
     weight = FloatField(_("Weight (in kg)"), validators=[DataRequired()])
+    submit = SubmitField(_("Submit"))
+
+
+class PostWeightContentForm(FlaskForm):
+    name = StringField(_("Content name"), validators=[DataRequired()])
+    price = FloatField(_("Price"), validators=[DataRequired()])
+    quantity = IntegerField(_("Quantity"), validators=[DataRequired()])
+    content_image = FileField(_("Content image"), validators=[FileAllowed(images, _('Images only are allowed (optional) (.jpg, .jpe, .jpeg, .png, .gif, .svg, and .bmp)!'))])
     submit = SubmitField(_("Submit"))
 
 

@@ -5,6 +5,7 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_babel import Babel
 from flask_admin import Admin
+from flask_uploads import UploadSet, IMAGES, configure_uploads
 from flask import g, session
 from flask import request
 from flask_mail import Mail
@@ -19,6 +20,7 @@ moment = Moment()
 db = SQLAlchemy()
 admin_flsk = Admin(name="bsiuzbekistanjapan")
 login_manager = LoginManager()
+images = UploadSet('images', IMAGES)
 
 
 def create_app(config_name):
@@ -42,6 +44,7 @@ def create_app(config_name):
     babel.init_app(app)
     mail.init_app(app)
     login_manager.init_app(app)
+    configure_uploads(app, images)
 
     app.logger.info(f"Finished initializations for db,bootstrap, moment, babel and mail and login_manager")
     app.logger.info(f"SQLALCHEMY_DATABASE_URI is {app.config['SQLALCHEMY_DATABASE_URI']}")
