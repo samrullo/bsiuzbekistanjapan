@@ -112,7 +112,10 @@ def resend_confirmation():
 @auth_bp.route('/<lang>/unconfirmed')
 @login_required
 def unconfirmed():
-    return render_template("unconfirmed.html", page_header_title=_("Unconfirmed"))
+    if not current_user.is_confirmed:
+        return render_template("unconfirmed.html", page_header_title=_("Unconfirmed"))
+    else:
+        return redirect(url_for('main_bp.home'))
 
 
 @auth_bp.route('/<lang>/send_reset_link', methods=['GET', 'POST'])

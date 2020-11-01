@@ -5,6 +5,7 @@ from application.utils.custom_url_for import url_for
 from flask_babel import lazy_gettext as _
 from application.post_weight import post_weight_bp
 from flask_login import login_required, current_user
+from application.auth.permission_required import confirm_required
 
 # import models and forms related to represented_individuals and recipients
 from .models import RepresentedIndividual, Recipient
@@ -13,12 +14,16 @@ from application.post_weight.forms import RepresentedIndividualRecipientForm
 
 # views to add, edit, view represented individuals
 @post_weight_bp.route("/<lang>/view_represented_individuals")
+@login_required
+@confirm_required
 def view_represented_individuals():
     return render_template("represented_individuals.html", page_header_title=_("Represented individuals"),
                            represented_individuals=current_user.represented_individuals)
 
 
 @post_weight_bp.route("/<lang>/add_represented_individual", methods=['GET', 'POST'])
+@login_required
+@confirm_required
 def add_represented_individual():
     form = RepresentedIndividualRecipientForm()
     if form.validate_on_submit():
@@ -37,6 +42,8 @@ def add_represented_individual():
 
 
 @post_weight_bp.route("/<lang>/edit_represented_individual/<represented_individual_id>", methods=['GET', 'POST'])
+@login_required
+@confirm_required
 def edit_represented_individual(represented_individual_id):
     represented_individual = RepresentedIndividual.query.get(represented_individual_id)
     form = RepresentedIndividualRecipientForm()
@@ -63,6 +70,8 @@ def edit_represented_individual(represented_individual_id):
 
 
 @post_weight_bp.route("/<lang>/remove_represented_individual/<represented_individual_id>")
+@login_required
+@confirm_required
 def remove_represented_individual(represented_individual_id):
     represented_individual = RepresentedIndividual.query.get(represented_individual_id)
     db.session.delete(represented_individual)

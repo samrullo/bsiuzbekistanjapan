@@ -36,3 +36,9 @@ from .model_views import PostWeightContentView
 from application.post_weight.models import PostWeightContent
 
 admin_flsk.add_view(PostWeightContentView(PostWeightContent, db.session))
+
+# add ModelView to maintain BSIPostWeight
+from .model_views import BSIPostWeightView
+from application.bsi.models import BSIPostWeight
+
+admin_flsk.add_view(BSIPostWeightView(BSIPostWeight, db.session))

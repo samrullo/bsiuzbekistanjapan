@@ -8,13 +8,14 @@ from application import moment
 import datetime
 from flask_wtf.file import FileField, FileAllowed
 from application import images
+from .models import PostTrackingStatus
 
 
 class PostWeightForm(FlaskForm):
     from_country = SelectField(_("From country"), coerce=int, validate_choice=False)
     to_country = SelectField(_("To country"), coerce=int, validate_choice=False)
     represented_individual = SelectField(
-        _("Represented individual. (to add new represented individual use the menu above)"), coerce=int,
+        _("Represented individual (to add new represented individual use the menu above)"), coerce=int,
         validate_choice=False)
     recipient = SelectField(_("Recipient (to add a new recipient use the menu above)"), coerce=int,
                             validate_choice=False)
@@ -27,7 +28,21 @@ class PostWeightContentForm(FlaskForm):
     name = StringField(_("Content name"), validators=[DataRequired()])
     price = FloatField(_("Price"), validators=[DataRequired()])
     quantity = IntegerField(_("Quantity"), validators=[DataRequired()])
-    content_image = FileField(_("Content image"), validators=[FileAllowed(images, _('Images only are allowed (optional) (.jpg, .jpe, .jpeg, .png, .gif, .svg, and .bmp)!'))])
+    content_image = FileField(_("Content image"), validators=[
+        FileAllowed(images, _('Images only are allowed (optional) (.jpg, .jpe, .jpeg, .png, .gif, .svg, and .bmp)!'))])
+    submit = SubmitField(_("Submit"))
+
+
+class PostTrackingStatusForm(FlaskForm):
+    tracking_status = SelectField(_("Tracking status"), choices=[
+        (PostTrackingStatus.AWAIT_STATUS, PostTrackingStatus.get_status_description(PostTrackingStatus.AWAIT_STATUS)),
+        (PostTrackingStatus.ARRIVED_IN_BSI_OFFICE,
+         PostTrackingStatus.get_status_description(PostTrackingStatus.ARRIVED_IN_BSI_OFFICE)),
+        (PostTrackingStatus.ON_THE_WAY, PostTrackingStatus.get_status_description(PostTrackingStatus.ON_THE_WAY)),
+        (PostTrackingStatus.ARRIVED_IN_DESTINATION,
+         PostTrackingStatus.get_status_description(PostTrackingStatus.ARRIVED_IN_DESTINATION)),
+        (PostTrackingStatus.DELIVERED, PostTrackingStatus.get_status_description(PostTrackingStatus.DELIVERED))
+    ],coerce=int)
     submit = SubmitField(_("Submit"))
 
 

@@ -10,6 +10,7 @@ from flask import request, g
 from flask_sqlalchemy import get_debug_queries
 from flask_login import current_user
 import datetime
+from application.post_weight.models import PostTrackingStatus
 
 
 @main_bp.app_context_processor
@@ -23,6 +24,18 @@ def inject_number_formatter():
         return "{:,.2f}".format(amount)
 
     return dict(format_number=format_number)
+
+
+@main_bp.app_context_processor
+def post_weight_status_tracking():
+    def get_tracking_status_description(status_id):
+        return PostTrackingStatus.get_status_description(status_id)
+
+    def get_tracking_status_bg_color(status_id):
+        return PostTrackingStatus.get_status_color(status_id)
+
+    return dict(get_tracking_status_description=get_tracking_status_description,
+                get_tracking_status_bg_color=get_tracking_status_bg_color)
 
 
 @main_bp.before_app_request

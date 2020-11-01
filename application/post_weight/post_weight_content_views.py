@@ -65,6 +65,8 @@ def new_post_weight_content(post_weight_id):
             post_weight_content.content_image_url = content_image_url
             db.session.add(post_weight_content)
             db.session.commit()
+            # s3uploader.upload_photo_to_s3_asynch(form.content_image.data, content_image_filename, "post_item_images",
+            #                                      post_weight_content)
 
         # set post weight is_removable to False
         post_weight = PostWeight.query.get(post_weight_content.post_weight_id)
@@ -104,6 +106,8 @@ def edit_post_weight_content(post_weight_content_id):
             post_weight_content.content_image_url = content_image_url
             db.session.add(post_weight_content)
             db.session.commit()
+            # s3uploader.upload_photo_to_s3_asynch(form.content_image.data, content_image_filename, "post_item_images",
+            #                                      post_weight_content)
 
         flash(_("Successfully updated post weight content %(name)s | %(price)d | %(quantity)d",
                 name=post_weight_content.name,
@@ -128,7 +132,7 @@ def remove_post_weight_content(post_weight_content_id):
     db.session.commit()
     post_weight_contents = PostWeightContent.query.filter_by(post_weight_id=post_weight_content.post_weight_id).all()
     if len(post_weight_contents) == 0:
-        # set post weight is_removable to False
+        # set post weight is_removable to True
         post_weight = PostWeight.query.get(post_weight_content.post_weight_id)
         post_weight.is_removable = True
         db.session.add(post_weight)

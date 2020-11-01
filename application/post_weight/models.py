@@ -2,6 +2,37 @@ from application import db
 import datetime
 from application.utils.date_utils import to_yyyymmdd
 import logging
+from flask_babel import lazy_gettext as _
+
+
+class PostTrackingStatus:
+    AWAIT_STATUS = 0
+    ARRIVED_IN_BSI_OFFICE = 1
+    ON_THE_WAY = 2
+    ARRIVED_IN_DESTINATION = 3
+    DELIVERED = 4
+
+    status_descriptions = {AWAIT_STATUS: _("Awaiting tracking status"),
+                           ARRIVED_IN_BSI_OFFICE: _("Arrived in BSI Office"),
+                           ON_THE_WAY: _("On the way"),
+                           ARRIVED_IN_DESTINATION: _("Arrived in destination"),
+                           DELIVERED: _("Delivered to the recipient")}
+
+    status_bg_colors = {
+        AWAIT_STATUS: 'light',
+        ARRIVED_IN_BSI_OFFICE: 'danger',
+        ON_THE_WAY: 'warning',
+        ARRIVED_IN_DESTINATION: 'primary',
+        DELIVERED: 'success'
+    }
+
+    @staticmethod
+    def get_status_description(status_id: int) -> str:
+        return PostTrackingStatus.status_descriptions[status_id]
+
+    @staticmethod
+    def get_status_color(status_id: int) -> str:
+        return PostTrackingStatus.status_bg_colors[status_id]
 
 
 class Country(db.Model):
@@ -37,11 +68,14 @@ class PostWeight(db.Model):
     recipient_id = db.Column(db.Integer, db.ForeignKey("recipients.id"))
     weight = db.Column(db.Float)
     payment_amount = db.Column(db.Float)
+    tracking_status = db.Column(db.Integer, default=PostTrackingStatus.AWAIT_STATUS)
     entered_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     modified_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     is_paid = db.Column(db.Boolean, default=False)
     is_removable = db.Column(db.Boolean, default=True)
     is_editable = db.Column(db.Boolean, default=True)
+    bsi_post_weight_id = db.Column(db.Integer, db.ForeignKey("bsi_post_weights.id"))
+    bsi_post_weight = db.relationship("BSIPostWeight", foreign_keys=[bsi_post_weight_id])
     post_weight_contents = db.relationship("PostWeightContent", backref="post_weight", lazy="dynamic")
 
     def update_modified_on(self):

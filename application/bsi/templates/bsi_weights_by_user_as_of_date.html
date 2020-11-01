@@ -3,8 +3,14 @@
 {% block page_content %}
 <table class="table table-hover table-responsive orderByDateTable">
   <thead order_col_no="0">
+    <th>{{_("Post ID")}}</th>
+    <th>{{_("From Country")}}</th>
+    <th>{{_("To Country")}}</th>
+    <th>{{_("Represented Individual")}}</th>
+    <th>{{_("Recipient")}}</th>
     <th>{{_("Entered on")}}</th>
     <th>{{_("Is paid?")}}</th>
+    <th>{{_("Tracking status")}}</th>
     <th>{{_("Weight")}}</th>
     <th>{{_("Payment amount")}}</th>
     <th>{{_("BSI weight")}}</th>
@@ -15,12 +21,27 @@
     <th>{{_("BSI modified by")}}</th>
     <th></th>
     <th></th>
+    <th></th>
   </thead>
   <tbody>
     {% for post_weight in post_weights %}
     <tr class="{% if post_weight.is_paid %} table-success {% endif %}">
+      <td>{{post_weight.human_readable_id}}</td>
+      <th>{{post_weight.from_country.country_name}}</th>
+      <th>{{post_weight.to_country.country_name}}</th>
+      <th>
+        <a href="{{url_for('bsi_bp.view_represented_individual',represented_individual_id=post_weight.represented_individual_id)}}">{{post_weight.represented_individual.name}}</a>
+      </th>
+      <th>
+        <a href="{{url_for('bsi_bp.view_recipient',recipient_id=post_weight.recipient_id)}}">{{post_weight.recipient.name}}</a>
+      </th>
       <td>{{moment(post_weight.entered_on).format('LLL')}}</td>
       <td>{{post_weight.is_paid}}</td>
+      <td>
+        <div class="alert alert-{{get_tracking_status_bg_color(post_weight.tracking_status)}}">
+          {{get_tracking_status_description(post_weight.tracking_status)}}
+        </div>
+      </td>
       <td>{{format_number(post_weight.weight)}}</td>
       <td>{{format_number(post_weight.payment_amount)}}</td>
       {% if post_weight.bsi_post_weight %}
@@ -49,6 +70,9 @@
         {% else %}
         <a class="btn btn-dark" href="{{url_for('bsi_bp.mark_post_weight_as_paid_or_unpaid',post_weight_id=post_weight.id)}}">{{_("Mark as unpaid")}}</a>
         {% endif %}
+      </td>
+      <td>
+        <a class="btn btn-dark" href="{{url_for('bsi_bp.change_tracking_status',post_weight_id=post_weight.id)}}">{{_("Change tracking status")}}</a>
       </td>
     </tr>
     {% endfor %}

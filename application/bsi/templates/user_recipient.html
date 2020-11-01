@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block page_content %}
+<table class="table table-hover table-responsive">
+  <thead>
+    <th>{{_("Item")}}</th>
+    <th>{{_("Value")}}</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{_("Name")}}</td>
+      <td>{{recipient.name}}</td>
+    </tr>
+    <tr>
+      <td>{{_("Email")}}</td>
+      <td>{{recipient.email}}</td>
+    </tr>
+    <tr>
+      <td>{{_("Phone")}}</td>
+      <td>{{recipient.phone}}</td>
+    </tr>
+    <tr>
+      <td>{{_("Telegram username")}}</td>
+      <td>{{recipient.telegram_username}}</td>
+    </tr>
+    <tr>
+      <td>{{_("Address")}}</td>
+      <td>{{recipient.address}}</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
