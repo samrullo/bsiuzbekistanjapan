@@ -81,8 +81,8 @@ def home():
     session['price_per_kg'] = get_price_per_kg()
 
     # get next most recent sending date
-    from application.bsi.models import SendingDate
-    sending_dates = SendingDate.query.filter(SendingDate.sending_date >= datetime.date.today()).all()
+    from application.bsi.models import PostFlight
+    sending_dates = PostFlight.query.filter(PostFlight.sending_date >= datetime.date.today()).all()
     next_sending_dates = [sending_date_record.sending_date for sending_date_record in sending_dates]
     if len(next_sending_dates) > 0:
         min_sending_date = min(next_sending_dates)

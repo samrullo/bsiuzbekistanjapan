@@ -91,10 +91,14 @@ def callback():
                         confirmed_on=datetime.datetime.utcnow())
             db.session.add(user)
             db.session.commit()
+            user.set_username()
             # add the user as a first represented individual
-            represented_individual = RepresentedIndividual(name=user.name, email=user.email, phone=user.phone,
+            represented_individual = RepresentedIndividual(name=user.name,
+                                                           email=user.email,
+                                                           phone=user.phone,
                                                            telegram_username=user.telegram_username,
-                                                           address=user.address)
+                                                           address=user.address,
+                                                           user_id=user.id)
             db.session.add(represented_individual)
             db.session.commit()
 

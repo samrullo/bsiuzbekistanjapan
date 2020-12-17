@@ -63,8 +63,12 @@ def register():
         user.set_username()
 
         # add the user as a first represented individual
-        represented_individual = RepresentedIndividual(name=user.name, email=user.email, phone=user.phone,
-                                                       telegram_username=user.telegram_username, address=user.address)
+        represented_individual = RepresentedIndividual(name=user.name,
+                                                       email=user.email,
+                                                       phone=user.phone,
+                                                       telegram_username=user.telegram_username,
+                                                       address=user.address,
+                                                       user_id=user.id)
         db.session.add(represented_individual)
         db.session.commit()
         login_user(user)

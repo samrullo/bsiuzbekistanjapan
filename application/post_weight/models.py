@@ -120,6 +120,15 @@ class PostWeightContent(db.Model):
     modified_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 
+class UserPostWeightPrice(db.Model):
+    __tablename__ = "user_post_weight_prices"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    post_weight_price = db.Column(db.Float, nullable=False)
+    from_date = db.Column(db.Date)
+    to_date = db.Column(db.Date)
+
+
 class RepresentedIndividual(db.Model):
     __tablename__ = "represented_individuals"
     id = db.Column(db.Integer, primary_key=True)

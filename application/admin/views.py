@@ -42,3 +42,9 @@ from .model_views import BSIPostWeightView
 from application.bsi.models import BSIPostWeight
 
 admin_flsk.add_view(BSIPostWeightView(BSIPostWeight, db.session))
+
+# add ModelView to maintain UserPostWeightPrice
+from .model_views import UserPostWeightPriceView
+from application.post_weight.models import UserPostWeightPrice
+
+admin_flsk.add_view(UserPostWeightPriceView(UserPostWeightPrice, db.session))

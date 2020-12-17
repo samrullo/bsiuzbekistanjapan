@@ -8,7 +8,7 @@ from application.bsi import bsi_bp
 from application.post_weight.post_weight_utils import get_price_per_kg
 from application.post_weight.models import PostWeight
 from application.post_weight.models import PostTrackingStatus
-from .models import BSIPostWeight, SendingDate
+from .models import BSIPostWeight, PostFlight
 from application.auth.models import User
 from flask_login import login_required
 from application.auth.permission_required import confirm_required, moderator_required

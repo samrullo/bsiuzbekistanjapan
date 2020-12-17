@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, DateField, FloatField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, ValidationError
-from application.bsi.models import SendingDate
+from application.bsi.models import PostFlight
 from flask_babel import lazy_gettext as _
 
 
@@ -17,5 +17,5 @@ class SendingDateForm(FlaskForm):
     submit = SubmitField(_("Submit"))
 
     def validate_sending_date(self,field):
-        if SendingDate.query.filter_by(sending_date=field.data).first():
+        if PostFlight.query.filter_by(sending_date=field.data).first():
             raise ValidationError(_("This sending date already exists"))

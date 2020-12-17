@@ -1,5 +1,7 @@
 from application import db
 import datetime
+from flask_babel import lazy_gettext as _
+from application.post_weight.models import Country
 
 
 class BSIPostWeight(db.Model):
@@ -17,7 +19,20 @@ class BSIPostWeight(db.Model):
     modified_by = db.relationship("User", foreign_keys=[modified_by_id])
 
 
-class SendingDate(db.Model):
+class PostFlightStatus:
+    FULL_FREE = 0
+    FREE = 1
+    MODERATELY_FREE = 2
+    NOSPACELEFT = 3
+
+    status_descriptions = {FULL_FREE: _('◎ ... fully available')}
+
+
+class PostFlight(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sending_date = db.Column(db.Date, unique=True)
+    from_country_id = db.Column(db.Integer, db.ForeignKey("countries.id"))
+    to_country_id = db.Column(db.Integer, db.ForeignKey("countries.id"))
+    from_country = db.relationship("Country", foreign_keys=[from_country_id])
+    to_country = db.relationship("Country", foreign_keys=[to_country_id])
     note = db.Column(db.String(100))

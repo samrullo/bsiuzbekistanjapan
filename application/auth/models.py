@@ -7,7 +7,7 @@ from application import login_manager
 import datetime
 from .permissions import Permissions
 from functools import wraps
-from application.post_weight.models import PostWeight
+from application.post_weight.models import PostWeight, UserPostWeightPrice
 from application.post_weight.models import RepresentedIndividual
 from application.post_weight.models import Recipient
 
@@ -31,6 +31,7 @@ class User(UserMixin, db.Model):
     post_weights = db.relationship("PostWeight", backref="user", lazy="dynamic")
     represented_individuals = db.relationship("RepresentedIndividual", backref="user", lazy="dynamic")
     recipients = db.relationship("Recipient", backref="user", lazy="dynamic")
+    user_post_weight_prices = db.relationship("UserPostWeightPrice", backref="user", lazy="dynamic")
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
