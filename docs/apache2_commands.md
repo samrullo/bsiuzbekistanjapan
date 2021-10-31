@@ -1,14 +1,14 @@
 - enable site.
-```python
-sudo a2ensite.
+```
+sudo a2ensite <site name>
 ```
 
 - disable site.
-```python
-sudo a2dissite.
+```
+sudo a2dissite <site name>
 ```
 
 - enable an apache2 module.
-```python
-sudo a2enmod.
+```
+sudo a2enmod
 ```
