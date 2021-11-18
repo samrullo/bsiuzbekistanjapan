@@ -32,11 +32,12 @@ saved_filename = images.save(filename)
 
 This version is not compatible with ```werkzeug==1.0.1```
 In ```venv/lib/python3.7/site-packages/flask_uploads.py```
-you will have to change the way ```secure_filename``` functions are imported.
+you will have to change the way ```secure_filename``` and ```FileStorage``` are imported.
 
 From
 ```python
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
 ```
 
 To 
