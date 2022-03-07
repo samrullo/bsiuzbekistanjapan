@@ -43,4 +43,5 @@ from werkzeug.datastructures import FileStorage
 To 
 ```python
 from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
 ```

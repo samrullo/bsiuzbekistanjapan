@@ -22,6 +22,14 @@ from flask_migrate import Migrate
 migrate=Migrate(app,db)
 ```
 
+Before creating tables ensure that you import Models in the file where you 
+instantiate Migrate.
+```python
+from models import User, Product, SomeOtherModel
+...
+migrate=Migrate(app,db)
+```
+
 When you work on a new project, you can add support for database
 migrations with the init subcommand
 ```
