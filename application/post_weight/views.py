@@ -97,35 +97,40 @@ def unpaid_post_weights():
 @login_required
 @confirm_required
 def new_post_weight():
-    form = PostWeightForm()
-    if form.validate_on_submit():
-        new_weight = PostWeight(from_country_id=form.from_country.data,
-                                to_country_id=form.to_country.data,
-                                represented_individual_id=form.represented_individual.data,
-                                recipient_id=form.recipient.data,
-                                sent_date=form.sent_date.data,
-                                weight=form.weight.data)
-        price_per_kg = get_price_per_kg()
-        new_weight.payment_amount = new_weight.weight * price_per_kg
-        new_weight.user = current_user
-        db.session.add(new_weight)
-        db.session.commit()
-        new_weight.human_readable_id = generate_human_readable_post_weight_id(new_weight)
-        db.session.add(new_weight)
-        db.session.commit()
-        flash(
-            _(
-                "Successfully inserted new weight %(weight)s with paid amount %(paid_amount)s. \
-                Please proceed to entering post contents.",
-                weight=new_weight.weight,
-                paid_amount=new_weight.payment_amount), "success")
-        return redirect(url_for("post_weight_bp.view_post_weight_contents", post_weight_id=new_weight.id))
-    form.from_country.choices = [(country.id, country.country_name) for country in Country.query.all()]
-    form.to_country.choices = [(country.id, country.country_name) for country in Country.query.all()]
-    form.represented_individual.choices = [(represented_individual.id, represented_individual.name) for
-                                           represented_individual in current_user.represented_individuals]
-    form.recipient.choices = [(recipient.id, recipient.name) for recipient in current_user.recipients]
-    return render_template("new_weight.html", form=form, page_header_title=_("Enter new weight"))
+    if len(list(current_user.recipients))==0:
+        flash(_("You should add recipient before adding new post"),"danger")
+        return redirect(url_for("post_weight_bp.add_recipient"))
+    else:
+        form = PostWeightForm()
+        form.from_country.choices = [(country.id, country.country_name) for country in Country.query.all()]
+        form.to_country.choices = [(country.id, country.country_name) for country in Country.query.all()]
+        form.represented_individual.choices = [(represented_individual.id, represented_individual.name) for
+                                            represented_individual in current_user.represented_individuals]
+        form.recipient.choices = [(recipient.id, recipient.name) for recipient in current_user.recipients]
+        if form.validate_on_submit():
+            new_weight = PostWeight(from_country_id=form.from_country.data,
+                                    to_country_id=form.to_country.data,
+                                    represented_individual_id=form.represented_individual.data,
+                                    recipient_id=form.recipient.data,
+                                    sent_date=form.sent_date.data,
+                                    weight=form.weight.data)
+            price_per_kg = get_price_per_kg()
+            new_weight.payment_amount = new_weight.weight * price_per_kg
+            new_weight.user = current_user
+            db.session.add(new_weight)
+            db.session.commit()
+            new_weight.human_readable_id = generate_human_readable_post_weight_id(new_weight)
+            db.session.add(new_weight)
+            db.session.commit()
+            flash(
+                _(
+                    "Successfully inserted new weight %(weight)s with paid amount %(paid_amount)s. \
+                    Please proceed to entering post contents.",
+                    weight=new_weight.weight,
+                    paid_amount=new_weight.payment_amount), "success")
+            return redirect(url_for("post_weight_bp.view_post_weight_contents", post_weight_id=new_weight.id))
+        
+        return render_template("new_weight.html", form=form, page_header_title=_("Enter new weight"))
 
 
 @post_weight_bp.route("/<lang>/edit_post_weight/<post_weight_id>", methods=['GET', 'POST'])

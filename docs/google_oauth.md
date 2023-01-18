@@ -1,22 +1,38 @@
-import os
-from ..auth import auth_bp
-from oauthlib.oauth2 import WebApplicationClient
-from ..utils.google_login_utils import get_google_provider_cfg
-from application import db
-from flask_login import login_required, current_user
-from .models import User
-from application.post_weight.models import RepresentedIndividual
-from ..auth.forms import RegisterForm
-from flask import request, redirect, current_app, flash, g
-from flask_babel import lazy_gettext as _
-from flask_login import login_user
-from ..utils.custom_url_for import url_for
-import datetime
+# Authenticating users with their Google accounts
 
-import requests
-import json
+Authenticating users with Google Oauth2.0 is straightforward.
+First you will need to create Oauth2.0 credentials from [Google Cloud Console](https://console.cloud.google.com/apis/dashboard?project=ideliver-374910)
+And remember that before you can create Oauth2.0 credentials you will have to first create a project.
+
+Once you have created a project and navigate to *API and Services* > *Credentials*
+you can start creating new credentials.
+
+In this application's case I chose *web application* as application type
+and then provided following values for important Attributes
+
+- Authorized Javascript origins : https://localhost:5000
+- Authorized redirect uris : https://localhost:5000/uz/google_login/callback, https://localhost:5000/en/google_login/callback
+
+After filling in above attributes you will have your credential in place.
+We will grab "Client id" and "Client secret" and specify them to following configs
+
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
+
+# How does it work
+
+When user presses "Login with Google" button which has the url of "/<lang>/google_login", the app creates google *client* object by passing *GOOGLE_CLIENT_ID*.
 
 
+
+Using *client* object we prepare *request_uri* to which we eventually redirect the user for authorization.
+When preparing this *request_uri* we specify 
+- authorization_endpoint("https://accounts.google.com/.well-known/openid-configuration")
+- redirect_uri : URI to which Google will send authorization code
+- scope : a list of strings that specify what Google account data this application can access. Ex : ["openid", "email", "profile"]
+
+
+```python
 @auth_bp.route("/<lang>/google_login")
 def google_login():
     client = WebApplicationClient(current_app.config.get('GOOGLE_CLIENT_ID'))
@@ -32,8 +48,15 @@ def google_login():
         scope=["openid", "email", "profile"],
     )
     return redirect(request_uri)
+```
 
+In *redirect_uri* view function we receive authorization code.
+As a next step we obtain *tokens* by preparing request to send to tokens endpoint.
+After getting tokens, we add tokens to *client* object, which will give us 
+uri, headers, body
+And we use that to finally get user Google account info, confirm that user has validated account and finally register the user into database, by setting *is_google_account* flag of *users* table to True. 
 
+```python
 @auth_bp.route("/<lang>/google_login/callback")
 def callback():
     client = WebApplicationClient(current_app.config.get('GOOGLE_CLIENT_ID'))
@@ -113,3 +136,5 @@ def callback():
         return redirect(next)
     else:
         return "User email not available or not verified by Google.", 400
+```
+

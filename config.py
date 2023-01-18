@@ -16,9 +16,9 @@ class Config:
     SLOW_DB_QUERY_THRESHOLD = float(os.environ.get('SLOW_DB_QUERY_THRESHOLD'))
 
     # Gmail API related configurations
-    GMAILAPI_CREDENTIALS_FILE = os.path.join(basedir, "credentials/bsiuzbekistanjapan_gmailapi.json")
+    GMAILAPI_CREDENTIALS_FILE = os.path.join(basedir, "credentials","bsiuzbekistanjapan_gmailapi.json")
     GMAILAPI_CREDENTIALS_FOLDER = os.path.join(basedir, "credentials")
-    GMAILAPI_REDIRECT_URI = 'https://127.0.0.1:5000/gmail_login/callback'
+    GMAILAPI_REDIRECT_URI = os.environ.get("GMAILAPI_REDIRECT_URI")
 
     GMAILAPI_SCOPES = [
         "https://www.googleapis.com/auth/gmail.compose",
